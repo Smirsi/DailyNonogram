@@ -62,9 +62,9 @@ class NonogramViewModel: ObservableObject {
     func endDrag() {
         visitedInDrag = []
         updateAutoFeatures()
-        DailyPuzzleService.saveProgress(grid)
+        DailyPuzzleService.saveProgress(grid, difficulty: nonogram.difficulty)
         if isComplete {
-            DailyPuzzleService.markSolved()
+            DailyPuzzleService.markSolved(difficulty: nonogram.difficulty)
             showCompletion = true
         }
     }
@@ -73,9 +73,9 @@ class NonogramViewModel: ObservableObject {
         let target = targetState(for: coord)
         apply(targetState: target, at: coord)
         updateAutoFeatures()
-        DailyPuzzleService.saveProgress(grid)
+        DailyPuzzleService.saveProgress(grid, difficulty: nonogram.difficulty)
         if isComplete {
-            DailyPuzzleService.markSolved()
+            DailyPuzzleService.markSolved(difficulty: nonogram.difficulty)
             showCompletion = true
         }
     }
@@ -143,21 +143,32 @@ class NonogramViewModel: ObservableObject {
 
     /// Returns which clue indices are satisfied by the current filled sequences.
     private func matchClues(_ clues: [Int], to sequences: [Int]) -> [Bool] {
-        guard sequences == clues else {
-            // Partial: mark clues matched from left
-            var result = Array(repeating: false, count: clues.count)
-            var si = 0
-            for (ci, clue) in clues.enumerated() {
-                if si < sequences.count && sequences[si] == clue {
-                    result[ci] = true
-                    si += 1
-                } else {
-                    break
-                }
-            }
-            return result
+        guard sequences != clues else {
+            return Array(repeating: true, count: clues.count)
         }
-        return Array(repeating: true, count: clues.count)
+        var result = Array(repeating: false, count: clues.count)
+        // Left pass: match clues from the left
+        var si = 0
+        for (ci, clue) in clues.enumerated() {
+            if si < sequences.count && sequences[si] == clue {
+                result[ci] = true
+                si += 1
+            } else {
+                break
+            }
+        }
+        // Right pass: match remaining unmatched clues from the right
+        var siR = sequences.count - 1
+        for ci in stride(from: clues.count - 1, through: 0, by: -1) {
+            if result[ci] { break }
+            if siR >= 0 && sequences[siR] == clues[ci] {
+                result[ci] = true
+                siR -= 1
+            } else {
+                break
+            }
+        }
+        return result
     }
 
     // MARK: - Private

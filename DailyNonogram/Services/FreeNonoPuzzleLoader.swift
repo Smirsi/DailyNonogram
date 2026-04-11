@@ -2,6 +2,9 @@ import Foundation
 
 /// Loads puzzles from FreeNono `.nonogram` XML files bundled in the app.
 ///
+/// Files are organised in subdirectories per difficulty:
+/// `Puzzles/easy/`, `Puzzles/medium/`, `Puzzles/hard/`
+///
 /// Expected XML format:
 /// ```xml
 /// <FreeNono><Nonograms>
@@ -14,18 +17,24 @@ import Foundation
 /// `x` = filled cell, `_` = empty cell.
 struct FreeNonoPuzzleLoader {
 
-    /// Loads all `.nonogram` files from the app bundle.
-    static func loadAll() -> [Nonogram] {
-        guard let urls = Bundle.main.urls(forResourcesWithExtension: "nonogram", subdirectory: nil) else {
+    /// Loads all puzzles for a given difficulty level.
+    static func load(difficulty: DifficultyLevel) -> [Nonogram] {
+        // With a folder reference the bundle path is "Puzzles/<level>"
+        guard let urls = Bundle.main.urls(
+            forResourcesWithExtension: "nonogram",
+            subdirectory: "Puzzles/\(difficulty.subdirectory)"
+        ) else {
             return []
         }
-        return urls.compactMap { load(from: $0) }.sorted { $0.title < $1.title }
+        return urls
+            .compactMap { load(from: $0, difficulty: difficulty) }
+            .sorted { $0.title < $1.title }
     }
 
     /// Parses a single `.nonogram` file and returns a `Nonogram`, or `nil` on failure.
-    static func load(from url: URL) -> Nonogram? {
+    static func load(from url: URL, difficulty: DifficultyLevel = .easy) -> Nonogram? {
         guard let data = try? Data(contentsOf: url) else { return nil }
-        let parser = NonogramXMLParser(data: data)
+        let parser = NonogramXMLParser(data: data, difficulty: difficulty)
         return parser.parse()
     }
 }
@@ -34,14 +43,16 @@ struct FreeNonoPuzzleLoader {
 
 private final class NonogramXMLParser: NSObject, XMLParserDelegate {
     private let data: Data
+    private let difficulty: DifficultyLevel
 
     private var name: String = ""
     private var rows: [[Bool]] = []
     private var currentText = ""
     private var insideNonogram = false
 
-    init(data: Data) {
+    init(data: Data, difficulty: DifficultyLevel) {
         self.data = data
+        self.difficulty = difficulty
     }
 
     func parse() -> Nonogram? {
@@ -51,7 +62,6 @@ private final class NonogramXMLParser: NSObject, XMLParserDelegate {
             return nil
         }
         let cols = firstRow.count
-        // Ensure all rows have the same length
         let grid = rows.filter { $0.count == cols }
         guard !grid.isEmpty else { return nil }
 
@@ -63,7 +73,8 @@ private final class NonogramXMLParser: NSObject, XMLParserDelegate {
             cols: cols,
             rowClues: clues.rows,
             colClues: clues.cols,
-            solution: grid
+            solution: grid,
+            difficulty: difficulty
         )
     }
 

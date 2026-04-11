@@ -15,7 +15,12 @@ targets:
     type: application
     platform: iOS
     sources:
-      - DailyNonogram
+      - path: DailyNonogram
+        excludes:
+          - Resources/Puzzles/**
+    resources:
+      - path: DailyNonogram/Resources/Puzzles
+        type: folder
     dependencies:
       - package: GoogleMobileAds
     settings:

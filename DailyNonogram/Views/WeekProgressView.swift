@@ -49,7 +49,7 @@ struct WeekProgressView: View {
             return DayEntry(
                 id: offset,
                 weekday: short,
-                isSolved: DailyPuzzleService.wasSolved(for: date),
+                isSolved: DailyPuzzleService.wasAnySolved(for: date),
                 isToday: cal.isDate(date, inSameDayAs: today)
             )
         }

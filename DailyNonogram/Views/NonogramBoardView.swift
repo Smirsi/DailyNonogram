@@ -2,9 +2,13 @@ import SwiftUI
 
 struct NonogramBoardView: View {
     @ObservedObject var vm: NonogramViewModel
+    /// Called when a premium user wants to switch difficulty. `nil` for free users (locked).
+    var onChangeDifficulty: (() -> Void)? = nil
 
     @AppStorage("showCluesBothSides") private var showCluesBothSides = false
     @State private var showSettings = false
+    @State private var showPremiumTeaser = false
+    @State private var showPaywall = false
 
     @EnvironmentObject private var store: StoreKitManager
 
@@ -38,6 +42,27 @@ struct NonogramBoardView: View {
                     Text(formattedDate())
                         .font(DS.dateLabelFont())
                         .foregroundStyle(DS.textSecondary)
+                    if let change = onChangeDifficulty {
+                        // Premium: difficulty badge is tappable to switch
+                        Button(action: change) {
+                            Text(vm.nonogram.difficulty.displayName)
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(DS.accent)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 3)
+                                .background(DS.accent.opacity(0.12))
+                                .clipShape(Capsule())
+                        }
+                        .buttonStyle(.plain)
+                    } else {
+                        Text(vm.nonogram.difficulty.displayName)
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundStyle(DS.accent)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 3)
+                            .background(DS.accent.opacity(0.12))
+                            .clipShape(Capsule())
+                    }
                 }
                 .frame(maxWidth: .infinity)
 
@@ -133,12 +158,34 @@ struct NonogramBoardView: View {
             if vm.showCompletion {
                 CompletionOverlayView(
                     puzzleTitle: vm.nonogram.title,
-                    onDismiss: { vm.showCompletion = false }
+                    onDismiss: {
+                        vm.showCompletion = false
+                        if PremiumTeaserService.shouldShow(isPremium: store.isPremium) {
+                            PremiumTeaserService.markShown()
+                            showPremiumTeaser = true
+                        }
+                    }
                 )
                 .transition(.opacity.combined(with: .scale(scale: 0.95)))
             }
         }
+        .overlay {
+            if showPremiumTeaser {
+                PremiumTeaserView(
+                    onUpgrade: {
+                        showPremiumTeaser = false
+                        showPaywall = true
+                    },
+                    onDismiss: { showPremiumTeaser = false }
+                )
+                .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            }
+        }
+        .sheet(isPresented: $showPaywall) {
+            PremiumPaywallView()
+        }
         .animation(.easeOut(duration: 0.3), value: vm.showCompletion)
+        .animation(.easeOut(duration: 0.3), value: showPremiumTeaser)
     }
 
     private func formattedDate() -> String {

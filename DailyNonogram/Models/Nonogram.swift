@@ -7,6 +7,8 @@ struct Nonogram {
     let rowClues: [[Int]]
     let colClues: [[Int]]
     let solution: [[Bool]]
+    var difficulty: DifficultyLevel = .easy
+    var isColorized: Bool = false
 
     static func computeClues(from grid: [[Bool]]) -> (rows: [[Int]], cols: [[Int]]) {
         let numRows = grid.count
