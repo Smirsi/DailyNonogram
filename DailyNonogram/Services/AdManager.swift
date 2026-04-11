@@ -15,10 +15,8 @@ final class AdManager: NSObject, ObservableObject {
     // MARK: - Ad Unit IDs
     // Replace with real IDs from AdMob console before App Store submission
 
-    /// Google test banner ID — replace with real ID: ca-app-pub-XXXXXXXXXXXXXXXX/YYYYYYYYYY
-    static let bannerUnitID      = "ca-app-pub-3940256099942544/2934735716"
-    /// Google test interstitial ID — replace with real ID
-    static let interstitialUnitID = "ca-app-pub-3940256099942544/4411468910"
+    static let bannerUnitID       = "ca-app-pub-1758574140088603/4561452330"
+    static let interstitialUnitID = "ca-app-pub-1758574140088603/7574628484"
 
     // MARK: - State
 
