@@ -1,0 +1,72 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": false,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "tag:#approved",
+      "color": {
+        "a": 1,
+        "rgb": 2740549
+      }
+    },
+    {
+      "query": "tag:#notapproved",
+      "color": {
+        "a": 1,
+        "rgb": 15367942
+      }
+    },
+    {
+      "query": "tag:#backlog  ",
+      "color": {
+        "a": 1,
+        "rgb": 15854314
+      }
+    },
+    {
+      "query": "tag:#open",
+      "color": {
+        "a": 1,
+        "rgb": 15140872
+      }
+    },
+    {
+      "query": "tag:#waiting",
+      "color": {
+        "a": 1,
+        "rgb": 16051216
+      }
+    },
+    {
+      "query": "tag:#done",
+      "color": {
+        "a": 1,
+        "rgb": 613576
+      }
+    },
+    {
+      "query": "tag:#structure",
+      "color": {
+        "a": 1,
+        "rgb": 328966
+      }
+    }
+  ],
+  "collapse-display": true,
+  "showArrow": true,
+  "textFadeMultiplier": -1.1,
+  "nodeSizeMultiplier": 0.897526041666667,
+  "lineSizeMultiplier": 1.49939236111111,
+  "collapse-forces": true,
+  "centerStrength": 0.518713248970312,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 1.0770346710099084,
+  "close": true
+}

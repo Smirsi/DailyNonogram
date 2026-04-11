@@ -1,0 +1,264 @@
+{
+  "main": {
+    "id": "bed6c299f3d83884",
+    "type": "split",
+    "children": [
+      {
+        "id": "bbd03e96e3340ab3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7a54e84205ed5ec5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Templates/Template - Aufgabe.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Template - Aufgabe"
+            }
+          },
+          {
+            "id": "fa65bfbc5580d892",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "FUN2 - Erstellung von neuen Nonogrammen.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "FUN2 - Erstellung von neuen Nonogrammen"
+            }
+          },
+          {
+            "id": "a0e3aec8fc125e45",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "DES5.1 - DarkMode erstellen.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "DES5.1 - DarkMode erstellen"
+            }
+          }
+        ],
+        "currentTab": 2
+      },
+      {
+        "id": "ff747a6b5efe87aa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "72f205a5f5567720",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b6ca5e990ac6b1bc",
+    "type": "split",
+    "children": [
+      {
+        "id": "8e740c1d6bcb7e98",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7f7e6c1f825d7746",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "b769e41e2765cc71",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "9cf29ffcf7bb385e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a8f333b5f6ba3507",
+    "type": "split",
+    "children": [
+      {
+        "id": "a3f97b9352dbc8a9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d4deccf234505437",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Templates/Template - Aufgabe.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Template - Aufgabe"
+            }
+          },
+          {
+            "id": "7a16879a2202d3d3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Templates/Template - Aufgabe.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Template - Aufgabe"
+            }
+          },
+          {
+            "id": "57a1ad7eca6d17d2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6fdf9c67451884c2",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "bb80f8224d142d61",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Templates/Template - Aufgabe.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Template - Aufgabe"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "72f205a5f5567720",
+  "lastOpenFiles": [
+    "DES5.1 - DarkMode erstellen.md",
+    "DES5 - DarkMode.md",
+    "DES0 - Design.md",
+    "FUN6 - Einstellungen.md",
+    "DES3 - Einstellungen.md",
+    "DES3.1 - Einstellungsmenü.md",
+    "FUN6.3.1 - Zahl wird immer abgehakt.md",
+    "MON1.1 - Grundlage.md",
+    "MON2.2 - Premium-Funktion.md",
+    "MON2.1 - Grundlage.md",
+    "DES2.1 - Tägliche Lösung.md",
+    "FUN2.1 - Tägliches Nonogramm.md",
+    "FUN2.2.1 - Komplexere Nonogramme.md",
+    "FUN2.2 - Nonogramm Generator.md",
+    "FUN6.3 - Auto Abhaken.md",
+    "FUN1.4 - Automatisches X und Abhaken.md",
+    "FUN1.5 - Automatische X andere Farbe.md",
+    "FUN1 - Nonogramm lösen.md",
+    "FUN6.2  - Auto X.md",
+    "FUN6.1 - Zahlen auf beiden Seiten.md",
+    "FUN1.3.1 - Zahlen zoomen nicht mit.md",
+    "FUN1.3 - Zoomen.md",
+    "FUN1.2 - Größeres Rätsel.md",
+    "FUN1.1 - Nonogramm Rätsel implementieren.md",
+    "DES4.1 - App Icon erstellen.md",
+    "FUN0 - Funktion.md",
+    "Untitled.canvas",
+    "Templates"
+  ]
+}
