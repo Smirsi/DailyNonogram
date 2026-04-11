@@ -29,3 +29,7 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_CFBundleDisplayName: Daily Nonogram
+    info:
+      path: DailyNonogram/Info.plist
+      properties:
+        GADApplicationIdentifier: ca-app-pub-1758574140088603~6006395949
