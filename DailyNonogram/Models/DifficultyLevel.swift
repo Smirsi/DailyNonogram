@@ -15,9 +15,9 @@ enum DifficultyLevel: String, Codable, CaseIterable, Sendable {
 
     var description: String {
         switch self {
-        case .easy:   return "10×10 · 100 Felder"
-        case .medium: return "15×15 · 225 Felder"
-        case .hard:   return "25×25 · 625 Felder"
+        case .easy:   return "Klein · bis 10×10 Felder"
+        case .medium: return "Mittel · bis 15×15 Felder"
+        case .hard:   return "Groß · bis 25×25 Felder"
         }
     }
 

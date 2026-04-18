@@ -26,9 +26,12 @@ struct CompletionOverlayView: View {
                     .foregroundStyle(DS.textPrimary)
                     .padding(.bottom, 8)
 
-                Text(puzzleTitle)
-                    .font(.custom("Georgia", size: 17).weight(.regular))
-                    .foregroundStyle(DS.textSecondary)
+                // Motif reveal: emoji + German title (or original title)
+                let motifEmoji = PuzzleMotifHelper.emoji(for: puzzleTitle)
+                let displayTitle = PuzzleMotifHelper.germanTitle(for: puzzleTitle) ?? puzzleTitle
+                Text("\(motifEmoji) \(displayTitle)")
+                    .font(.custom("Georgia", size: 20).weight(.regular))
+                    .foregroundStyle(DS.textPrimary)
 
                 Text(formattedDate())
                     .font(DS.dateLabelFont())
