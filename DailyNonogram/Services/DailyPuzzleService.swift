@@ -30,6 +30,12 @@ struct DailyPuzzleService {
         puzzle(for: today(), difficulty: difficulty)
     }
 
+    /// Returns a bonus puzzle distinct from today's daily puzzle (offset by 180 days).
+    static func bonusPuzzle(difficulty: DifficultyLevel) -> Nonogram {
+        let offset = Calendar.current.date(byAdding: .day, value: 180, to: today())!
+        return puzzle(for: offset, difficulty: difficulty)
+    }
+
     static func puzzle(for date: Date, difficulty: DifficultyLevel) -> Nonogram {
         let puzzles = PuzzleLibrary.puzzles(for: difficulty)
         guard !puzzles.isEmpty else {

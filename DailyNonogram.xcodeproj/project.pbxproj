@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		058FA31CD6F99464BD4784F0 /* NonogramBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05920377EBA37BBF4404D4 /* NonogramBoardView.swift */; };
+		0A60067CA779534269D7BF8C /* BonusPuzzleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711715741E47E26C4A8A67B0 /* BonusPuzzleSheet.swift */; };
 		262400F6C024DB4B44F56FE1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1ACB73559FBBBE7B1EEE6 /* ContentView.swift */; };
 		2EFD5468E6EFB550A377D71D /* NonogramGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B951C79BA2F054FCF1D020F /* NonogramGridView.swift */; };
 		3179DE2DC261FD0B4731DF2B /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B37F78BE24814A515D18980 /* ToolbarView.swift */; };
@@ -16,6 +17,7 @@
 		4F71C0794E0FCF3E1616F1DE /* WeekProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5FE7A79FD1BBCD1BDB8C4 /* WeekProgressView.swift */; };
 		567B139F0D50EC152837B64D /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E7BA55A92FB471FBB8146 /* AdManager.swift */; };
 		5A870020E1E2339CC8FAEF0A /* CompletionOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E91DC2F0C457E06BBA4DF /* CompletionOverlayView.swift */; };
+		651FE96FAB7380AE4569870D /* BonusOfferBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1073FF18412A0D545127B07 /* BonusOfferBanner.swift */; };
 		6EAF301A20468F3B727F520E /* FreeNonoPuzzleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DA8289EE7971E7633D4D15 /* FreeNonoPuzzleLoader.swift */; };
 		706E9F189225A0C6CAE0E0FE /* PuzzleLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BF5A3C3563AC6BAA2D1A9 /* PuzzleLibrary.swift */; };
 		707D5AD5BB7C0AEB823330ED /* SampleNonogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A891DCA6E668581CE3C05D /* SampleNonogram.swift */; };
@@ -48,16 +50,18 @@
 		4A83E456CDBB8C4EFA54E82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4FFD26CA8FC88C9A36972A9B /* Nonogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonogram.swift; sourceTree = "<group>"; };
 		545BF5A3C3563AC6BAA2D1A9 /* PuzzleLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleLibrary.swift; sourceTree = "<group>"; };
+		711715741E47E26C4A8A67B0 /* BonusPuzzleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusPuzzleSheet.swift; sourceTree = "<group>"; };
 		7B37F78BE24814A515D18980 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		920C4400CBEECBA6F443C2F9 /* PremiumTeaserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTeaserView.swift; sourceTree = "<group>"; };
 		9351350ADED814AECA29CAB7 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		957CE66FCA8E6B4C3742E6AA /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		9B951C79BA2F054FCF1D020F /* NonogramGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonogramGridView.swift; sourceTree = "<group>"; };
 		AA8AA9506E7D2C8677D27027 /* DailyPuzzleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPuzzleService.swift; sourceTree = "<group>"; };
+		B1073FF18412A0D545127B07 /* BonusOfferBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusOfferBanner.swift; sourceTree = "<group>"; };
 		B301E4FA53788FF012DEA80C /* CluesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CluesView.swift; sourceTree = "<group>"; };
 		BB7406D25A43DE0183CE9350 /* NonogramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonogramViewModel.swift; sourceTree = "<group>"; };
 		BE6E91DC2F0C457E06BBA4DF /* CompletionOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionOverlayView.swift; sourceTree = "<group>"; };
-		C793274A66DB3D4CE0FC4B38 /* DailyNonogram.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; name = DailyNonogram.app; path = "Daily Nonogram.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C793274A66DB3D4CE0FC4B38 /* DailyNonogram.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DailyNonogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBF9FDF36B5C95B5E28231FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4FF677544C464B41061B1C8 /* StreakService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakService.swift; sourceTree = "<group>"; };
 		D51F2BC79F415C64A294158F /* CellState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				9351350ADED814AECA29CAB7 /* BannerAdView.swift */,
+				B1073FF18412A0D545127B07 /* BonusOfferBanner.swift */,
+				711715741E47E26C4A8A67B0 /* BonusPuzzleSheet.swift */,
 				B301E4FA53788FF012DEA80C /* CluesView.swift */,
 				BE6E91DC2F0C457E06BBA4DF /* CompletionOverlayView.swift */,
 				FC0A51968B391AFA9660FE9F /* DifficultySelectionView.swift */,
@@ -219,6 +225,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = A867428F355C25DE2AD96130 /* Build configuration list for PBXProject "DailyNonogram" */;
 			developmentRegion = en;
@@ -260,6 +268,8 @@
 			files = (
 				567B139F0D50EC152837B64D /* AdManager.swift in Sources */,
 				8A9E7CD99C92EAF97347C481 /* BannerAdView.swift in Sources */,
+				651FE96FAB7380AE4569870D /* BonusOfferBanner.swift in Sources */,
+				0A60067CA779534269D7BF8C /* BonusPuzzleSheet.swift in Sources */,
 				3ECB45976EABDAAADEE02999 /* CellState.swift in Sources */,
 				981E78C8D56F6CB8AAFCCB4C /* CluesView.swift in Sources */,
 				5A870020E1E2339CC8FAEF0A /* CompletionOverlayView.swift in Sources */,

@@ -10,9 +10,12 @@ struct NonogramBoardView: View {
     @State private var showPremiumTeaser = false
     @State private var showPaywall = false
     @State private var showFreezeAlert = false
+    @State private var showBonusOffer = false
+    @State private var showBonusPuzzle = false
     @State private var streak: Int = 0
 
     @EnvironmentObject private var store: StoreKitManager
+    @EnvironmentObject private var ads: AdManager
 
     /// Base cell size — zoom is applied on top of this
     private let cellSize: CGFloat = 36
@@ -145,10 +148,22 @@ struct NonogramBoardView: View {
             ToolbarView(currentTool: $vm.currentTool)
                 .padding(.top, 16)
 
-            // Banner Ad (non-premium only)
-            if !store.isPremium {
-                BannerAdView(adUnitID: AdManager.bannerUnitID)
-                    .frame(height: 50)
+            // Bonus puzzle offer (shown after solving, rewarded video)
+            if showBonusOffer && !store.isPremium {
+                BonusOfferBanner(
+                    rewardedReady: ads.rewardedReady,
+                    onTap: {
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                              let rootVC = windowScene.windows.first?.rootViewController else { return }
+                        ads.showRewardedIfReady(from: rootVC) {
+                            showBonusOffer = false
+                            showBonusPuzzle = true
+                        }
+                    },
+                    onDismiss: { showBonusOffer = false }
+                )
+                .padding(.top, 8)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
         .padding()
@@ -184,7 +199,19 @@ struct NonogramBoardView: View {
                     onDismiss: {
                         vm.showCompletion = false
                         streak = StreakService.currentStreak()
-                        if PremiumTeaserService.shouldShow(isPremium: store.isPremium) {
+                        if !store.isPremium {
+                            // Show interstitial after completion, then offer bonus puzzle
+                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                                  let rootVC = windowScene.windows.first?.rootViewController else { return }
+                            ads.showInterstitialIfReady(from: rootVC) {
+                                if ads.rewardedReady {
+                                    withAnimation { showBonusOffer = true }
+                                } else if PremiumTeaserService.shouldShow(isPremium: false) {
+                                    PremiumTeaserService.markShown()
+                                    showPremiumTeaser = true
+                                }
+                            }
+                        } else if PremiumTeaserService.shouldShow(isPremium: true) {
                             PremiumTeaserService.markShown()
                             showPremiumTeaser = true
                         }
@@ -208,8 +235,12 @@ struct NonogramBoardView: View {
         .sheet(isPresented: $showPaywall) {
             PremiumPaywallView()
         }
+        .sheet(isPresented: $showBonusPuzzle) {
+            BonusPuzzleSheet(difficulty: vm.nonogram.difficulty)
+        }
         .animation(.easeOut(duration: 0.3), value: vm.showCompletion)
         .animation(.easeOut(duration: 0.3), value: showPremiumTeaser)
+        .animation(.easeOut(duration: 0.3), value: showBonusOffer)
     }
 
     private func formattedDate() -> String {
