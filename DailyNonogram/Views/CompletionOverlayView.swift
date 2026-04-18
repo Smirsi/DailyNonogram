@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CompletionOverlayView: View {
-    let puzzleTitle: String
+    let nonogram: Nonogram
     let streak: Int
     let onDismiss: () -> Void
 
@@ -9,12 +9,10 @@ struct CompletionOverlayView: View {
 
     var body: some View {
         ZStack {
-            // Scrim
             Color.black.opacity(0.4)
                 .ignoresSafeArea()
                 .onTapGesture { onDismiss() }
 
-            // Card
             VStack(spacing: 0) {
                 Image(systemName: "checkmark")
                     .font(.system(size: 44, weight: .light))
@@ -24,14 +22,10 @@ struct CompletionOverlayView: View {
                 Text("Puzzle gelöst!")
                     .font(DS.completionHeadlineFont())
                     .foregroundStyle(DS.textPrimary)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 16)
 
-                // Motif reveal: emoji + German title (or original title)
-                let motifEmoji = PuzzleMotifHelper.emoji(for: puzzleTitle)
-                let displayTitle = PuzzleMotifHelper.germanTitle(for: puzzleTitle) ?? puzzleTitle
-                Text("\(motifEmoji) \(displayTitle)")
-                    .font(.custom("Georgia", size: 20).weight(.regular))
-                    .foregroundStyle(DS.textPrimary)
+                SolvedPixelArtView(solution: nonogram.solution)
+                    .padding(.bottom, 8)
 
                 Text(formattedDate())
                     .font(DS.dateLabelFont())
@@ -90,5 +84,42 @@ struct CompletionOverlayView: View {
         f.dateStyle = .long
         f.timeStyle = .none
         return f.string(from: DailyPuzzleService.today())
+    }
+}
+
+// MARK: - Pixel art preview of the solved puzzle
+
+private struct SolvedPixelArtView: View {
+    let solution: [[Bool]]
+
+    private let maxSize: CGFloat = 120
+
+    var body: some View {
+        let rows = solution.count
+        let cols = solution.first?.count ?? 1
+        let cellSize = min(maxSize / CGFloat(max(rows, cols)), 8)
+        let width = CGFloat(cols) * cellSize
+        let height = CGFloat(rows) * cellSize
+
+        Canvas { ctx, _ in
+            for row in 0..<rows {
+                for col in 0..<cols where solution[row][col] {
+                    let rect = CGRect(
+                        x: CGFloat(col) * cellSize,
+                        y: CGFloat(row) * cellSize,
+                        width: cellSize,
+                        height: cellSize
+                    )
+                    ctx.fill(Path(rect), with: .color(DS.filled))
+                }
+            }
+        }
+        .frame(width: width, height: height)
+        .background(DS.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .overlay(
+            RoundedRectangle(cornerRadius: 4)
+                .stroke(DS.gridLine, lineWidth: 0.5)
+        )
     }
 }

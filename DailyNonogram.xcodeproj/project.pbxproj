@@ -15,7 +15,6 @@
 		399DD36B58B3908BAD26FF63 /* ArchivePuzzleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */; };
 		3ECB45976EABDAAADEE02999 /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F2BC79F415C64A294158F /* CellState.swift */; };
 		4287AC26BAFD4AE147A50DA6 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 9974737F4A9D8525F078B9E5 /* GoogleMobileAds */; };
-		4D7DBAC7AA7D2CA3D29A5644 /* PuzzleMotifHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E88BF2AD4ED14E6BB7E2712 /* PuzzleMotifHelper.swift */; };
 		4F71C0794E0FCF3E1616F1DE /* WeekProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5FE7A79FD1BBCD1BDB8C4 /* WeekProgressView.swift */; };
 		567B139F0D50EC152837B64D /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E7BA55A92FB471FBB8146 /* AdManager.swift */; };
 		5A870020E1E2339CC8FAEF0A /* CompletionOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E91DC2F0C457E06BBA4DF /* CompletionOverlayView.swift */; };
@@ -55,7 +54,6 @@
 		4A83E456CDBB8C4EFA54E82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4FFD26CA8FC88C9A36972A9B /* Nonogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonogram.swift; sourceTree = "<group>"; };
 		545BF5A3C3563AC6BAA2D1A9 /* PuzzleLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleLibrary.swift; sourceTree = "<group>"; };
-		6E88BF2AD4ED14E6BB7E2712 /* PuzzleMotifHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleMotifHelper.swift; sourceTree = "<group>"; };
 		711715741E47E26C4A8A67B0 /* BonusPuzzleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusPuzzleSheet.swift; sourceTree = "<group>"; };
 		7B37F78BE24814A515D18980 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		920C4400CBEECBA6F443C2F9 /* PremiumTeaserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTeaserView.swift; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 				AA8AA9506E7D2C8677D27027 /* DailyPuzzleService.swift */,
 				D9DA8289EE7971E7633D4D15 /* FreeNonoPuzzleLoader.swift */,
 				39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */,
-				6E88BF2AD4ED14E6BB7E2712 /* PuzzleMotifHelper.swift */,
 				344AE480174BED22980C88EE /* StoreKitManager.swift */,
 				D4FF677544C464B41061B1C8 /* StreakService.swift */,
 			);
@@ -299,7 +296,6 @@
 				E855D0E16EDB29EF3B10D833 /* PremiumTeaserService.swift in Sources */,
 				7721DDAA8CD2DD68E2CB3BDF /* PremiumTeaserView.swift in Sources */,
 				706E9F189225A0C6CAE0E0FE /* PuzzleLibrary.swift in Sources */,
-				4D7DBAC7AA7D2CA3D29A5644 /* PuzzleMotifHelper.swift in Sources */,
 				707D5AD5BB7C0AEB823330ED /* SampleNonogram.swift in Sources */,
 				F5F78C17595CFA859084C6CD /* SettingsView.swift in Sources */,
 				AFB73DD3E67D0B9B25DBFA84 /* StoreKitManager.swift in Sources */,

@@ -204,7 +204,7 @@ struct NonogramBoardView: View {
         .overlay {
             if vm.showCompletion {
                 CompletionOverlayView(
-                    puzzleTitle: vm.nonogram.title,
+                    nonogram: vm.nonogram,
                     streak: streak,
                     onDismiss: {
                         vm.showCompletion = false
