@@ -2,6 +2,8 @@ import SwiftUI
 
 struct WeekProgressView: View {
     var streak: Int = 0
+    /// Called when a past day circle is tapped. `nil` disables tapping.
+    var onSelectPastDay: ((Date) -> Void)? = nil
 
     private let days: [DayEntry] = Self.buildDays()
 
@@ -17,6 +19,16 @@ struct WeekProgressView: View {
                                         lineWidth: entry.isToday ? 2 : 1)
                         )
                         .frame(width: 22, height: 22)
+                        .overlay(
+                            // Tap target for past days
+                            Group {
+                                if !entry.isToday, let select = onSelectPastDay {
+                                    Color.clear
+                                        .contentShape(Circle())
+                                        .onTapGesture { select(entry.date) }
+                                }
+                            }
+                        )
 
                     Text(entry.weekday)
                         .font(DS.clueFont())
@@ -49,6 +61,7 @@ struct WeekProgressView: View {
 
     private struct DayEntry: Identifiable {
         let id: Int
+        let date: Date
         let weekday: String
         let isSolved: Bool
         let isToday: Bool
@@ -66,6 +79,7 @@ struct WeekProgressView: View {
             let short = String(formatter.string(from: date).prefix(2)).capitalized
             return DayEntry(
                 id: offset,
+                date: date,
                 weekday: short,
                 isSolved: DailyPuzzleService.wasAnySolved(for: date),
                 isToday: cal.isDate(date, inSameDayAs: today)

@@ -12,6 +12,7 @@
 		262400F6C024DB4B44F56FE1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1ACB73559FBBBE7B1EEE6 /* ContentView.swift */; };
 		2EFD5468E6EFB550A377D71D /* NonogramGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B951C79BA2F054FCF1D020F /* NonogramGridView.swift */; };
 		3179DE2DC261FD0B4731DF2B /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B37F78BE24814A515D18980 /* ToolbarView.swift */; };
+		399DD36B58B3908BAD26FF63 /* ArchivePuzzleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */; };
 		3ECB45976EABDAAADEE02999 /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F2BC79F415C64A294158F /* CellState.swift */; };
 		4287AC26BAFD4AE147A50DA6 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 9974737F4A9D8525F078B9E5 /* GoogleMobileAds */; };
 		4F71C0794E0FCF3E1616F1DE /* WeekProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5FE7A79FD1BBCD1BDB8C4 /* WeekProgressView.swift */; };
@@ -46,6 +47,7 @@
 		344AE480174BED22980C88EE /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		3534056C3831B2DB8FAF7828 /* PremiumPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumPaywallView.swift; sourceTree = "<group>"; };
 		39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTeaserService.swift; sourceTree = "<group>"; };
+		43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePuzzleSheet.swift; sourceTree = "<group>"; };
 		441BECA3F9388B0F91CD6063 /* DifficultyLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevel.swift; sourceTree = "<group>"; };
 		4A83E456CDBB8C4EFA54E82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4FFD26CA8FC88C9A36972A9B /* Nonogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonogram.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		236045FED646FD1AB0E3C15C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */,
 				9351350ADED814AECA29CAB7 /* BannerAdView.swift */,
 				B1073FF18412A0D545127B07 /* BonusOfferBanner.swift */,
 				711715741E47E26C4A8A67B0 /* BonusPuzzleSheet.swift */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				567B139F0D50EC152837B64D /* AdManager.swift in Sources */,
+				399DD36B58B3908BAD26FF63 /* ArchivePuzzleSheet.swift in Sources */,
 				8A9E7CD99C92EAF97347C481 /* BannerAdView.swift in Sources */,
 				651FE96FAB7380AE4569870D /* BonusOfferBanner.swift in Sources */,
 				0A60067CA779534269D7BF8C /* BonusPuzzleSheet.swift in Sources */,

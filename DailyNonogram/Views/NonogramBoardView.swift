@@ -12,6 +12,7 @@ struct NonogramBoardView: View {
     @State private var showFreezeAlert = false
     @State private var showBonusOffer = false
     @State private var showBonusPuzzle = false
+    @State private var archiveSelection: ArchiveDateSelection? = nil
     @State private var streak: Int = 0
 
     @EnvironmentObject private var store: StoreKitManager
@@ -88,7 +89,16 @@ struct NonogramBoardView: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
 
-            WeekProgressView(streak: streak)
+            WeekProgressView(
+                streak: streak,
+                onSelectPastDay: { date in
+                    if store.isPremium {
+                        archiveSelection = ArchiveDateSelection(date: date)
+                    } else {
+                        showPaywall = true
+                    }
+                }
+            )
 
             Rectangle()
                 .fill(DS.separator)
@@ -237,6 +247,9 @@ struct NonogramBoardView: View {
         }
         .sheet(isPresented: $showBonusPuzzle) {
             BonusPuzzleSheet(difficulty: vm.nonogram.difficulty)
+        }
+        .sheet(item: $archiveSelection) { selection in
+            ArchivePuzzleSheet(date: selection.date, difficulty: vm.nonogram.difficulty)
         }
         .animation(.easeOut(duration: 0.3), value: vm.showCompletion)
         .animation(.easeOut(duration: 0.3), value: showPremiumTeaser)
