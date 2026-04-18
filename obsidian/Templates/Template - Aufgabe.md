@@ -1,5 +1,5 @@
 {{date}}
-#backlog 
+#open 
 # Aufgabe
 
 # Implementierung

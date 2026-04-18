@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CompletionOverlayView: View {
     let puzzleTitle: String
+    let streak: Int
     let onDismiss: () -> Void
 
     @State private var appeared = false
@@ -33,6 +34,21 @@ struct CompletionOverlayView: View {
                     .font(DS.dateLabelFont())
                     .foregroundStyle(DS.textTertiary)
                     .padding(.top, 4)
+
+                if streak > 0 {
+                    HStack(spacing: 6) {
+                        Text("🔥")
+                            .font(.system(size: 18))
+                        Text("\(streak) \(streak == 1 ? "Tag" : "Tage") in Folge")
+                            .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                            .foregroundStyle(DS.accent)
+                    }
+                    .padding(.top, 16)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(DS.accent.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
+                    .padding(.top, 12)
+                }
 
                 Rectangle()
                     .fill(DS.separator)

@@ -5,3 +5,4 @@
 [[FUN4 - Aktivitätstracker]]
 [[FUN5 - Schwierigkeitsgrad]]
 [[FUN6 - Einstellungen]]
+[[FUN7 - Share Card nach dem Lösen]]

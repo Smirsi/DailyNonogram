@@ -21,6 +21,21 @@ struct SettingsView: View {
                     Toggle("Automatisches Abhaken", isOn: $autoCheckmark)
                 }
 
+                if store.isPremium {
+                    Section("Streak") {
+                        HStack {
+                            Label("Streak Freezes", systemImage: "snowflake")
+                            Spacer()
+                            Text("\(StreakService.availableFreezes(isPremium: true))")
+                                .foregroundStyle(DS.textSecondary)
+                                .font(.system(size: 14, design: .monospaced))
+                        }
+                        Text("Du erhältst nach je 7 gespielten Tagen in Folge einen Freeze-Token. Ein Freeze schützt deinen Streak für einen verpassten Tag.")
+                            .font(.system(size: 12))
+                            .foregroundStyle(DS.textTertiary)
+                    }
+                }
+
                 Section("Premium") {
                     if store.isPremium {
                         Label("Premium aktiv", systemImage: "crown.fill")

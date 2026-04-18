@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct WeekProgressView: View {
+    var streak: Int = 0
+
     private let days: [DayEntry] = Self.buildDays()
 
     var body: some View {
@@ -21,6 +23,22 @@ struct WeekProgressView: View {
                         .foregroundStyle(entry.isToday ? DS.textPrimary : DS.textTertiary)
                 }
                 .frame(maxWidth: .infinity)
+            }
+
+            if streak > 0 {
+                Rectangle()
+                    .fill(DS.separator)
+                    .frame(width: 0.5, height: 30)
+                    .padding(.horizontal, 8)
+
+                VStack(spacing: 1) {
+                    Text("\(streak)")
+                        .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                        .foregroundStyle(DS.accent)
+                    Text("🔥")
+                        .font(.system(size: 11))
+                }
+                .padding(.trailing, 4)
             }
         }
         .padding(.horizontal, 8)

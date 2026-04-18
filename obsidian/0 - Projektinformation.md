@@ -6,3 +6,4 @@ Das Programm soll eine App für den iOS, ipadOS und macOS Appstore werden, mit d
 [[MON0 - Monetarisierung]]
 [[PUSH0 - Push-Benachrichtigung]]
 [[DES0 - Design]]
+[[BUG0 - Bugs]]
