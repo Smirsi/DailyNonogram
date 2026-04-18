@@ -30,6 +30,7 @@
 		936234CBB032844977C7CADF /* StreakService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF677544C464B41061B1C8 /* StreakService.swift */; };
 		981E78C8D56F6CB8AAFCCB4C /* CluesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B301E4FA53788FF012DEA80C /* CluesView.swift */; };
 		9833DEF1EE63CAA8FD74CE03 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CE66FCA8E6B4C3742E6AA /* DesignSystem.swift */; };
+		99678A1E077CBD6DAC1EC175 /* Puzzles in Resources */ = {isa = PBXBuildFile; fileRef = 378E9D6D32E1FB9C631E41A5 /* Puzzles */; };
 		A8016A59D14073F427D4F0A3 /* DailyPuzzleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AA9506E7D2C8677D27027 /* DailyPuzzleService.swift */; };
 		ABB44DD793415AAA0EF794B7 /* DifficultyLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BECA3F9388B0F91CD6063 /* DifficultyLevel.swift */; };
 		AFB73DD3E67D0B9B25DBFA84 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344AE480174BED22980C88EE /* StoreKitManager.swift */; };
@@ -47,6 +48,7 @@
 		20A891DCA6E668581CE3C05D /* SampleNonogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleNonogram.swift; sourceTree = "<group>"; };
 		344AE480174BED22980C88EE /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		3534056C3831B2DB8FAF7828 /* PremiumPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumPaywallView.swift; sourceTree = "<group>"; };
+		378E9D6D32E1FB9C631E41A5 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Puzzles; path = DailyNonogram/Resources/Puzzles; sourceTree = SOURCE_ROOT; };
 		39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTeaserService.swift; sourceTree = "<group>"; };
 		43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePuzzleSheet.swift; sourceTree = "<group>"; };
 		441BECA3F9388B0F91CD6063 /* DifficultyLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevel.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		4E5760593D7D79D7E6C50D2F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				378E9D6D32E1FB9C631E41A5 /* Puzzles */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				820102793C6550F972C7E8FC /* Assets.xcassets in Resources */,
+				99678A1E077CBD6DAC1EC175 /* Puzzles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

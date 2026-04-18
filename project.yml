@@ -18,9 +18,9 @@ targets:
       - path: DailyNonogram
         excludes:
           - Resources/Puzzles/**
-    resources:
       - path: DailyNonogram/Resources/Puzzles
         type: folder
+        buildPhase: resources
     dependencies:
       - package: GoogleMobileAds
     settings:
