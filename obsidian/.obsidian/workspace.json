@@ -6,7 +6,7 @@
       {
         "id": "bbd03e96e3340ab3",
         "type": "tabs",
-        "dimension": 24.98360655737705,
+        "dimension": 36.39344262295082,
         "children": [
           {
             "id": "7a54e84205ed5ec5",
@@ -28,12 +28,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DES4.1 - App Icon erstellen.md",
+                "file": "FUN2.2 - Nonogramm Generator.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DES4.1 - App Icon erstellen"
+              "title": "FUN2.2 - Nonogramm Generator"
             }
           }
         ],
@@ -42,7 +42,7 @@
       {
         "id": "7eac7ff413c28412",
         "type": "tabs",
-        "dimension": 41.90163934426229,
+        "dimension": 30.491803278688522,
         "children": [
           {
             "id": "a0e3aec8fc125e45",
@@ -241,34 +241,35 @@
       "bases:Create new base": false
     }
   },
-  "active": "fa65bfbc5580d892",
+  "active": "72f205a5f5567720",
   "lastOpenFiles": [
+    "FUN2.2 - Nonogramm Generator.md",
+    "DES4.1 - App Icon erstellen.md",
+    "nonogram_icon_pencil_grid 1.svg",
+    "nonogram_icon_pencil_grid.svg",
+    "PUSH1 - Tägliche Push-Benachrichtigung.md",
+    "FUN2.4 - Neuimplementierung der Generierung.md",
+    "FUN7 - Share Card nach dem Lösen.md",
+    "FUN2 - Erstellung von neuen Nonogrammen.md",
+    "FUN5 - Schwierigkeitsgrad.md",
+    "FUN5.2 - Schwarz-Weiße und Farbige Nonogramme.md",
+    "FUN5.1 - Leichte und Schwere Nonogramme.md",
+    "FUN4.1 - Streak Counter.md",
+    "MON1.2 - Werbeplatzierung optimieren.md",
     "FUN1.5 - Automatische X andere Farbe.md",
     "DES3 - Einstellungen.md",
     "DES4 - App Icon.md",
-    "DES4.1 - App Icon erstellen.md",
     "FUN1.3.1 - Zahlen zoomen nicht mit.md",
     "FUN1.4 - Automatisches X und Abhaken.md",
     "FUN2.1 - Tägliches Nonogramm.md",
-    "FUN2.2 - Nonogramm Generator.md",
-    "FUN4.1 - Streak Counter.md",
     "FUN4 - Aktivitätstracker.md",
-    "FUN2 - Erstellung von neuen Nonogrammen.md",
     "ANA1 - Marktanalyse-Todos.md",
     "FUN0 - Funktion.md",
     "FUN1 - Nonogramm lösen.md",
     "FUN3 - Zugriff auf alte Nonogramme.md",
     "FUN6 - Einstellungen.md",
-    "FUN7 - Share Card nach dem Lösen.md",
     "PUSH0 - Push-Benachrichtigung.md",
-    "PUSH1 - Tägliche Push-Benachrichtigung.md",
     "FUN2.3 - Motiv-Anzeige nach dem Lösen.md",
-    "FUN3.1 - Puzzle-Archiv Screen.md",
-    "FUN2.2.1 - Komplexere Nonogramme.md",
-    "MON1.2 - Werbeplatzierung optimieren.md",
-    "FUN4.2 - Streak Freeze (Premium).md",
-    "Templates/Template - Aufgabe.md",
-    "MON3.1 - Hauptunterschiede.md",
     "Untitled.canvas",
     "Templates"
   ]

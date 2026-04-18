@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<FreeNono>
+  <Nonograms>
+    <Nonogram name="fish_color_vflip" height="10" width="8" type="color">
+      <palette>
+        <color index="1" hex="#FF8C00"/>
+        <color index="2" hex="#1E90FF"/>
+        <color index="3" hex="#FFFFFF"/>
+      </palette>
+      <line> 0 1 0 0 0 0 1 0 </line>
+      <line> 0 0 1 0 0 1 0 0 </line>
+      <line> 0 0 0 1 0 0 0 0 </line>
+      <line> 0 1 1 1 1 1 0 0 </line>
+      <line> 1 1 2 1 2 1 1 0 </line>
+      <line> 1 1 1 1 1 1 1 1 </line>
+      <line> 1 1 1 3 1 1 1 1 </line>
+      <line> 1 0 1 1 1 1 0 0 </line>
+      <line> 0 0 1 1 1 0 0 0 </line>
+      <line> 0 0 0 1 0 0 0 0 </line>
+    </Nonogram>
+  </Nonograms>
+</FreeNono>

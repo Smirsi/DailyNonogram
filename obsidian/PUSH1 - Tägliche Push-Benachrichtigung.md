@@ -1,5 +1,5 @@
 2026-04-18
-#open 
+#backlog
 # Aufgabe
 Push-Benachrichtigungen
 **Analyse-Bewertung:** Täglich neues Rätsel = natürlicher Anlass für tägliche Notification ("Dein Nonogramm für heute ist bereit 🎯").  

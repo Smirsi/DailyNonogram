@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<FreeNono>
+  <Nonograms>
+    <Nonogram name="apple_vflip" height="6" width="5" type="color">
+      <palette>
+        <color index="1" hex="#C8414A"/>
+        <color index="2" hex="#2E8B57"/>
+      </palette>
+      <line> 0 1 1 1 0 </line>
+      <line> 1 1 1 1 1 </line>
+      <line> 1 1 1 1 1 </line>
+      <line> 1 1 1 1 0 </line>
+      <line> 0 0 0 2 0 </line>
+      <line> 0 2 2 2 0 </line>
+    </Nonogram>
+  </Nonograms>
+</FreeNono>

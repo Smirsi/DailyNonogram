@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<FreeNono>
+  <Nonograms>
+    <Nonogram name="sunset_rot90" height="8" width="10" type="color">
+      <palette>
+        <color index="1" hex="#FF4500"/>
+        <color index="2" hex="#FF8C00"/>
+        <color index="3" hex="#FFD700"/>
+        <color index="4" hex="#87CEEB"/>
+      </palette>
+      <line> 1 1 1 1 2 3 3 4 4 4 </line>
+      <line> 1 1 1 2 2 2 3 4 4 4 </line>
+      <line> 1 1 1 1 2 2 3 3 4 4 </line>
+      <line> 1 1 1 2 2 3 3 4 4 4 </line>
+      <line> 1 1 1 2 2 3 3 4 4 4 </line>
+      <line> 1 1 1 1 2 2 3 3 4 4 </line>
+      <line> 1 1 1 2 2 2 3 4 4 4 </line>
+      <line> 1 1 1 1 2 3 3 4 4 4 </line>
+    </Nonogram>
+  </Nonograms>
+</FreeNono>

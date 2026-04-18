@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<FreeNono>
+  <Nonograms>
+    <Nonogram name="flower_vflip" height="7" width="5" type="color">
+      <palette>
+        <color index="1" hex="#FF69B4"/>
+        <color index="2" hex="#FFD700"/>
+        <color index="3" hex="#228B22"/>
+      </palette>
+      <line> 0 0 3 0 0 </line>
+      <line> 0 0 3 0 0 </line>
+      <line> 0 1 1 1 0 </line>
+      <line> 1 1 2 1 1 </line>
+      <line> 1 2 2 2 1 </line>
+      <line> 1 1 2 1 1 </line>
+      <line> 0 1 1 1 0 </line>
+    </Nonogram>
+  </Nonograms>
+</FreeNono>
