@@ -11,3 +11,4 @@ Das Nonogramm liegt im Downloads-Ordner:![[nonogram_icon_pencil_grid 1.svg]]
 Datum: 2026-04-18
 
 SVG viewBox auf `218 52 244 244` zugeschnitten (quadratischer Crop, weißer Rand entfernt). Mit `rsvg-convert` als 1024×1024 PNG exportiert und in `DailyNonogram/Assets.xcassets/AppIcon.appiconset/AppIcon.png` abgelegt. `Contents.json` mit `filename`-Eintrag ergänzt.
+#approved 

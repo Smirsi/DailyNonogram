@@ -8,11 +8,14 @@ struct WeekProgressView: View {
     private let days: [DayEntry] = Self.buildDays()
 
     var body: some View {
+        let frozenDates = Set(StreakService.loadFrozenDatesPublic())
+
         HStack(spacing: 0) {
             ForEach(days) { entry in
                 VStack(spacing: 4) {
+                    let isFrozen = frozenDates.contains(DailyPuzzleService.dateString(for: entry.date))
                     Circle()
-                        .fill(entry.isSolved ? DS.accent : Color.clear)
+                        .fill(entry.isSolved ? DS.accent : (isFrozen ? Color.blue.opacity(0.75) : Color.clear))
                         .overlay(
                             Circle()
                                 .stroke(entry.isToday ? DS.accent : DS.gridLine,
@@ -20,7 +23,6 @@ struct WeekProgressView: View {
                         )
                         .frame(width: 22, height: 22)
                         .overlay(
-                            // Tap target for past days
                             Group {
                                 if !entry.isToday, let select = onSelectPastDay {
                                     Color.clear
@@ -47,8 +49,9 @@ struct WeekProgressView: View {
                     Text("\(streak)")
                         .font(.system(size: 15, weight: .semibold, design: .monospaced))
                         .foregroundStyle(DS.accent)
-                    Text("🔥")
+                    Image(systemName: "flame.fill")
                         .font(.system(size: 11))
+                        .foregroundStyle(DS.accent)
                 }
                 .padding(.trailing, 4)
             }

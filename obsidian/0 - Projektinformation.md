@@ -7,3 +7,4 @@ Das Programm soll eine App für den iOS, ipadOS und macOS Appstore werden, mit d
 [[PUSH0 - Push-Benachrichtigung]]
 [[DES0 - Design]]
 [[BUG0 - Bugs]]
+[[REL0 - Release]]

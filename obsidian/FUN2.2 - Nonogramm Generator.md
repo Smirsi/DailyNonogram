@@ -10,3 +10,4 @@ Es muss jeden Tag ein neues Nonogramm gelöst werden können. Entwickle daher ei
 Herz, Weihnachtsbaum, Haus, Fisch, Katze, Rakete, Pilz, Sonne, Vogel, Diamant.
 Die Clues werden automatisch per String-basierter Grid-Definition und `Nonogram.computeClues()` berechnet. Die Bibliothek kann jederzeit um weitere Motive erweitert werden.
 #notapproved [[FUN2.2.1 - Komplexere Nonogramme]]
+#approved 

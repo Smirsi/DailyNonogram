@@ -9,3 +9,4 @@ Es soll möglich sein, das Nonogramm zu verschieben und rein- und raus zu zoomen
 - Zeichnen (1-Finger) funktioniert weiterhin korrekt mit angepasster Koordinatentransformation.
 
 #notapproved siehe [[FUN1.3.1 - Zahlen zoomen nicht mit]]
+#approved 

@@ -32,3 +32,4 @@ Vollständige Neuimplementierung der Puzzle-Generierung:
 - **`PuzzleLibrary.swift`**: Neue Properties `colorEasy`, `colorMedium`, `colorHard`.
 - Alle alten ~158 B&W-Puzzles gelöscht und ersetzt.
 - Build: ✅ erfolgreich.
+#approved 

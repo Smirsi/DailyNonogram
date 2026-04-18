@@ -5,3 +5,4 @@ In den Einstellungen soll es die Möglichkeit geben, das automatische Abhaken zu
 # Implementierung
 Toggle in `SettingsView` unter „Automatisierung". Steuert `@AppStorage("autoCheckmark")`, das im `NonogramViewModel` abgefragt wird.
 #notapproved [[FUN6.3.1 - Zahl wird immer abgehakt]]
+#approved 

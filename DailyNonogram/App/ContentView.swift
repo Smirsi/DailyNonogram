@@ -55,7 +55,7 @@ private struct PuzzleContainerView: View {
     var body: some View {
         NonogramBoardView(
             vm: vm,
-            onChangeDifficulty: isPremium ? onChangeDifficulty : nil
+            onChangeDifficulty: onChangeDifficulty
         )
     }
 }

@@ -16,3 +16,4 @@ Datum: 2026-04-18
 - `CompletionOverlayView`: Streak-Badge im Abschluss-Dialog ("X Tage in Folge")
 - `NonogramBoardView`: `@State streak` wird bei `.onAppear` und nach Puzzle-Lösung aktualisiert; Freeze-Alert wenn Premium-Nutzer gestern verpasst hat (einmalig pro Tag)
 - `SettingsView`: Abschnitt "Streak" für Premium-Nutzer mit verfügbaren Freeze-Tokens und Erklärung
+#notapproved [[FUN4.1.1 - Streak Counter Darstellung]]

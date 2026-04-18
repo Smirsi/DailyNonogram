@@ -12,7 +12,7 @@ final class AdManager: NSObject, ObservableObject {
 
     // MARK: - Ad Unit IDs
 
-    static let interstitialUnitID = "ca-app-pub-1758574140088603/7574628484"
+    static let interstitialUnitID = "ca-app-pub-1758574140088603/7992491536"
     static let rewardedUnitID     = "ca-app-pub-1758574140088603/9876543210"
 
     // MARK: - State

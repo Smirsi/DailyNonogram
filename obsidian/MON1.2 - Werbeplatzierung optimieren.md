@@ -15,3 +15,4 @@ Datum: 2026-04-18
 - Nach Interstitial: `BonusOfferBanner` erscheint mit "Spielen"-Button (Rewarded Video)
 - Nach Reward: `BonusPuzzleSheet` öffnet sich mit einem Bonus-Rätsel (180 Tage offset vom heutigen Rätsel)
 - `DailyPuzzleService.bonusPuzzle(difficulty:)` hinzugefügt
+- #approved 

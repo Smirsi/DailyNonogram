@@ -74,7 +74,8 @@ private final class NonogramXMLParser: NSObject, XMLParserDelegate {
         guard !grid.isEmpty else { return nil }
 
         let clues = Nonogram.computeClues(from: grid)
-        let title = name.isEmpty ? "Unbekannt" : name.capitalized
+        let cleaned = name.replacingOccurrences(of: #"(?i)\s+[vh]flip$"#, with: "", options: .regularExpression)
+        let title = cleaned.isEmpty ? "Unbekannt" : cleaned.capitalized
         return Nonogram(
             title: title,
             rows: grid.count,
@@ -156,7 +157,8 @@ private final class ColorNonogramXMLParser: NSObject, XMLParserDelegate {
         let rowColorClues = computeColorClues(grid: grid, lineCount: rows, cellCount: cols, byRow: true)
         let colColorClues = computeColorClues(grid: grid, lineCount: cols, cellCount: rows, byRow: false)
 
-        let title = name.isEmpty ? "Unbekannt" : name.capitalized
+        let cleaned = name.replacingOccurrences(of: #"(?i)\s+[vh]flip$"#, with: "", options: .regularExpression)
+        let title = cleaned.isEmpty ? "Unbekannt" : cleaned.capitalized
         var nono = Nonogram(
             title: title,
             rows: rows,

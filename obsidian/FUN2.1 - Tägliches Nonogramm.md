@@ -8,3 +8,4 @@ Da das Ziel dieser App ist, jeden Tag grundsätzlich nur 1 Nonogramm anzuzeigen,
 - `saveProgress()` / `loadProgress()` persistieren den Spielstand per UserDefaults (tagesbezogener Schlüssel).
 - `ContentView` lädt beim Start das tägliche Rätsel inkl. gespeichertem Fortschritt.
 - Die Funktion `puzzle(for:)` ist als Override-Point für spätere Premium-Ausnahmen vorbereitet.
+#approved 

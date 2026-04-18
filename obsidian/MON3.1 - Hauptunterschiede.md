@@ -9,3 +9,4 @@ Die Vorteil sollen alle ersichtlich sein.
 # Implementierung
 `DifficultySelectionView` als eigener Start-Screen implementiert: Free-User wählen eine Schwierigkeit/Tag mit Bestätigungs-Alert (danach gesperrt). Premium-User können jederzeit über den Difficulty-Badge im Header zur Auswahl zurückkehren und alle 3 Levels lösen. `WeekProgressView` zeigt den Tag als gelöst sobald eine Schwierigkeit gelöst wurde. `isColorized: Bool` als Vorbereitungsfeld in `Nonogram` hinzugefügt (kein UI). Banner-Werbung bereits für Premium unterdrückt (war schon implementiert).
 Datum: 2026-04-11 | Commit: folgt
+#approved 

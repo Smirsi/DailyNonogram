@@ -14,3 +14,4 @@ Datum: 2026-04-18
 - `WeekProgressView`: Vergangene Tages-Kreise (nicht heute) sind jetzt tappbar via `onSelectPastDay`-Callback
 - `ArchivePuzzleSheet.swift`: Sheet mit Puzzle der gewählten Vergangenheitsdatum + Fortschritt-Persistierung; `ArchiveDateSelection` als Identifiable-Wrapper
 - `NonogramBoardView`: Tippt Premium-Nutzer auf vergangenen Tag → öffnet `ArchivePuzzleSheet`; Free-Nutzer → Paywall
+#approved 

@@ -9,8 +9,8 @@ struct NonogramBoardView: View {
     @State private var showSettings = false
     @State private var showPremiumTeaser = false
     @State private var showPaywall = false
-    @State private var showFreezeAlert = false
     @State private var showBonusOffer = false
+    @State private var pendingCompletion = false
     @State private var showBonusPuzzle = false
     @State private var archiveSelection: ArchiveDateSelection? = nil
     @State private var streak: Int = 0
@@ -40,7 +40,7 @@ struct NonogramBoardView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Header
-            ZStack(alignment: .topTrailing) {
+            ZStack(alignment: .top) {
                 VStack(spacing: 4) {
                     Text(vm.nonogram.title)
                         .font(DS.titleFont())
@@ -72,14 +72,27 @@ struct NonogramBoardView: View {
                 }
                 .frame(maxWidth: .infinity)
 
-                Button {
-                    showSettings = true
-                } label: {
-                    Image(systemName: "gearshape")
-                        .font(.system(size: 18, weight: .light))
-                        .foregroundStyle(DS.textSecondary)
+                HStack {
+                    Button {
+                        onChangeDifficulty?()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 18, weight: .light))
+                            .foregroundStyle(DS.textSecondary)
+                    }
+                    .buttonStyle(.plain)
+
+                    Spacer()
+
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                            .font(.system(size: 18, weight: .light))
+                            .foregroundStyle(DS.textSecondary)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
             .padding(.horizontal, 8)
 
@@ -183,43 +196,39 @@ struct NonogramBoardView: View {
             checkFreezeOpportunity()
         }
         .onChange(of: vm.showCompletion) { _, isShowing in
-            if isShowing {
-                streak = StreakService.currentStreak()
+            guard isShowing else { return }
+            streak = StreakService.currentStreak()
+            if !store.isPremium {
+                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let rootVC = windowScene.windows.first?.rootViewController else {
+                    pendingCompletion = true
+                    return
+                }
+                ads.showInterstitialIfReady(from: rootVC) {
+                    pendingCompletion = true
+                }
+            } else {
+                pendingCompletion = true
             }
         }
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
-        .alert("Streak retten", isPresented: $showFreezeAlert) {
-            Button("Freeze verwenden") {
-                let cal = Calendar.current
-                let yesterday = cal.date(byAdding: .day, value: -1, to: DailyPuzzleService.today())!
-                StreakService.applyFreeze(for: yesterday, isPremium: store.isPremium)
-                streak = StreakService.currentStreak()
-            }
-            Button("Abbrechen", role: .cancel) {}
-        } message: {
-            Text("Du hast gestern nicht gespielt. Verwende einen Freeze, um deinen Streak zu erhalten.")
-        }
         .overlay {
-            if vm.showCompletion {
+            if pendingCompletion {
                 CompletionOverlayView(
                     nonogram: vm.nonogram,
                     streak: streak,
                     onDismiss: {
+                        pendingCompletion = false
                         vm.showCompletion = false
                         streak = StreakService.currentStreak()
                         if !store.isPremium {
-                            // Show interstitial after completion, then offer bonus puzzle
-                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                                  let rootVC = windowScene.windows.first?.rootViewController else { return }
-                            ads.showInterstitialIfReady(from: rootVC) {
-                                if ads.rewardedReady {
-                                    withAnimation { showBonusOffer = true }
-                                } else if PremiumTeaserService.shouldShow(isPremium: false) {
-                                    PremiumTeaserService.markShown()
-                                    showPremiumTeaser = true
-                                }
+                            if ads.rewardedReady {
+                                withAnimation { showBonusOffer = true }
+                            } else if PremiumTeaserService.shouldShow(isPremium: false) {
+                                PremiumTeaserService.markShown()
+                                showPremiumTeaser = true
                             }
                         } else if PremiumTeaserService.shouldShow(isPremium: true) {
                             PremiumTeaserService.markShown()
@@ -251,7 +260,7 @@ struct NonogramBoardView: View {
         .sheet(item: $archiveSelection) { selection in
             ArchivePuzzleSheet(date: selection.date, difficulty: vm.nonogram.difficulty)
         }
-        .animation(.easeOut(duration: 0.3), value: vm.showCompletion)
+        .animation(.easeOut(duration: 0.3), value: pendingCompletion)
         .animation(.easeOut(duration: 0.3), value: showPremiumTeaser)
         .animation(.easeOut(duration: 0.3), value: showBonusOffer)
     }
@@ -265,11 +274,13 @@ struct NonogramBoardView: View {
     }
 
     private func checkFreezeOpportunity() {
-        guard store.isPremium,
-              StreakService.canApplyFreezeForYesterday(isPremium: true) else { return }
-        let key = "freezePromptShown_\(DailyPuzzleService.dateString(for: DailyPuzzleService.today()))"
+        guard StreakService.canApplyFreezeForYesterday(isPremium: store.isPremium) else { return }
+        let key = "freezeAutoApplied_\(DailyPuzzleService.dateString(for: DailyPuzzleService.today()))"
         guard !UserDefaults.standard.bool(forKey: key) else { return }
         UserDefaults.standard.set(true, forKey: key)
-        showFreezeAlert = true
+        let cal = Calendar.current
+        let yesterday = cal.date(byAdding: .day, value: -1, to: DailyPuzzleService.today())!
+        StreakService.applyFreeze(for: yesterday, isPremium: store.isPremium)
+        streak = StreakService.currentStreak()
     }
 }

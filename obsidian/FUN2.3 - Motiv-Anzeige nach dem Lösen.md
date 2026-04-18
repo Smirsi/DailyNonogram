@@ -18,3 +18,4 @@ Datum: 2026-04-18
   - Easy: 55 Puzzles gesamt (5×5 bis 10×10, Motive: Stern, Haus, Pilz, Boot, Apfel, Hase, Vogel, Blume, Sonne, Auto, Kiefer, Schlüssel, Anker, Krone, Blitz u.v.m.)
   - Medium: 52 Puzzles gesamt (12×12 bis 15×15, Motive: Schmetterling, Pferd, Elefant, Katze, Hund, Rose, Zug, Schiff, Löwe, Haus, Baum, Stern, Fisch, Bär, Schildkröte, Pinguin, Wal, Hirsch, Mond, Krabbe, Gitarre, Trommel)
   - Hard: 51 Puzzles gesamt (20×20, Motive: Drache, Wolf, Hai, Pfau, Burg, Rakete, Tiger, Fuchs, Klavier, Adler, Leuchtturm + weitere)
+#approved 

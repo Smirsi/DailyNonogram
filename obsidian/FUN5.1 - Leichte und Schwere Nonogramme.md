@@ -10,3 +10,4 @@ Lade dafür Rätsel für die nächsten 30 Tage herunter und weise ihnen das Datu
 # Implementierung
 90 FreeNono-Puzzles heruntergeladen (je 30 aus Rumiko Course 10x10/15x15/25x25) und in `Resources/Puzzles/easy|medium|hard/` organisiert. Alle bisherigen Puzzles (10 handgemachte + alte FreeNono-Flat-Dateien) gelöscht. `DifficultyLevel`-Enum hinzugefügt, `FreeNonoPuzzleLoader` und `PuzzleLibrary` auf Difficulty-Subdirectories umgebaut. `DailyPuzzleService` erhält difficulty-Parameter für alle Progress- und Puzzle-Funktionen.
 Datum: 2026-04-11 | Commit: folgt
+#approved 

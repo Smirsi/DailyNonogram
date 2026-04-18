@@ -6,3 +6,4 @@ Ich denke es müsste nicht nur von oben nach unten geprüft werden sondern auch 
 # Implementierung
 `matchClues()` in `NonogramViewModel.swift` auf bidirektionales Matching umgebaut: Links-Pass matcht Clues von links, Rechts-Pass matcht verbleibende Clues von rechts – beide Pässe unabhängig, kein vorzeitiger Break mehr für bereits gematchte Clues.
 Datum: 2026-04-11 | Commit: folgt mit AP2
+#approved 
