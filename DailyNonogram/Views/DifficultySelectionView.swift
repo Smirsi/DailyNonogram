@@ -25,7 +25,7 @@ struct DifficultySelectionView: View {
                 .padding(.top, 48)
 
                 VStack(spacing: 14) {
-                    ForEach(DifficultyLevel.allCases, id: \.self) { level in
+                    ForEach(DifficultyLevel.allCases.filter { !$0.isColor }, id: \.self) { level in
                         DifficultyButton(
                             level: level,
                             isSolved: solvedToday.contains(level),
