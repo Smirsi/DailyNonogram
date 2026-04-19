@@ -5,3 +5,4 @@
 [[FUN1.4 - Automatisches X und Abhaken]]
 [[FUN1.5 - Automatische X andere Farbe]]
 [[FUN1.6 - Darstellung Namen]]
+[[FUN1.7 - FreeNonogramm überprüfen]]
