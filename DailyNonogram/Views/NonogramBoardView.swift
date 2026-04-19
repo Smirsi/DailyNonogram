@@ -2,7 +2,6 @@ import SwiftUI
 
 struct NonogramBoardView: View {
     @ObservedObject var vm: NonogramViewModel
-    /// Called when a premium user wants to switch difficulty. `nil` for free users (locked).
     var onChangeDifficulty: (() -> Void)? = nil
 
     @AppStorage("showCluesBothSides") private var showCluesBothSides = false
@@ -12,15 +11,13 @@ struct NonogramBoardView: View {
     @State private var pendingCompletion = false
     @State private var archiveSelection: ArchiveDateSelection? = nil
     @State private var streak: Int = 0
+    @State private var showSolveConfirm = false
 
     @EnvironmentObject private var store: StoreKitManager
     @EnvironmentObject private var ads: AdManager
 
-    /// Base cell size — zoom is applied on top of this
     private let cellSize: CGFloat = 36
-    /// Persisted zoom level (set when pinch ends)
     @State private var scale: CGFloat = 1.0
-    /// Live zoom level (updated every gesture frame, shared with CluesView)
     @State private var liveScale: CGFloat = 1.0
 
     private var effectiveCellSize: CGFloat { cellSize * liveScale }
@@ -47,7 +44,6 @@ struct NonogramBoardView: View {
                         .font(DS.dateLabelFont())
                         .foregroundStyle(DS.textSecondary)
                     if let change = onChangeDifficulty {
-                        // Premium: difficulty badge is tappable to switch
                         Button(action: change) {
                             Text(vm.nonogram.difficulty.displayName)
                                 .font(.system(size: 11, weight: .semibold))
@@ -71,20 +67,14 @@ struct NonogramBoardView: View {
                 .frame(maxWidth: .infinity)
 
                 HStack {
-                    Button {
-                        onChangeDifficulty?()
-                    } label: {
+                    Button { onChangeDifficulty?() } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 18, weight: .light))
                             .foregroundStyle(DS.textSecondary)
                     }
                     .buttonStyle(.plain)
-
                     Spacer()
-
-                    Button {
-                        showSettings = true
-                    } label: {
+                    Button { showSettings = true } label: {
                         Image(systemName: "gearshape")
                             .font(.system(size: 18, weight: .light))
                             .foregroundStyle(DS.textSecondary)
@@ -94,69 +84,43 @@ struct NonogramBoardView: View {
             }
             .padding(.horizontal, 8)
 
-            Rectangle()
-                .fill(DS.separator)
-                .frame(height: 0.5)
-                .padding(.horizontal, 16)
-                .padding(.top, 12)
+            Rectangle().fill(DS.separator).frame(height: 0.5).padding(.horizontal, 16).padding(.top, 12)
 
             WeekProgressView(
                 streak: streak,
                 onSelectPastDay: { date in
-                    if store.isPremium {
-                        archiveSelection = ArchiveDateSelection(date: date)
-                    } else {
-                        showPaywall = true
-                    }
+                    if store.isPremium { archiveSelection = ArchiveDateSelection(date: date) }
+                    else { showPaywall = true }
                 }
             )
 
-            Rectangle()
-                .fill(DS.separator)
-                .frame(height: 0.5)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 16)
+            Rectangle().fill(DS.separator).frame(height: 0.5).padding(.horizontal, 16).padding(.bottom, 16)
 
             ScrollView([.horizontal, .vertical], showsIndicators: false) {
                 VStack(spacing: 0) {
-                    // Top row: corner(s) + column clues + corner(s)
                     HStack(spacing: 0) {
                         Color.clear.frame(width: rowClueWidth, height: colClueHeight)
-                        ColCluesView(clues: vm.nonogram.colClues,
-                                     cellSize: effectiveCellSize,
-                                     checkedClues: vm.checkedColClues)
-                            .frame(height: colClueHeight)
+                        ColCluesView(clues: vm.nonogram.colClues, cellSize: effectiveCellSize,
+                                     checkedClues: vm.checkedColClues).frame(height: colClueHeight)
                         if showCluesBothSides {
                             Color.clear.frame(width: rowClueWidth, height: colClueHeight)
                         }
                     }
-
-                    // Middle row: row clues + grid + (optional right clues)
                     HStack(alignment: .top, spacing: 0) {
-                        RowCluesView(clues: vm.nonogram.rowClues,
-                                     cellSize: effectiveCellSize,
-                                     checkedClues: vm.checkedRowClues)
-                            .frame(width: rowClueWidth)
-
+                        RowCluesView(clues: vm.nonogram.rowClues, cellSize: effectiveCellSize,
+                                     checkedClues: vm.checkedRowClues).frame(width: rowClueWidth)
                         NonogramGridView(vm: vm, cellSize: cellSize, scale: $scale, liveScale: $liveScale)
-
                         if showCluesBothSides {
-                            RowCluesView(clues: vm.nonogram.rowClues,
-                                         cellSize: effectiveCellSize,
-                                         checkedClues: vm.checkedRowClues,
-                                         alignRight: false)
+                            RowCluesView(clues: vm.nonogram.rowClues, cellSize: effectiveCellSize,
+                                         checkedClues: vm.checkedRowClues, alignRight: false)
                                 .frame(width: rowClueWidth)
                         }
                     }
-
-                    // Optional bottom column clues
                     if showCluesBothSides {
                         HStack(spacing: 0) {
                             Color.clear.frame(width: rowClueWidth, height: colClueHeight)
-                            ColCluesView(clues: vm.nonogram.colClues,
-                                         cellSize: effectiveCellSize,
-                                         checkedClues: vm.checkedColClues,
-                                         alignBottom: false)
+                            ColCluesView(clues: vm.nonogram.colClues, cellSize: effectiveCellSize,
+                                         checkedClues: vm.checkedColClues, alignBottom: false)
                                 .frame(height: colClueHeight)
                             Color.clear.frame(width: rowClueWidth, height: colClueHeight)
                         }
@@ -165,10 +129,15 @@ struct NonogramBoardView: View {
                 .padding(16)
             }
 
-            // Toolbar
-            ToolbarView(currentTool: $vm.currentTool)
-                .padding(.top, 16)
+            // Action buttons row
+            actionButtonsRow
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+                .padding(.bottom, 4)
 
+            // Draw tools
+            ToolbarView(currentTool: $vm.currentTool)
+                .padding(.top, 8)
         }
         .padding()
         .background(DS.background.ignoresSafeArea())
@@ -182,63 +151,134 @@ struct NonogramBoardView: View {
             if !store.isPremium {
                 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                       let rootVC = windowScene.windows.first?.rootViewController else {
-                    pendingCompletion = true
-                    return
+                    pendingCompletion = true; return
                 }
-                ads.showInterstitialIfReady(from: rootVC) {
-                    pendingCompletion = true
-                }
+                ads.showInterstitialIfReady(from: rootVC) { pendingCompletion = true }
             } else {
                 pendingCompletion = true
             }
         }
-        .sheet(isPresented: $showSettings) {
-            SettingsView()
-        }
+        .sheet(isPresented: $showSettings) { SettingsView() }
         .overlay {
             if pendingCompletion {
-                CompletionOverlayView(
-                    nonogram: vm.nonogram,
-                    streak: streak,
-                    onDismiss: {
-                        pendingCompletion = false
-                        vm.showCompletion = false
-                        streak = StreakService.currentStreak()
-                        if !store.isPremium {
-                            if PremiumTeaserService.shouldShow(isPremium: false) {
-                                PremiumTeaserService.markShown()
-                                showPremiumTeaser = true
-                            }
-                        } else if PremiumTeaserService.shouldShow(isPremium: true) {
-                            PremiumTeaserService.markShown()
-                            showPremiumTeaser = true
+                CompletionOverlayView(nonogram: vm.nonogram, streak: streak, onDismiss: {
+                    pendingCompletion = false
+                    vm.showCompletion = false
+                    streak = StreakService.currentStreak()
+                    if !store.isPremium {
+                        if PremiumTeaserService.shouldShow(isPremium: false) {
+                            PremiumTeaserService.markShown(); showPremiumTeaser = true
                         }
+                    } else if PremiumTeaserService.shouldShow(isPremium: true) {
+                        PremiumTeaserService.markShown(); showPremiumTeaser = true
                     }
-                )
+                })
                 .transition(.opacity.combined(with: .scale(scale: 0.95)))
             }
         }
         .overlay {
             if showPremiumTeaser {
                 PremiumTeaserView(
-                    onUpgrade: {
-                        showPremiumTeaser = false
-                        showPaywall = true
-                    },
+                    onUpgrade: { showPremiumTeaser = false; showPaywall = true },
                     onDismiss: { showPremiumTeaser = false }
                 )
                 .transition(.opacity.combined(with: .scale(scale: 0.95)))
             }
         }
-        .sheet(isPresented: $showPaywall) {
-            PremiumPaywallView()
-        }
+        .sheet(isPresented: $showPaywall) { PremiumPaywallView() }
         .sheet(item: $archiveSelection) { selection in
             ArchivePuzzleSheet(date: selection.date, difficulty: vm.nonogram.difficulty)
+        }
+        .confirmationDialog("Puzzle lösen?", isPresented: $showSolveConfirm, titleVisibility: .visible) {
+            Button("Lösen (kostet 1 Freeze)") { performSolve() }
+            Button("Abbrechen", role: .cancel) {}
+        } message: {
+            Text("Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen.")
         }
         .animation(.easeOut(duration: 0.3), value: pendingCompletion)
         .animation(.easeOut(duration: 0.3), value: showPremiumTeaser)
     }
+
+    // MARK: - Action Buttons
+
+    private var actionButtonsRow: some View {
+        HStack(spacing: 16) {
+            // Undo
+            actionButton(icon: "arrow.uturn.backward", label: "Undo", enabled: vm.canUndo) {
+                withAnimation(.easeOut(duration: 0.15)) { vm.undo() }
+            }
+
+            // Redo
+            actionButton(icon: "arrow.uturn.forward", label: "Redo", enabled: vm.canRedo) {
+                withAnimation(.easeOut(duration: 0.15)) { vm.redo() }
+            }
+
+            Spacer()
+
+            // Hint (all users, requires rewarded ad)
+            if !vm.hintsBlocked {
+                actionButton(icon: "lightbulb", label: "Hint", enabled: ads.hintRewardedReady) {
+                    showHintAd()
+                }
+            }
+
+            // Error Reveal (premium only, requires ad)
+            if store.isPremium {
+                actionButton(icon: "eye", label: "Fehler", enabled: ads.errorRevealReady) {
+                    showErrorRevealAd()
+                }
+            }
+
+            // Auto-Solve (premium only, costs freeze)
+            if store.isPremium {
+                let freezesLeft = StreakService.availableFreezes(isPremium: true)
+                actionButton(icon: "wand.and.stars", label: "Lösen", enabled: freezesLeft > 0) {
+                    showSolveConfirm = true
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func actionButton(icon: String, label: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(spacing: 3) {
+                Image(systemName: icon)
+                    .font(.system(size: 16, weight: .light))
+                Text(label)
+                    .font(.system(size: 10, weight: .medium))
+            }
+            .foregroundStyle(enabled ? DS.textSecondary : DS.textTertiary)
+            .frame(width: 48, height: 40)
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
+    }
+
+    // MARK: - Ad Actions
+
+    private func showHintAd() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootVC = windowScene.windows.first?.rootViewController else { return }
+        ads.showHintAdIfReady(from: rootVC) { vm.applyHint() }
+    }
+
+    private func showErrorRevealAd() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootVC = windowScene.windows.first?.rootViewController else { return }
+        ads.showErrorRevealAdIfReady(from: rootVC) { vm.applyErrors(max: 5) }
+    }
+
+    // MARK: - Solve
+
+    private func performSolve() {
+        let spent = StreakService.spendFreezeForSolve(isPremium: store.isPremium)
+        guard spent else { return }
+        vm.applySolve()
+        streak = StreakService.currentStreak()
+    }
+
+    // MARK: - Helpers
 
     private func formattedDate() -> String {
         let f = DateFormatter()

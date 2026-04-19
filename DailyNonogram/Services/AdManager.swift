@@ -2,26 +2,27 @@ import GoogleMobileAds
 import SwiftUI
 
 /// Manages AdMob interstitial and rewarded video ads.
-///
-/// **Setup for production:**
-/// 1. Register at https://admob.google.com and create an app
-/// 2. Replace `appID` in Info.plist key `GADApplicationIdentifier` with your real App ID
-/// 3. Replace the placeholder unit IDs below with your real Ad Unit IDs from AdMob
 @MainActor
 final class AdManager: NSObject, ObservableObject {
 
     // MARK: - Ad Unit IDs
 
-    static let interstitialUnitID = "ca-app-pub-1758574140088603/7574628484"
-    static let rewardedUnitID     = "ca-app-pub-1758574140088603/7992491536"
+    static let interstitialUnitID       = "ca-app-pub-1758574140088603/7574628484"
+    static let rewardedUnitID           = "ca-app-pub-1758574140088603/7992491536"
+    static let rewardedHintUnitID       = "ca-app-pub-1758574140088603/3275878139"
+    static let rewardedErrorRevealUnitID = "ca-app-pub-1758574140088603/4321366497"
 
     // MARK: - State
 
     @Published var interstitialReady = false
     @Published var rewardedReady = false
+    @Published var hintRewardedReady = false
+    @Published var errorRevealReady = false
 
     private var interstitial: GADInterstitialAd?
     private var rewarded: GADRewardedAd?
+    private var hintRewarded: GADRewardedAd?
+    private var errorRevealRewarded: GADRewardedAd?
     private var interstitialDismissCallback: (() -> Void)?
 
     // MARK: - Init
@@ -32,6 +33,8 @@ final class AdManager: NSObject, ObservableObject {
         Task {
             await loadInterstitial()
             await loadRewarded()
+            await loadHintRewarded()
+            await loadErrorRevealRewarded()
         }
     }
 
@@ -51,7 +54,6 @@ final class AdManager: NSObject, ObservableObject {
         }
     }
 
-    /// Shows the interstitial if ready. `onDismiss` is called after the ad closes (or immediately if not ready).
     func showInterstitialIfReady(from rootVC: UIViewController, onDismiss: (() -> Void)? = nil) {
         guard let ad = interstitial, interstitialReady else {
             onDismiss?()
@@ -61,7 +63,7 @@ final class AdManager: NSObject, ObservableObject {
         ad.present(fromRootViewController: rootVC)
     }
 
-    // MARK: - Rewarded Video
+    // MARK: - Rewarded (puzzle unlock)
 
     func loadRewarded() async {
         do {
@@ -70,20 +72,66 @@ final class AdManager: NSObject, ObservableObject {
                 withAdUnitID: Self.rewardedUnitID,
                 request: request
             )
-            rewarded?.fullScreenContentDelegate = self
             rewardedReady = true
         } catch {
             rewardedReady = false
         }
     }
 
-    /// Shows a rewarded video. `onReward` is called when the user earns the reward.
     func showRewardedIfReady(from rootVC: UIViewController, onReward: @escaping () -> Void) {
         guard let ad = rewarded, rewardedReady else { return }
         rewardedReady = false
         ad.present(fromRootViewController: rootVC) { [weak self] in
             onReward()
             Task { await self?.loadRewarded() }
+        }
+    }
+
+    // MARK: - Rewarded Hint
+
+    func loadHintRewarded() async {
+        do {
+            let request = GADRequest()
+            hintRewarded = try await GADRewardedAd.load(
+                withAdUnitID: Self.rewardedHintUnitID,
+                request: request
+            )
+            hintRewardedReady = true
+        } catch {
+            hintRewardedReady = false
+        }
+    }
+
+    func showHintAdIfReady(from rootVC: UIViewController, onReward: @escaping () -> Void) {
+        guard let ad = hintRewarded, hintRewardedReady else { return }
+        hintRewardedReady = false
+        ad.present(fromRootViewController: rootVC) { [weak self] in
+            onReward()
+            Task { await self?.loadHintRewarded() }
+        }
+    }
+
+    // MARK: - Rewarded Error Reveal
+
+    func loadErrorRevealRewarded() async {
+        do {
+            let request = GADRequest()
+            errorRevealRewarded = try await GADRewardedAd.load(
+                withAdUnitID: Self.rewardedErrorRevealUnitID,
+                request: request
+            )
+            errorRevealReady = true
+        } catch {
+            errorRevealReady = false
+        }
+    }
+
+    func showErrorRevealAdIfReady(from rootVC: UIViewController, onReward: @escaping () -> Void) {
+        guard let ad = errorRevealRewarded, errorRevealReady else { return }
+        errorRevealReady = false
+        ad.present(fromRootViewController: rootVC) { [weak self] in
+            onReward()
+            Task { await self?.loadErrorRevealRewarded() }
         }
     }
 }
@@ -93,7 +141,6 @@ final class AdManager: NSObject, ObservableObject {
 extension AdManager: GADFullScreenContentDelegate {
     nonisolated func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         Task { @MainActor in
-            // If an interstitial dismiss callback is set, this is an interstitial dismissal
             if interstitialDismissCallback != nil || !interstitialReady {
                 interstitialReady = false
                 let cb = interstitialDismissCallback

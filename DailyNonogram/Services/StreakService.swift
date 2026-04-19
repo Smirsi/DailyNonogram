@@ -5,6 +5,7 @@ struct StreakService {
     // MARK: - Keys
 
     private static let frozenDatesKey = "streak_frozenDates"
+    private static let solveSpentKey  = "streak_solveSpentFreezes"
 
     // MARK: - Public API
 
@@ -36,8 +37,17 @@ struct StreakService {
     /// Free: 1 per 7 consecutive solved days, max 5. Premium: 2 per 7 days, max 10.
     static func availableFreezes(isPremium: Bool) -> Int {
         let maxFreezes = isPremium ? 10 : 5
-        let used = loadFrozenDates().count
+        let used = loadFrozenDates().count + UserDefaults.standard.integer(forKey: solveSpentKey)
         return max(0, min(earnedFreezes(isPremium: isPremium) - used, maxFreezes - used))
+    }
+
+    /// Spends one freeze token for the auto-solve feature. Returns false if none available.
+    @discardableResult
+    static func spendFreezeForSolve(isPremium: Bool) -> Bool {
+        guard availableFreezes(isPremium: isPremium) > 0 else { return false }
+        let current = UserDefaults.standard.integer(forKey: solveSpentKey)
+        UserDefaults.standard.set(current + 1, forKey: solveSpentKey)
+        return true
     }
 
     /// Returns true when yesterday was missed, the day before was active,

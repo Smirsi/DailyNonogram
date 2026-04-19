@@ -27,6 +27,10 @@ struct NonogramGridView: View {
                     switch vm.grid[row][col] {
                     case .filled:
                         ctx.fill(Path(rect), with: .color(DS.filled))
+                    case .hinted:
+                        ctx.fill(Path(rect), with: .color(DS.hintedCell))
+                    case .error:
+                        ctx.fill(Path(rect), with: .color(DS.errorCell.opacity(0.25)))
                     case .crossed:
                         ctx.fill(Path(rect), with: .color(DS.crossed))
                     case .autoCrossed:
@@ -65,11 +69,12 @@ struct NonogramGridView: View {
             }
             ctx.stroke(boldPath, with: .color(DS.boldLine), lineWidth: 1.0)
 
-            // X marks for .crossed and .autoCrossed cells
+            // X marks for .crossed, .autoCrossed, .error cells
             for row in 0..<rows {
                 for col in 0..<cols {
                     let state = vm.grid[row][col]
-                    guard state == .crossed || state == .autoCrossed else { continue }
+                    let isX = state == .crossed || state == .autoCrossed || state == .error
+                    guard isX else { continue }
                     let inset = effectiveCellSize * 0.15
                     let rect = cellRect(row: row, col: col).insetBy(dx: inset, dy: inset)
                     var xPath = Path()
@@ -77,7 +82,12 @@ struct NonogramGridView: View {
                     xPath.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
                     xPath.move(to: CGPoint(x: rect.maxX, y: rect.minY))
                     xPath.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-                    let markColor = state == .autoCrossed ? DS.accent : DS.crossedMark
+                    let markColor: Color
+                    switch state {
+                    case .autoCrossed: markColor = DS.accent
+                    case .error:       markColor = DS.errorCell
+                    default:           markColor = DS.crossedMark
+                    }
                     ctx.stroke(xPath, with: .color(markColor), lineWidth: max(1.0, liveScale * 0.9))
                 }
             }

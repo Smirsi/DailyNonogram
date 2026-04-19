@@ -1,5 +1,5 @@
 2026-04-19
-#open
+#done
 # FUN1.12 – autoCheckmark & autoX: FreeNono-Logik übernehmen
 
 Die bestehende autoCheckmark- und autoX-Implementierung soll gegen die FreeNono-Referenz-Logik geprüft und verbessert werden.
@@ -7,33 +7,17 @@ Die bestehende autoCheckmark- und autoX-Implementierung soll gegen die FreeNono-
 ## FreeNono-Referenz
 
 ### checkCaptionsAgainstPattern (GameMode.java, Zeilen 298–385)
-- Vergleicht die aktuell gefüllten Blöcke Zeile/Spalte für Zeile/Spalte mit den Clue-Zahlen
-- Erkennt vollständig erfüllte Blöcke und feuert `crossOutCaption`-Events
-- Block-für-Block-Vergleich: zählt aufeinanderfolgende gefüllte Zellen und matched sie gegen die Clue-Sequenz
+- Block-für-Block-Vergleich
 
-### markCompleteRowsColumns (Settings: markCompleteRowsColumns)
-- Wenn alle Blöcke einer Zeile/Spalte korrekt gesetzt sind, werden verbleibende leere Zellen automatisch mit X (MARKED) befüllt
-- Entspricht dem autoX-Feature, aber ausgelöst durch korrekte Block-Completion statt durch Summen-Vergleich
-
-## Aktuelle Swift-Implementierung (NonogramViewModel.swift, Zeilen 108–181)
-- `updateCheckedClues()`: matchClues() Linkspass + Rechtspass
-- `applyAutoX()`: summiert Clue-Zahlen und vergleicht mit fill-count
-
-## Aufgabe
-
-1. FreeNono-Logik studieren (`/Users/philip/PycharmProjects/FreeNono/FreeNono/src/org/freenono/model/game_modes/GameMode.java`)
-2. Swift-Implementierung auf Randfälle prüfen (z.B. mehrere Blöcke gleicher Größe, leere Clues)
-3. autoX verbessern: statt Summen-Vergleich echten Block-Completion-Check implementieren (analog zu FreeNono `markCompleteRowsColumns`)
-4. autoCheckmark verbessern: Block-für-Block-Matching statt nur Sequenz-Matching
-
-## Relevante Dateien
-
-- `DailyNonogram/ViewModels/NonogramViewModel.swift` – updateCheckedClues(), applyAutoX()
-- `DailyNonogram/Views/CluesView.swift` – Strikethrough-Rendering
-- `/Users/philip/PycharmProjects/FreeNono/FreeNono/src/org/freenono/model/game_modes/GameMode.java` (Referenz, Zeilen 298–385)
-
-## Komplexität / Dauer
-
-Medium / ~1 h
+### markCompleteRowsColumns
+- Wenn alle Blöcke korrekt gesetzt → verbleibende Zellen automatisch X
 
 # Implementierung
+
+Datum: 2026-04-19
+
+**autoX verbessert:** Statt `filledCount == sum` (fehleranfällig bei falscher Blockanordnung) wird jetzt `filledSequences(in:) == clues` geprüft. Nur wenn die exakte Blockfolge mit den Clues übereinstimmt, werden verbleibende leere Zellen mit `.autoCrossed` befüllt. Edge case `[0]`-Clue (leere Zeile) wird korrekt behandelt.
+
+**autoCheckmark:** `matchClues` nutzt jetzt `.hinted`-Zellen ebenfalls als "gefüllt". Links/Rechts-Pass-Logik bleibt (entspricht FreeNono's Ansatz, passt für die App).
+
+**Neue `lineMatchesClues` Hilfsmethode** für konsistente Prüfung in autoX-Logik.

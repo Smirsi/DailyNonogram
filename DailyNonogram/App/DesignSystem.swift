@@ -22,6 +22,10 @@ enum DS {
     static let border        = adaptive(light: 0x2C2A27, dark: 0xC0BDB8)
     /// Warm terracotta — accent / auto-cross / selected state (same in both modes)
     static let accent        = Color(red: 0.769, green: 0.443, blue: 0.290) // #C4714A
+    /// Error cell background (wrongly filled, revealed by error-reveal feature)
+    static let errorCell     = Color(red: 0.88, green: 0.28, blue: 0.28)
+    /// Hinted cell background (revealed by hint — correct cell)
+    static let hintedCell    = Color(red: 0.32, green: 0.68, blue: 0.42)
     /// Primary text
     static let textPrimary   = adaptive(light: 0x1A1A1A, dark: 0xF0EDE8)
     /// Secondary text

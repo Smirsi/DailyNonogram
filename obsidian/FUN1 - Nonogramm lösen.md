@@ -6,3 +6,8 @@
 [[FUN1.5 - Automatische X andere Farbe]]
 [[FUN1.6 - Darstellung Namen]]
 [[FUN1.7 - FreeNonogramm überprüfen]]
+[[FUN1.8 - Echtzeit-Fehler-Highlighting]]
+[[FUN1.9 - Undo Redo]]
+[[FUN1.10 - Einzelzellen-Hinweis Hint]]
+[[FUN1.11 - Auto-Lösen Solve]]
+[[FUN1.12 - autoCheckmark autoX FreeNono-Logik]]

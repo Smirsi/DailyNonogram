@@ -22,7 +22,7 @@ struct ContentView: View {
                 },
                 isPremium: store.isPremium,
                 solvedToday: solvedDifficultiesForToday(),
-                dailyPuzzle: DailyPuzzleService.todaysDailyPuzzle()
+                dailyPuzzles: DailyPuzzleService.todaysDailyPuzzles()
             )
         }
     }

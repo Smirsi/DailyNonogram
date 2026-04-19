@@ -35,8 +35,17 @@ struct DailyPuzzleService {
         FreeNonoPuzzleLoader.loadDailyPuzzle(for: today())
     }
 
+    /// Returns all daily puzzles for today (one per available difficulty).
+    static func todaysDailyPuzzles() -> [DailyPuzzleResult] {
+        FreeNonoPuzzleLoader.loadAllDailyPuzzles(for: today())
+    }
+
+    static func bonusPuzzle(difficulty: DifficultyLevel) -> Nonogram {
+        puzzle(for: today(), difficulty: difficulty)
+    }
+
     static func puzzle(for date: Date, difficulty: DifficultyLevel) -> Nonogram {
-        if let daily = FreeNonoPuzzleLoader.loadDailyPuzzle(for: date), daily.difficulty == difficulty {
+        if let daily = FreeNonoPuzzleLoader.loadDailyPuzzle(for: date, difficulty: difficulty) {
             return daily.puzzle
         }
         let puzzles = PuzzleLibrary.puzzles(for: difficulty)

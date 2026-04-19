@@ -42,12 +42,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "FUN1.7 - FreeNonogramm überprüfen.md",
+                "file": "FUN1.12 - autoCheckmark autoX FreeNono-Logik.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "FUN1.7 - FreeNonogramm überprüfen"
+              "title": "FUN1.12 - autoCheckmark autoX FreeNono-Logik"
             }
           }
         ],
@@ -255,7 +255,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "7e9858096bc7c24b",
+  "active": "72f205a5f5567720",
   "lastOpenFiles": [
     "FUN1.12 - autoCheckmark autoX FreeNono-Logik.md",
     "FUN1.11 - Auto-Lösen Solve.md",
@@ -263,26 +263,26 @@
     "FUN1.9 - Undo Redo.md",
     "FUN1.8 - Echtzeit-Fehler-Highlighting.md",
     "FUN1.7 - FreeNonogramm überprüfen.md",
-    "FUN1 - Nonogramm lösen.md",
+    "FUN1.6 - Darstellung Namen.md",
     "00 - Todos.md",
-    "0 - Projektinformation.md",
-    "ANA1 - Marktanalyse-Todos.md",
+    "BUG3 - Flammensymbol nach Rätsellösen fehlt.md",
     "BUG0 - Bugs.md",
+    "BUG2 - Mittleres und Schweres Rätsel wird nicht mehr angezeigt.md",
+    "DES6.2 - Frage nach wirklich starten entfernen.md",
+    "DES6 - HomeScreen.md",
+    "DES6.1 - HomeScreen Anpassungen.md",
+    "ANA1 - Marktanalyse-Todos.md",
+    "BUG1 - Automatisches Abhaken nicht logisch.md",
+    "FUN1 - Nonogramm lösen.md",
+    "FUN0 - Funktion.md",
+    "0 - Projektinformation.md",
     "FUN2.5 - Fertige Nonogramme verwenden.md",
     "FUN2 - Erstellung von neuen Nonogrammen.md",
-    "FUN0 - Funktion.md",
     "FUN1.1 - Nonogramm Rätsel implementieren.md",
-    "DES6.1 - HomeScreen Anpassungen.md",
-    "DES6 - HomeScreen.md",
     "DES0 - Design.md",
     "FUN4.1.2 - Streak Counter Home Screen.md",
     "FUN4.1.1 - Streak Counter Darstellung.md",
     "MON1.3.1 - Fix Interstitial.md",
-    "MON1.3 - Korrekte Interstitial-ID.md",
-    "REL1 - Release 0.1.md",
-    "REL0 - Release.md",
-    "FUN4.1 - Streak Counter.md",
-    "MON1.2 - Werbeplatzierung optimieren.md",
     "nonogram_icon_pencil_grid 1.svg",
     "nonogram_icon_pencil_grid.svg",
     "Untitled.canvas",

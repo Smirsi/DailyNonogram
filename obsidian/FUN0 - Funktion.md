@@ -6,3 +6,4 @@
 [[FUN5 - Schwierigkeitsgrad]]
 [[FUN6 - Einstellungen]]
 [[FUN7 - Share Card nach dem Lösen]]
+[[FUN8 - Persönliche Statistiken]]

@@ -1,5 +1,5 @@
 2026-04-19
-#open
+#done
 # FUN1.10 – Einzelzellen-Hinweis (Hint via Rewarded Ad)
 
 Ein Hint-Button enthüllt eine zufällig gewählte noch-nicht-korrekt-gefüllte Zelle. Jeder Hint erfordert das Ansehen eines Rewarded-Ad-Videos.
@@ -19,14 +19,8 @@ Ein Hint-Button enthüllt eine zufällig gewählte noch-nicht-korrekt-gefüllte 
 - GADRewardedAd laden und vorab pre-cachen
 - Callback nach erfolgreichem Ansehen → Hint-Logik auslösen
 
-## Relevante Dateien
-
-- `DailyNonogram/ViewModels/NonogramViewModel.swift` – revealHint()
-- `DailyNonogram/Services/AdService.swift` (oder bestehende Ad-Integration)
-- `DailyNonogram/Views/NonogramBoardView.swift` – Hint-Button
-
-## Komplexität / Dauer
-
-Medium / ~1 h
-
 # Implementierung
+
+Datum: 2026-04-19
+
+Neuer `CellState.hinted = 4` (grün dargestellt, zählt für `isComplete` als gefüllt). `NonogramViewModel.applyHint()` wählt zufällig eine korrekte leere Zelle und setzt sie auf `.hinted`. Neuer Rewarded-Ad-Slot `rewardedHintUnitID` in `AdManager`. Button "Hint" (Glühbirnen-Icon) für alle User sichtbar, aber nur aktiv wenn Ad geladen. Nach Auto-Lösen wird `hintsBlocked = true` gesetzt.

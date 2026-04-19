@@ -1,4 +1,0 @@
-- Mittel und Schwer wird nicht angezeigt
-- Die Bestätigung fürs Starten wird nicht benötigt
-- Rätsel lösen nicht wirklich gut, von Nonogramm übernehmen
-- Flamme fehlt nach Beenden des Rätsels

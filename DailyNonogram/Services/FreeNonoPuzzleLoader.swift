@@ -11,33 +11,44 @@ struct FreeNonoPuzzleLoader {
 
     // MARK: - Daily Puzzle (date-based, YYYYMMDD_COL_ROW_NAME.nonogram)
 
-    private static var dailyCache: [String: DailyPuzzleResult?] = [:]
+    private nonisolated(unsafe) static var allDailyCache: [String: [DailyPuzzleResult]] = [:]
 
-    static func loadDailyPuzzle(for date: Date = Date()) -> DailyPuzzleResult? {
+    /// Returns all daily puzzles for the given date (one per difficulty level).
+    static func loadAllDailyPuzzles(for date: Date = Date()) -> [DailyPuzzleResult] {
         let key = dailyDateString(for: date)
-        if let cached = dailyCache[key] { return cached }
-        let result = findDailyPuzzle(dateKey: key)
-        dailyCache[key] = result
+        if let cached = allDailyCache[key] { return cached }
+        let result = findAllDailyPuzzles(dateKey: key)
+        allDailyCache[key] = result
         return result
     }
 
-    private static func findDailyPuzzle(dateKey: String) -> DailyPuzzleResult? {
+    /// Returns the daily puzzle for the given date matching the specified difficulty, or nil.
+    static func loadDailyPuzzle(for date: Date = Date(), difficulty: DifficultyLevel) -> DailyPuzzleResult? {
+        loadAllDailyPuzzles(for: date).first { $0.difficulty == difficulty }
+    }
+
+    /// Returns the first daily puzzle for the given date (any difficulty), or nil.
+    static func loadDailyPuzzle(for date: Date = Date()) -> DailyPuzzleResult? {
+        loadAllDailyPuzzles(for: date).first
+    }
+
+    private static func findAllDailyPuzzles(dateKey: String) -> [DailyPuzzleResult] {
         guard let urls = Bundle.main.urls(
             forResourcesWithExtension: "nonogram",
             subdirectory: "Puzzles/daily"
-        ) else { return nil }
-        guard let url = urls.first(where: { $0.lastPathComponent.hasPrefix(dateKey + "_") })
-        else { return nil }
+        ) else { return [] }
 
-        let filename = url.deletingPathExtension().lastPathComponent
-        let parts = filename.split(separator: "_")
-        guard parts.count >= 3,
-              let cols = Int(parts[1]),
-              let rows = Int(parts[2]) else { return nil }
-
-        let difficulty = difficultyFromSize(cols: cols, rows: rows)
-        guard let puzzle = load(from: url, difficulty: difficulty) else { return nil }
-        return DailyPuzzleResult(puzzle: puzzle, difficulty: difficulty)
+        let matching = urls.filter { $0.lastPathComponent.hasPrefix(dateKey + "_") }
+        return matching.compactMap { url -> DailyPuzzleResult? in
+            let filename = url.deletingPathExtension().lastPathComponent
+            let parts = filename.split(separator: "_")
+            guard parts.count >= 3,
+                  let cols = Int(parts[1]),
+                  let rows = Int(parts[2]) else { return nil }
+            let difficulty = difficultyFromSize(cols: cols, rows: rows)
+            guard let puzzle = load(from: url, difficulty: difficulty) else { return nil }
+            return DailyPuzzleResult(puzzle: puzzle, difficulty: difficulty)
+        }
     }
 
     private static func difficultyFromSize(cols: Int, rows: Int) -> DifficultyLevel {

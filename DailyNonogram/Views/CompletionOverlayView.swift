@@ -9,51 +9,50 @@ struct CompletionOverlayView: View {
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.4)
+            Color.black.opacity(0.45)
                 .ignoresSafeArea()
                 .onTapGesture { onDismiss() }
 
             VStack(spacing: 0) {
-                Image(systemName: "checkmark")
-                    .font(.system(size: 44, weight: .light))
-                    .foregroundStyle(DS.accent)
-                    .padding(.bottom, 20)
+                // Flame + streak
+                VStack(spacing: 6) {
+                    Image(systemName: "flame.fill")
+                        .font(.system(size: 48, weight: .regular))
+                        .foregroundStyle(streak > 0 ? DS.accent : DS.textTertiary)
 
-                Text("Puzzle gelöst!")
+                    if streak > 0 {
+                        Text("\(streak)")
+                            .font(.system(size: 36, weight: .bold, design: .rounded))
+                            .foregroundStyle(DS.textPrimary)
+                        Text(streak == 1 ? "Tag in Folge" : "Tage in Folge")
+                            .font(DS.dateLabelFont())
+                            .foregroundStyle(DS.textSecondary)
+                    }
+                }
+                .padding(.bottom, 20)
+
+                // Pixel art
+                SolvedPixelArtView(solution: nonogram.solution)
+                    .padding(.bottom, 14)
+
+                // Title
+                Text("Gelöst!")
                     .font(DS.completionHeadlineFont())
                     .foregroundStyle(DS.textPrimary)
-                    .padding(.bottom, 16)
+                    .padding(.bottom, 4)
 
-                SolvedPixelArtView(solution: nonogram.solution)
-                    .padding(.bottom, 8)
+                Text(nonogram.title)
+                    .font(DS.dateLabelFont())
+                    .foregroundStyle(DS.textSecondary)
+                    .padding(.bottom, 2)
 
                 Text(formattedDate())
                     .font(DS.dateLabelFont())
                     .foregroundStyle(DS.textTertiary)
-                    .padding(.top, 4)
+                    .padding(.bottom, 28)
 
-                if streak > 0 {
-                    HStack(spacing: 6) {
-                        Text("🔥")
-                            .font(.system(size: 16))
-                        Text("\(streak) \(streak == 1 ? "Tag" : "Tage") in Folge")
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(DS.accent)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(DS.accent.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
-                    .padding(.top, 12)
-                }
-
-                Rectangle()
-                    .fill(DS.separator)
-                    .frame(height: 0.5)
-                    .padding(.vertical, 24)
-
-                Button {
-                    onDismiss()
-                } label: {
+                // CTA
+                Button { onDismiss() } label: {
                     Text("Weiter")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(.white)
@@ -63,14 +62,15 @@ struct CompletionOverlayView: View {
                 }
                 .buttonStyle(.plain)
             }
-            .padding(32)
+            .padding(.horizontal, 32)
+            .padding(.vertical, 36)
             .background(DS.background, in: RoundedRectangle(cornerRadius: DS.completionRadius))
-            .shadow(color: .black.opacity(0.12), radius: 32, x: 0, y: 8)
-            .padding(.horizontal, 40)
-            .scaleEffect(appeared ? 1.0 : 0.92)
+            .shadow(color: .black.opacity(0.14), radius: 40, x: 0, y: 10)
+            .padding(.horizontal, 36)
+            .scaleEffect(appeared ? 1.0 : 0.88)
             .opacity(appeared ? 1.0 : 0.0)
             .onAppear {
-                withAnimation(.easeOut(duration: 0.35)) {
+                withAnimation(.spring(response: 0.45, dampingFraction: 0.75)) {
                     appeared = true
                 }
             }
@@ -91,7 +91,7 @@ struct CompletionOverlayView: View {
 private struct SolvedPixelArtView: View {
     let solution: [[Bool]]
 
-    private let maxSize: CGFloat = 120
+    private let maxSize: CGFloat = 110
 
     var body: some View {
         let rows = solution.count
@@ -116,9 +116,6 @@ private struct SolvedPixelArtView: View {
         .frame(width: width, height: height)
         .background(DS.surface)
         .clipShape(RoundedRectangle(cornerRadius: 4))
-        .overlay(
-            RoundedRectangle(cornerRadius: 4)
-                .stroke(DS.gridLine, lineWidth: 0.5)
-        )
+        .overlay(RoundedRectangle(cornerRadius: 4).stroke(DS.gridLine, lineWidth: 0.5))
     }
 }
