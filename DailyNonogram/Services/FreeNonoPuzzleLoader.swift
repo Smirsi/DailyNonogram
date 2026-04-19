@@ -1,8 +1,59 @@
 import Foundation
 import SwiftUI
 
+struct DailyPuzzleResult {
+    let puzzle: Nonogram
+    let difficulty: DifficultyLevel
+}
+
 /// Loads B&W puzzles from FreeNono `.nonogram` XML files bundled in the app.
 struct FreeNonoPuzzleLoader {
+
+    // MARK: - Daily Puzzle (date-based, YYYYMMDD_COL_ROW_NAME.nonogram)
+
+    private static var dailyCache: [String: DailyPuzzleResult?] = [:]
+
+    static func loadDailyPuzzle(for date: Date = Date()) -> DailyPuzzleResult? {
+        let key = dailyDateString(for: date)
+        if let cached = dailyCache[key] { return cached }
+        let result = findDailyPuzzle(dateKey: key)
+        dailyCache[key] = result
+        return result
+    }
+
+    private static func findDailyPuzzle(dateKey: String) -> DailyPuzzleResult? {
+        guard let urls = Bundle.main.urls(
+            forResourcesWithExtension: "nonogram",
+            subdirectory: "Puzzles/daily"
+        ) else { return nil }
+        guard let url = urls.first(where: { $0.lastPathComponent.hasPrefix(dateKey + "_") })
+        else { return nil }
+
+        let filename = url.deletingPathExtension().lastPathComponent
+        let parts = filename.split(separator: "_")
+        guard parts.count >= 3,
+              let cols = Int(parts[1]),
+              let rows = Int(parts[2]) else { return nil }
+
+        let difficulty = difficultyFromSize(cols: cols, rows: rows)
+        guard let puzzle = load(from: url, difficulty: difficulty) else { return nil }
+        return DailyPuzzleResult(puzzle: puzzle, difficulty: difficulty)
+    }
+
+    private static func difficultyFromSize(cols: Int, rows: Int) -> DifficultyLevel {
+        let cells = cols * rows
+        if cells <= 100 { return .easy }
+        if cells <= 400 { return .medium }
+        return .hard
+    }
+
+    private static func dailyDateString(for date: Date) -> String {
+        let f = DateFormatter()
+        f.dateFormat = "yyyyMMdd"
+        return f.string(from: date)
+    }
+
+    // MARK: - Standard Loaders
 
     static func load(difficulty: DifficultyLevel) -> [Nonogram] {
         guard let urls = Bundle.main.urls(

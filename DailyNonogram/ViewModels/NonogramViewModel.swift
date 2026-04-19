@@ -16,6 +16,7 @@ class NonogramViewModel: ObservableObject {
 
     private var dragTargetState: CellState = .filled
     private var visitedInDrag: Set<GridCoord> = []
+    private var didLockPuzzle = false
 
     init(nonogram: Nonogram, savedGrid: [[CellState]]? = nil) {
         self.nonogram = nonogram
@@ -49,6 +50,7 @@ class NonogramViewModel: ObservableObject {
     }
 
     func beginDrag(at coord: GridCoord) {
+        lockIfNeeded()
         visitedInDrag = []
         dragTargetState = targetState(for: coord)
         apply(targetState: dragTargetState, at: coord)
@@ -70,6 +72,7 @@ class NonogramViewModel: ObservableObject {
     }
 
     func handleTap(at coord: GridCoord) {
+        lockIfNeeded()
         let target = targetState(for: coord)
         apply(targetState: target, at: coord)
         updateAutoFeatures()
@@ -78,6 +81,12 @@ class NonogramViewModel: ObservableObject {
             DailyPuzzleService.markSolved(difficulty: nonogram.difficulty)
             showCompletion = true
         }
+    }
+
+    private func lockIfNeeded() {
+        guard !didLockPuzzle else { return }
+        didLockPuzzle = true
+        PuzzleLockService.lockPuzzle(difficulty: nonogram.difficulty)
     }
 
     // MARK: - Auto Features

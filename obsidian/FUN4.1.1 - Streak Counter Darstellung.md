@@ -9,3 +9,4 @@ Datum: 2026-04-18
 1. `WeekProgressView.swift`: Streak-Icon von 🔥 Emoji auf SF Symbol `flame.fill` geändert; Freeze-Tage werden blau eingefärbt (via `StreakService.loadFrozenDatesPublic()`)
 2. `StreakService.swift`: `availableFreezes` gibt jetzt auch Free-Nutzern Tokens (1/7 Tage, max 5); Premium 2/7 Tage, max 10. `applyFreeze` und `canApplyFreezeForYesterday` für alle Nutzer geöffnet.
 3. `NonogramBoardView.swift`: Freeze wird automatisch angewendet (kein Alert mehr), sowohl für Free als auch Premium.
+#notapproved [[FUN4.1.2 - Streak Counter Home Screen]]

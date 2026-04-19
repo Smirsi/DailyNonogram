@@ -35,12 +35,11 @@ struct CompletionOverlayView: View {
                 if streak > 0 {
                     HStack(spacing: 6) {
                         Text("🔥")
-                            .font(.system(size: 18))
+                            .font(.system(size: 16))
                         Text("\(streak) \(streak == 1 ? "Tag" : "Tage") in Folge")
-                            .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                            .font(.system(size: 15, weight: .semibold))
                             .foregroundStyle(DS.accent)
                     }
-                    .padding(.top, 16)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 10)
                     .background(DS.accent.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))

@@ -21,7 +21,8 @@ struct ContentView: View {
                     selectedDifficulty = diff
                 },
                 isPremium: store.isPremium,
-                solvedToday: solvedDifficultiesForToday()
+                solvedToday: solvedDifficultiesForToday(),
+                dailyPuzzle: DailyPuzzleService.todaysDailyPuzzle()
             )
         }
     }

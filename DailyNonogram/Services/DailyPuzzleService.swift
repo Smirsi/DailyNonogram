@@ -30,23 +30,23 @@ struct DailyPuzzleService {
         puzzle(for: today(), difficulty: difficulty)
     }
 
-    /// Returns a bonus puzzle distinct from today's daily puzzle (offset by 180 days).
-    static func bonusPuzzle(difficulty: DifficultyLevel) -> Nonogram {
-        let offset = Calendar.current.date(byAdding: .day, value: 180, to: today())!
-        return puzzle(for: offset, difficulty: difficulty)
+    /// Returns the date-based daily puzzle for today, or nil if none exists.
+    static func todaysDailyPuzzle() -> DailyPuzzleResult? {
+        FreeNonoPuzzleLoader.loadDailyPuzzle(for: today())
     }
 
     static func puzzle(for date: Date, difficulty: DifficultyLevel) -> Nonogram {
+        if let daily = FreeNonoPuzzleLoader.loadDailyPuzzle(for: date), daily.difficulty == difficulty {
+            return daily.puzzle
+        }
         let puzzles = PuzzleLibrary.puzzles(for: difficulty)
         guard !puzzles.isEmpty else {
-            // Fallback: return a minimal placeholder
             return Nonogram(title: "?", rows: 1, cols: 1,
                             rowClues: [[0]], colClues: [[0]],
                             solution: [[false]], difficulty: difficulty)
         }
         let day = dayIndex(for: date)
-        let index = day % puzzles.count
-        return puzzles[index]
+        return puzzles[day % puzzles.count]
     }
 
     // MARK: - Progress

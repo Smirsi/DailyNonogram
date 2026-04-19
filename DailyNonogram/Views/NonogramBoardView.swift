@@ -9,9 +9,7 @@ struct NonogramBoardView: View {
     @State private var showSettings = false
     @State private var showPremiumTeaser = false
     @State private var showPaywall = false
-    @State private var showBonusOffer = false
     @State private var pendingCompletion = false
-    @State private var showBonusPuzzle = false
     @State private var archiveSelection: ArchiveDateSelection? = nil
     @State private var streak: Int = 0
 
@@ -171,23 +169,6 @@ struct NonogramBoardView: View {
             ToolbarView(currentTool: $vm.currentTool)
                 .padding(.top, 16)
 
-            // Bonus puzzle offer (shown after solving, rewarded video)
-            if showBonusOffer && !store.isPremium {
-                BonusOfferBanner(
-                    rewardedReady: ads.rewardedReady,
-                    onTap: {
-                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                              let rootVC = windowScene.windows.first?.rootViewController else { return }
-                        ads.showRewardedIfReady(from: rootVC) {
-                            showBonusOffer = false
-                            showBonusPuzzle = true
-                        }
-                    },
-                    onDismiss: { showBonusOffer = false }
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
         }
         .padding()
         .background(DS.background.ignoresSafeArea())
@@ -224,9 +205,7 @@ struct NonogramBoardView: View {
                         vm.showCompletion = false
                         streak = StreakService.currentStreak()
                         if !store.isPremium {
-                            if ads.rewardedReady {
-                                withAnimation { showBonusOffer = true }
-                            } else if PremiumTeaserService.shouldShow(isPremium: false) {
+                            if PremiumTeaserService.shouldShow(isPremium: false) {
                                 PremiumTeaserService.markShown()
                                 showPremiumTeaser = true
                             }
@@ -254,15 +233,11 @@ struct NonogramBoardView: View {
         .sheet(isPresented: $showPaywall) {
             PremiumPaywallView()
         }
-        .sheet(isPresented: $showBonusPuzzle) {
-            BonusPuzzleSheet(difficulty: vm.nonogram.difficulty)
-        }
         .sheet(item: $archiveSelection) { selection in
             ArchivePuzzleSheet(date: selection.date, difficulty: vm.nonogram.difficulty)
         }
         .animation(.easeOut(duration: 0.3), value: pendingCompletion)
         .animation(.easeOut(duration: 0.3), value: showPremiumTeaser)
-        .animation(.easeOut(duration: 0.3), value: showBonusOffer)
     }
 
     private func formattedDate() -> String {

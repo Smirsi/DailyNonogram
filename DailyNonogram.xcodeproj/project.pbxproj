@@ -37,6 +37,7 @@
 		C73527186039311067A52747 /* Nonogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD26CA8FC88C9A36972A9B /* Nonogram.swift */; };
 		D02992C93508574BCD4ABC46 /* DailyNonogramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0076EA9D3CE3B0C6F4CD8FE5 /* DailyNonogramApp.swift */; };
 		E855D0E16EDB29EF3B10D833 /* PremiumTeaserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */; };
+		B73313F1450D4C8F86A7E7A6 /* PuzzleLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9B217B85CA44929F04E42A /* PuzzleLockService.swift */; };
 		E9A86458A2706BB6354E6853 /* PremiumPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3534056C3831B2DB8FAF7828 /* PremiumPaywallView.swift */; };
 		F5F78C17595CFA859084C6CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD678FAAA87585D6FC92FC41 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		3534056C3831B2DB8FAF7828 /* PremiumPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumPaywallView.swift; sourceTree = "<group>"; };
 		378E9D6D32E1FB9C631E41A5 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Puzzles; path = DailyNonogram/Resources/Puzzles; sourceTree = SOURCE_ROOT; };
 		39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTeaserService.swift; sourceTree = "<group>"; };
+		5B9B217B85CA44929F04E42A /* PuzzleLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleLockService.swift; sourceTree = "<group>"; };
 		43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePuzzleSheet.swift; sourceTree = "<group>"; };
 		441BECA3F9388B0F91CD6063 /* DifficultyLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevel.swift; sourceTree = "<group>"; };
 		4A83E456CDBB8C4EFA54E82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				AA8AA9506E7D2C8677D27027 /* DailyPuzzleService.swift */,
 				D9DA8289EE7971E7633D4D15 /* FreeNonoPuzzleLoader.swift */,
 				39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */,
+				5B9B217B85CA44929F04E42A /* PuzzleLockService.swift */,
 				344AE480174BED22980C88EE /* StoreKitManager.swift */,
 				D4FF677544C464B41061B1C8 /* StreakService.swift */,
 			);
@@ -295,6 +298,7 @@
 				E9A86458A2706BB6354E6853 /* PremiumPaywallView.swift in Sources */,
 				E855D0E16EDB29EF3B10D833 /* PremiumTeaserService.swift in Sources */,
 				7721DDAA8CD2DD68E2CB3BDF /* PremiumTeaserView.swift in Sources */,
+				B73313F1450D4C8F86A7E7A6 /* PuzzleLockService.swift in Sources */,
 				706E9F189225A0C6CAE0E0FE /* PuzzleLibrary.swift in Sources */,
 				707D5AD5BB7C0AEB823330ED /* SampleNonogram.swift in Sources */,
 				F5F78C17595CFA859084C6CD /* SettingsView.swift in Sources */,

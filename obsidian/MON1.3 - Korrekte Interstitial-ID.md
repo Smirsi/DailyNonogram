@@ -19,3 +19,4 @@ Datum: 2026-04-18
 2. `NonogramBoardView.swift`: Interstitial wird jetzt sofort nach dem Lösen gezeigt (BEVOR das Completion-Overlay erscheint). Neuer `pendingCompletion`-State steuert das Overlay.
 3. `NonogramBoardView.swift`: Zurück-Button (chevron.left) im Header für alle Nutzer sichtbar; ruft `onChangeDifficulty` auf.
 4. `ContentView.swift`: `onChangeDifficulty` wird jetzt auch an Free-Nutzer weitergegeben.
+5. #notapproved [[MON1.3.1 - Fix Interstitial]]

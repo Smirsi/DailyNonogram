@@ -5,7 +5,7 @@ Bereite alles für einen Release der Version 0.1 vor. Vor dem Release soll das g
 # To-Do vor dem Release (du musst das selbst erledigen)
 
 ## App Store Connect vorbereiten
-- [ ] Apple Developer Account aktiv (99 $/Jahr unter developer.apple.com)
+- [x] Apple Developer Account aktiv (99 $/Jahr unter developer.apple.com)
 - [ ] App in App Store Connect anlegen: App Name, Bundle ID `com.philip.DailyNonogram` (oder deine gewünschte ID), Kategorie: Games → Puzzle
 - [ ] Bundle ID im Xcode-Projekt anpassen falls nötig (Signing & Capabilities)
 - [ ] **Datenschutz-URL** erstellen (z.B. einfache HTML-Seite auf GitHub Pages)
