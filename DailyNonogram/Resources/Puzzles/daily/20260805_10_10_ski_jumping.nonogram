@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <FreeNono>
   <Nonograms>
-    <Nonogram name="ski jumping" height="10" width="10">
+    <Nonogram name="ski_jumping" height="10" width="10">
       <line> _ x x _ _ _ _ _ _ x </line>
       <line> _ _ x x x x _ _ _ x </line>
       <line> _ x x x x _ x _ _ x </line>

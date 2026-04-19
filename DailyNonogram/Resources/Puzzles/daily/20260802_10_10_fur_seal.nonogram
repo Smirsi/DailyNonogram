@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <FreeNono>
   <Nonograms>
-    <Nonogram name="fur seal" height="10" width="10">
+    <Nonogram name="fur_seal" height="10" width="10">
       <line> x x _ _ _ x x x x x </line>
       <line> x x x _ x x x x x x </line>
       <line> _ _ _ x _ _ _ _ _ _ </line>
