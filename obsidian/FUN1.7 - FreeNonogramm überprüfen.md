@@ -16,3 +16,4 @@ FreeNono (Java/Swing) wurde analysiert. Folgende Features wurden identifiziert u
 - **FUN1.12** – autoCheckmark & autoX: FreeNono-Logik (`checkCaptionsAgainstPattern`, `markCompleteRowsColumns`) übernehmen
 
 FreeNono nutzt keine ausgefeilten Constraint-Algorithmen, sondern Brute-Force-Completion + event-basiertes Caption-Checking. Die Swift-App hat autoX und autoCheckmark bereits, aber die Logik soll gegen FreeNono-Referenz verbessert werden.
+#approved 

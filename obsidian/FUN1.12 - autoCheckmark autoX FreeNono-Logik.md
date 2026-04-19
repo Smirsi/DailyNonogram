@@ -21,3 +21,4 @@ Datum: 2026-04-19
 **autoCheckmark:** `matchClues` nutzt jetzt `.hinted`-Zellen ebenfalls als "gefüllt". Links/Rechts-Pass-Logik bleibt (entspricht FreeNono's Ansatz, passt für die App).
 
 **Neue `lineMatchesClues` Hilfsmethode** für konsistente Prüfung in autoX-Logik.
+#approved 

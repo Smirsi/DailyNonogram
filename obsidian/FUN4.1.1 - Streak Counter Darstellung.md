@@ -10,3 +10,4 @@ Datum: 2026-04-18
 2. `StreakService.swift`: `availableFreezes` gibt jetzt auch Free-Nutzern Tokens (1/7 Tage, max 5); Premium 2/7 Tage, max 10. `applyFreeze` und `canApplyFreezeForYesterday` für alle Nutzer geöffnet.
 3. `NonogramBoardView.swift`: Freeze wird automatisch angewendet (kein Alert mehr), sowohl für Free als auch Premium.
 #notapproved [[FUN4.1.2 - Streak Counter Home Screen]]
+#approved 

@@ -261,16 +261,20 @@ class NonogramViewModel: ObservableObject {
             return Array(repeating: true, count: clues.count)
         }
         var result = Array(repeating: false, count: clues.count)
+        // Left pass: match clues from the left
         var si = 0
         for (ci, clue) in clues.enumerated() {
             if si < sequences.count && sequences[si] == clue {
                 result[ci] = true; si += 1
             } else { break }
         }
+        // Right pass: match remaining unmatched clues from the right.
+        // Guard siR >= si so both passes never consume the same sequence element.
         var siR = sequences.count - 1
         for ci in stride(from: clues.count - 1, through: 0, by: -1) {
             if result[ci] { break }
-            if siR >= 0 && sequences[siR] == clues[ci] {
+            guard siR >= si else { break }
+            if sequences[siR] == clues[ci] {
                 result[ci] = true; siR -= 1
             } else { break }
         }

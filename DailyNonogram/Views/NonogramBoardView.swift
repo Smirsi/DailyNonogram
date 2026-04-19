@@ -215,9 +215,14 @@ struct NonogramBoardView: View {
 
             Spacer()
 
-            // Hint (all users, requires rewarded ad)
+            // Hint (all users, requires rewarded ad; Debug: always active)
             if !vm.hintsBlocked {
-                actionButton(icon: "lightbulb", label: "Hint", enabled: ads.hintRewardedReady) {
+                #if DEBUG
+                let hintEnabled = true
+                #else
+                let hintEnabled = ads.hintRewardedReady
+                #endif
+                actionButton(icon: "lightbulb", label: "Hint", enabled: hintEnabled) {
                     showHintAd()
                 }
             }
@@ -258,9 +263,13 @@ struct NonogramBoardView: View {
     // MARK: - Ad Actions
 
     private func showHintAd() {
+        #if DEBUG
+        vm.applyHint()
+        #else
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootVC = windowScene.windows.first?.rootViewController else { return }
         ads.showHintAdIfReady(from: rootVC) { vm.applyHint() }
+        #endif
     }
 
     private func showErrorRevealAd() {

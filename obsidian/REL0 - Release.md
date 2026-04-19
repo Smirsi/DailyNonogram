@@ -1,2 +1,2 @@
 #structure 
-[[REL1 - Release 0.1]]
+[[REL1 - Release 1.0]]

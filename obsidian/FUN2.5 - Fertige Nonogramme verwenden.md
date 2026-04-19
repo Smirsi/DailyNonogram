@@ -28,3 +28,4 @@ Datum: 2026-04-19
 - `DifficultySelectionView.swift`: Zeigt bei vorhandenem Tages-Puzzle eine einzelne Karte mit Puzzle-Name und Gittergröße statt 3 Schwierigkeits-Buttons. Titel geändert zu "Daily Nonogram".
 - `ContentView.swift`: Übergibt `DailyPuzzleService.todaysDailyPuzzle()` an DifficultySelectionView.
 - Neues Verzeichnis: `DailyNonogram/Resources/Puzzles/daily/`
+#approved 

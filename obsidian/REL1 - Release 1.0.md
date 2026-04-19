@@ -1,18 +1,18 @@
 2026-04-18
 #done 
 # Aufgabe
-Bereite alles für einen Release der Version 0.1 vor. Vor dem Release soll das ganze in Testflight von Usern getestet werden. Schreibe alle benötigten Ressourcen von mir hier als To-Do zusammen. Mache eine Schritt für Schritt Anleitung für mich, wie ich die App in den App-Store bekomme.
+Bereite alles für einen Release der Version 1.0 vor. Vor dem Release soll das ganze in Testflight von Usern getestet werden. Schreibe alle benötigten Ressourcen von mir hier als To-Do zusammen. Mache eine Schritt für Schritt Anleitung für mich, wie ich die App in den App-Store bekomme.
 # To-Do vor dem Release (du musst das selbst erledigen)
 
 ## App Store Connect vorbereiten
 - [x] Apple Developer Account aktiv (99 $/Jahr unter developer.apple.com)
-- [ ] App in App Store Connect anlegen: App Name, Bundle ID `com.philip.DailyNonogram` (oder deine gewünschte ID), Kategorie: Games → Puzzle
-- [ ] Bundle ID im Xcode-Projekt anpassen falls nötig (Signing & Capabilities)
+- [x] App in App Store Connect anlegen: App Name, Bundle ID `com.philip.DailyNonogram` (oder deine gewünschte ID), Kategorie: Games → Puzzle
+- [x] Bundle ID im Xcode-Projekt anpassen falls nötig (Signing & Capabilities)
 - [ ] **Datenschutz-URL** erstellen (z.B. einfache HTML-Seite auf GitHub Pages)
 - [ ] **Support-URL** erstellen (z.B. E-Mail-Link oder Webseite)
 
 ## App-Store-Assets
-- [ ] **App-Icon**: bereits gesetzt (DES4.1 erledigt) – alle Größen prüfen (1024×1024 für Store)
+- [x] **App-Icon**: bereits gesetzt (DES4.1 erledigt) – alle Größen prüfen (1024×1024 für Store)
 - [ ] **Screenshots iPhone**: mindestens für 6.5" (iPhone 15 Pro Max) und 5.5" (iPhone 8 Plus) – je 3–5 Stück
 - [ ] **Screenshots iPad** (falls iPad-Support): 12.9"
 - [ ] **App-Beschreibung** (Deutsch): Was ist Nonogramm? Was kann die App?
@@ -45,3 +45,5 @@ Bereite alles für einen Release der Version 0.1 vor. Vor dem Release soll das g
 Datum: 2026-04-18
 
 `MARKETING_VERSION` im Xcode-Projekt auf `0.1` gesetzt (war 1.0). `CURRENT_PROJECT_VERSION` bleibt 1 (Build-Nummer). Deployment Target iOS 17.0 bereits korrekt. Schritt-für-Schritt TestFlight/App-Store Anleitung und Asset-Checkliste oben ergänzt.
+
+[[REL1.1 - Vorbereitungen]]

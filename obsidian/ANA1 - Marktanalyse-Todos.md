@@ -120,7 +120,7 @@ Basierend auf der Marktanalyse vom April 2026 (Store-Potenzial: **7.1/10**) wurd
 
 ### 10. Dark Mode als Premium-Feature überdenken
 **Analyse-Bewertung:** Aktuell Dark Mode für alle Nutzer. Empfehlung: Dark Mode exklusiv für Premium, da Abend-Nutzer echten Anreiz brauchen.  
-**Aktueller Stand:** DES5.1 ist #done und approved — Dark Mode ist für alle verfügbar.  
+**Aktueller Stand:** DES5.1 ist done und approved — Dark Mode ist für alle verfügbar.  
 **Entscheidung nötig:** Soll Dark Mode hinter die Paywall verschoben werden?
 
 ---

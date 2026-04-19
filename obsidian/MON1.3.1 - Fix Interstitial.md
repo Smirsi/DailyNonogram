@@ -13,3 +13,4 @@ Datum: 2026-04-19
 - `NonogramViewModel.swift`: Ruft `lockPuzzle(difficulty:)` beim ersten Zug (beginDrag/handleTap) auf.
 - `DifficultySelectionView.swift`: Ad-Gate-Logik für Free-User: In-progress Puzzle → direkt öffnen, anderes Puzzle → Rewarded Ad Dialog, erstes Puzzle → Confirm Dialog.
 - `NonogramBoardView.swift`: BonusOfferBanner und showBonusPuzzle entfernt.
+- #approved 

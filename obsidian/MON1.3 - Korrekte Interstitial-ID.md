@@ -20,3 +20,4 @@ Datum: 2026-04-18
 3. `NonogramBoardView.swift`: Zurück-Button (chevron.left) im Header für alle Nutzer sichtbar; ruft `onChangeDifficulty` auf.
 4. `ContentView.swift`: `onChangeDifficulty` wird jetzt auch an Free-Nutzer weitergegeben.
 5. #notapproved [[MON1.3.1 - Fix Interstitial]]
+6. #approved 

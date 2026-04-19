@@ -12,3 +12,4 @@ Datum: 2026-04-19
   - Streak-Card: 🔥 Flamme + "X Tage in Folge", darunter 7-Tage-Leiste (WeekProgressView), darunter Freeze-Counter
   - Bei tagesbasiertem Puzzle: Puzzle-Name + Gittergröße statt generischer Difficulty
   - Ad-Gate für Free-User im Fallback-Modus (3 Schwierigkeiten)
+#approved 
