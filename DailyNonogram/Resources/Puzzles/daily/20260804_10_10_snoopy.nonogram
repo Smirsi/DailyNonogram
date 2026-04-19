@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<FreeNono>
+  <Nonograms>
+    <Nonogram name="snoopy" height="10" width="10">
+      <line> x x x x x _ x x x x </line>
+      <line> x x x x x x _ _ _ _ </line>
+      <line> x x x x x _ _ _ _ _ </line>
+      <line> x x _ _ _ _ _ _ x _ </line>
+      <line> x _ _ _ _ x _ x x x </line>
+      <line> x _ _ _ _ x _ x x x </line>
+      <line> _ _ _ _ _ _ _ x x x </line>
+      <line> x _ _ _ _ _ _ x x x </line>
+      <line> x x _ _ _ _ _ _ x x </line>
+      <line> x x x x x _ _ _ x _ </line>
+    </Nonogram>
+  </Nonograms>
+</FreeNono>

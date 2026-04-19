@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<FreeNono>
+  <Nonograms>
+    <Nonogram name="coffee" height="10" width="10">
+      <line> _ _ x _ x _ x _ _ _ </line>
+      <line> _ x _ x _ x _ _ _ _ </line>
+      <line> x x x x x x x x _ _ </line>
+      <line> x _ _ _ _ _ _ x x x </line>
+      <line> x x x x x x x x _ x </line>
+      <line> x _ x x x x x x _ x </line>
+      <line> x x x x x x x x x x </line>
+      <line> x x _ _ x x x x _ _ </line>
+      <line> _ x x x x x x _ _ _ </line>
+      <line> _ _ x x x x _ _ _ _ </line>
+    </Nonogram>
+  </Nonograms>
+</FreeNono>
