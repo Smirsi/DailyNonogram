@@ -131,12 +131,12 @@ struct NonogramBoardView: View {
                     }
                 }
                 .padding(16)
-                .background(
-                    GeometryReader { geo in
-                        Color.clear.onAppear { computeInitialScale(available: geo.size) }
-                    }
-                )
             }
+            .background(
+                GeometryReader { geo in
+                    Color.clear.onAppear { computeInitialScale(available: geo.size) }
+                }
+            )
             .simultaneousGesture(
                 MagnificationGesture()
                     .onChanged { value in
@@ -309,18 +309,28 @@ struct NonogramBoardView: View {
     // MARK: - Scale
 
     private func computeInitialScale(available: CGSize) {
+        guard available.width > 10, available.height > 10 else { return }
+
         let cols = vm.nonogram.cols
         let rows = vm.nonogram.rows
         let maxRowClues = vm.nonogram.rowClues.map(\.count).max() ?? 1
         let maxColClues = vm.nonogram.colClues.map(\.count).max() ?? 1
 
-        let totalW = CGFloat(cols) * cellSize + CGFloat(maxRowClues) * 18 + 8
-        let totalH = CGFloat(rows) * cellSize + CGFloat(maxColClues) * 18 + 8
+        let clueWSides: CGFloat = showCluesBothSides ? 2 : 1
+        let clueHSides: CGFloat = showCluesBothSides ? 2 : 1
 
-        let fitScale = min(available.width / totalW, available.height / totalH)
-        let newScale = min(1.0, max(minScale, fitScale))
+        // Unscaled content size (at scale 1.0) including padding (2×16=32)
+        let contentW = CGFloat(cols) * cellSize
+            + (CGFloat(maxRowClues) * 18 + 8) * clueWSides
+            + 32
+        let contentH = CGFloat(rows) * cellSize
+            + (CGFloat(maxColClues) * 18 + 8) * clueHSides
+            + 32
 
-        guard newScale < 0.95 else { return }
+        let fitScale = min(available.width / contentW, available.height / contentH)
+        let newScale = min(1.0, max(minScale, fitScale * 0.97)) // 3% margin
+
+        guard abs(newScale - scale) > 0.02 else { return }
         scale = newScale
         liveScale = newScale
     }
