@@ -6,11 +6,11 @@ struct PremiumTeaserView: View {
 
     @State private var appeared = false
 
-    private let features: [(icon: String, text: String)] = [
-        ("trophy.fill",          "Alle 3 Schwierigkeitsgrade täglich"),
-        ("calendar.badge.clock", "Zugriff auf die ganze Woche"),
-        ("xmark.circle.fill",    "Keine Werbung"),
-        ("paintpalette.fill",    "Bald: Farbige Nonogramme")
+    private let features: [(icon: String, text: String, active: Bool)] = [
+        ("xmark.circle.fill",    "Keine Werbung",                  true),
+        ("calendar",             "Alle Rätsel der letzten 7 Tage", true),
+        ("wand.and.stars",       "Auto-Lösen",                     true),
+        ("paintpalette.fill",    "Bald: Farbige Nonogramme",       false)
     ]
 
     var body: some View {
@@ -42,13 +42,13 @@ struct PremiumTeaserView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     ForEach(features, id: \.text) { feature in
                         HStack(spacing: 12) {
-                            Image(systemName: feature.icon)
+                            Image(systemName: feature.active ? "checkmark.circle.fill" : "circle.dotted")
                                 .font(.system(size: 16))
-                                .foregroundStyle(DS.accent)
+                                .foregroundStyle(feature.active ? DS.accent : DS.textTertiary)
                                 .frame(width: 24)
                             Text(feature.text)
                                 .font(.system(size: 14, weight: .regular))
-                                .foregroundStyle(DS.textPrimary)
+                                .foregroundStyle(feature.active ? DS.textPrimary : DS.textTertiary)
                         }
                     }
                 }

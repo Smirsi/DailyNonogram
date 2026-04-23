@@ -6,6 +6,8 @@ struct CompletionOverlayView: View {
     let onDismiss: () -> Void
 
     @State private var appeared = false
+    @State private var shareImage: UIImage? = nil
+    @State private var showShareSheet = false
 
     var body: some View {
         ZStack {
@@ -51,16 +53,35 @@ struct CompletionOverlayView: View {
                     .foregroundStyle(DS.textTertiary)
                     .padding(.bottom, 28)
 
-                // CTA
-                Button { onDismiss() } label: {
-                    Text("Weiter")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(DS.accent, in: RoundedRectangle(cornerRadius: 12))
+                // Share + CTA
+                HStack(spacing: 12) {
+                    Button {
+                        shareImage = renderShareCardImage(nonogram: nonogram, streak: streak)
+                        showShareSheet = shareImage != nil
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(DS.accent)
+                            .frame(width: 48, height: 48)
+                            .background(DS.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+                    }
+                    .buttonStyle(.plain)
+
+                    Button { onDismiss() } label: {
+                        Text("Weiter")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(DS.accent, in: RoundedRectangle(cornerRadius: 12))
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
+                .sheet(isPresented: $showShareSheet) {
+                    if let img = shareImage {
+                        ShareSheet(items: [img])
+                    }
+                }
             }
             .padding(.horizontal, 32)
             .padding(.vertical, 36)
@@ -118,4 +139,16 @@ private struct SolvedPixelArtView: View {
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .overlay(RoundedRectangle(cornerRadius: 4).stroke(DS.gridLine, lineWidth: 0.5))
     }
+}
+
+// MARK: - UIActivityViewController wrapper
+
+private struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ vc: UIActivityViewController, context: Context) {}
 }

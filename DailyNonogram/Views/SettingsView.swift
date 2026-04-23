@@ -4,6 +4,7 @@ struct SettingsView: View {
     @AppStorage("showCluesBothSides") var showCluesBothSides = false
     @AppStorage("autoX") var autoX = false
     @AppStorage("autoCheckmark") var autoCheckmark = false
+    @AppStorage("notificationsEnabled") private var notificationsEnabled = false
 
     @EnvironmentObject private var store: StoreKitManager
     @Environment(\.dismiss) private var dismiss
@@ -19,6 +20,13 @@ struct SettingsView: View {
                 Section("Automatisierung") {
                     Toggle("Automatisches X", isOn: $autoX)
                     Toggle("Automatisches Abhaken", isOn: $autoCheckmark)
+                }
+
+                Section("Benachrichtigungen") {
+                    Toggle("Tägliche Erinnerung (8:00 Uhr)", isOn: $notificationsEnabled)
+                        .onChange(of: notificationsEnabled) { _, enabled in
+                            NotificationManager.shared.isEnabled = enabled
+                        }
                 }
 
                 if store.isPremium {

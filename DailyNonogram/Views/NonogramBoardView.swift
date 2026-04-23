@@ -17,8 +17,11 @@ struct NonogramBoardView: View {
     @EnvironmentObject private var ads: AdManager
 
     private let cellSize: CGFloat = 36
+    private let minScale: CGFloat = 0.3
+    private let maxScale: CGFloat = 3.0
     @State private var scale: CGFloat = 1.0
     @State private var liveScale: CGFloat = 1.0
+    @State private var isPinching = false
 
     private var effectiveCellSize: CGFloat { cellSize * liveScale }
 
@@ -109,7 +112,8 @@ struct NonogramBoardView: View {
                     HStack(alignment: .top, spacing: 0) {
                         RowCluesView(clues: vm.nonogram.rowClues, cellSize: effectiveCellSize,
                                      checkedClues: vm.checkedRowClues).frame(width: rowClueWidth)
-                        NonogramGridView(vm: vm, cellSize: cellSize, scale: $scale, liveScale: $liveScale)
+                        NonogramGridView(vm: vm, cellSize: cellSize, scale: $scale,
+                                         liveScale: $liveScale, isPinching: $isPinching)
                         if showCluesBothSides {
                             RowCluesView(clues: vm.nonogram.rowClues, cellSize: effectiveCellSize,
                                          checkedClues: vm.checkedRowClues, alignRight: false)
@@ -127,7 +131,24 @@ struct NonogramBoardView: View {
                     }
                 }
                 .padding(16)
+                .background(
+                    GeometryReader { geo in
+                        Color.clear.onAppear { computeInitialScale(available: geo.size) }
+                    }
+                )
             }
+            .simultaneousGesture(
+                MagnificationGesture()
+                    .onChanged { value in
+                        isPinching = true
+                        liveScale = min(maxScale, max(minScale, scale * value))
+                    }
+                    .onEnded { value in
+                        scale = min(maxScale, max(minScale, scale * value))
+                        liveScale = scale
+                        isPinching = false
+                    }
+            )
 
             // Action buttons row
             actionButtonsRow
@@ -227,11 +248,9 @@ struct NonogramBoardView: View {
                 }
             }
 
-            // Error Reveal (premium only, requires ad)
-            if store.isPremium {
-                actionButton(icon: "eye", label: "Fehler", enabled: ads.errorRevealReady) {
-                    showErrorRevealAd()
-                }
+            // Error Reveal (all users, requires rewarded ad)
+            actionButton(icon: "eye", label: "Fehler", enabled: ads.errorRevealReady) {
+                showErrorRevealAd()
             }
 
             // Auto-Solve (premium only, costs freeze)
@@ -285,6 +304,25 @@ struct NonogramBoardView: View {
         guard spent else { return }
         vm.applySolve()
         streak = StreakService.currentStreak()
+    }
+
+    // MARK: - Scale
+
+    private func computeInitialScale(available: CGSize) {
+        let cols = vm.nonogram.cols
+        let rows = vm.nonogram.rows
+        let maxRowClues = vm.nonogram.rowClues.map(\.count).max() ?? 1
+        let maxColClues = vm.nonogram.colClues.map(\.count).max() ?? 1
+
+        let totalW = CGFloat(cols) * cellSize + CGFloat(maxRowClues) * 18 + 8
+        let totalH = CGFloat(rows) * cellSize + CGFloat(maxColClues) * 18 + 8
+
+        let fitScale = min(available.width / totalW, available.height / totalH)
+        let newScale = min(1.0, max(minScale, fitScale))
+
+        guard newScale < 0.95 else { return }
+        scale = newScale
+        liveScale = newScale
     }
 
     // MARK: - Helpers

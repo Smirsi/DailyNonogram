@@ -11,9 +11,9 @@ final class StoreKitManager: ObservableObject {
 
     // MARK: - Product IDs (replace with real IDs from App Store Connect)
 
-    static let monthlyID  = "com.philip.dailynonogram.premium.monthly"
-    static let yearlyID   = "com.philip.dailynonogram.premium.yearly"
-    static let lifetimeID = "com.philip.dailynonogram.premium.lifetime"
+    static let monthlyID  = "com.adept.dailynonogram.premium.monthly"
+    static let yearlyID   = "com.adept.dailynonogram.premium.yearly"
+    static let lifetimeID = "com.adept.dailynonogram.premium.lifetime"
 
     static let allProductIDs: Set<String> = [monthlyID, yearlyID, lifetimeID]
 

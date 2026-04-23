@@ -18,7 +18,7 @@ struct RowCluesView: View {
                             && checkedClues[row].indices.contains(i)
                             && checkedClues[row][i]
                         Text("\(clues[row][i])")
-                            .font(DS.clueFont())
+                            .font(DS.clueFontScaled(cellSize: cellSize))
                             .foregroundStyle(isChecked ? DS.textTertiary : DS.textPrimary)
                             .strikethrough(isChecked, color: DS.textTertiary)
                     }
@@ -48,7 +48,7 @@ struct ColCluesView: View {
                             && checkedClues[col].indices.contains(i)
                             && checkedClues[col][i]
                         Text("\(clues[col][i])")
-                            .font(DS.clueFont())
+                            .font(DS.clueFontScaled(cellSize: cellSize))
                             .foregroundStyle(isChecked ? DS.textTertiary : DS.textPrimary)
                             .strikethrough(isChecked, color: DS.textTertiary)
                     }

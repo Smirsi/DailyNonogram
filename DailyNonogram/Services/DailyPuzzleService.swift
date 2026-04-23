@@ -95,7 +95,7 @@ struct DailyPuzzleService {
     // MARK: - Utilities
 
     static func today() -> Date {
-        Calendar.current.startOfDay(for: Date())
+        TimeService.shared.today
     }
 
     static func dateString(for date: Date) -> String {

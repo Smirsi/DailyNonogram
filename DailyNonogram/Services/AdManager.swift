@@ -7,10 +7,17 @@ final class AdManager: NSObject, ObservableObject {
 
     // MARK: - Ad Unit IDs
 
-    static let interstitialUnitID       = "ca-app-pub-1758574140088603/7574628484"
-    static let rewardedUnitID           = "ca-app-pub-1758574140088603/7992491536"
-    static let rewardedHintUnitID       = "ca-app-pub-1758574140088603/3275878139"
+    #if DEBUG
+    static let interstitialUnitID        = "ca-app-pub-3940256099942544/4411468910"
+    static let rewardedUnitID            = "ca-app-pub-3940256099942544/1712485313"
+    static let rewardedHintUnitID        = "ca-app-pub-3940256099942544/1712485313"
+    static let rewardedErrorRevealUnitID = "ca-app-pub-3940256099942544/1712485313"
+    #else
+    static let interstitialUnitID        = "ca-app-pub-1758574140088603/7574628484"
+    static let rewardedUnitID            = "ca-app-pub-1758574140088603/7992491536"
+    static let rewardedHintUnitID        = "ca-app-pub-1758574140088603/3275878139"
     static let rewardedErrorRevealUnitID = "ca-app-pub-1758574140088603/4321366497"
+    #endif
 
     // MARK: - State
 

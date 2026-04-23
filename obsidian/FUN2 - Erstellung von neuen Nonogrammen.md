@@ -4,5 +4,4 @@
 [[FUN2.3 - Motiv-Anzeige nach dem Lösen]]
 [[FUN2.4 - Neuimplementierung der Generierung]]
 [[FUN2.5 - Fertige Nonogramme verwenden]]
-
-[[FUN2.5 - Basis muss Weltzeituhr sein und nicht Uhr des Handys]]
+[[FUN2.6 - Basis muss Weltzeituhr sein und nicht Uhr des Handys]]

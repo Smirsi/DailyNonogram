@@ -7,9 +7,8 @@ struct NonogramGridView: View {
     @Binding var scale: CGFloat
     /// Live zoom level — updated every gesture frame, shared with CluesView via BoardView
     @Binding var liveScale: CGFloat
-
-    private let minScale: CGFloat = 0.5
-    private let maxScale: CGFloat = 3.0
+    /// Set by the outer MagnificationGesture to prevent accidental draws during pinch
+    @Binding var isPinching: Bool
 
     private var effectiveCellSize: CGFloat { cellSize * liveScale }
 
@@ -98,10 +97,11 @@ struct NonogramGridView: View {
             RoundedRectangle(cornerRadius: DS.outerBorderRadius)
                 .stroke(DS.border, lineWidth: 1.5)
         )
-        // 1-finger draw
+        // 1-finger draw — suppressed while outer MagnificationGesture is active
         .gesture(
             DragGesture(minimumDistance: 0, coordinateSpace: .local)
                 .onChanged { value in
+                    guard !isPinching else { return }
                     let coord = gridCoord(at: value.location)
                     if value.translation == .zero {
                         vm.beginDrag(at: coord)
@@ -109,17 +109,9 @@ struct NonogramGridView: View {
                         vm.continueDrag(at: coord)
                     }
                 }
-                .onEnded { _ in vm.endDrag() }
-        )
-        // 2-finger pinch zoom
-        .gesture(
-            MagnificationGesture()
-                .onChanged { value in
-                    liveScale = min(maxScale, max(minScale, scale * value))
-                }
-                .onEnded { value in
-                    scale = min(maxScale, max(minScale, scale * value))
-                    liveScale = scale
+                .onEnded { _ in
+                    guard !isPinching else { return }
+                    vm.endDrag()
                 }
         )
         // Double tap resets zoom

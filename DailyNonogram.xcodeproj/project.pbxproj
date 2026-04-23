@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02F084C381332DB06D3FCDD3 /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB930642D7B07566EB82CBE /* ShareCardView.swift */; };
 		058FA31CD6F99464BD4784F0 /* NonogramBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05920377EBA37BBF4404D4 /* NonogramBoardView.swift */; };
 		0A60067CA779534269D7BF8C /* BonusPuzzleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711715741E47E26C4A8A67B0 /* BonusPuzzleSheet.swift */; };
 		262400F6C024DB4B44F56FE1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1ACB73559FBBBE7B1EEE6 /* ContentView.swift */; };
@@ -14,6 +15,7 @@
 		3179DE2DC261FD0B4731DF2B /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B37F78BE24814A515D18980 /* ToolbarView.swift */; };
 		399DD36B58B3908BAD26FF63 /* ArchivePuzzleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */; };
 		3ECB45976EABDAAADEE02999 /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F2BC79F415C64A294158F /* CellState.swift */; };
+		416AAC283423CC70155D77BD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9524B7009D2D3DE27CE2A77 /* NotificationManager.swift */; };
 		4287AC26BAFD4AE147A50DA6 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 9974737F4A9D8525F078B9E5 /* GoogleMobileAds */; };
 		4F71C0794E0FCF3E1616F1DE /* WeekProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5FE7A79FD1BBCD1BDB8C4 /* WeekProgressView.swift */; };
 		567B139F0D50EC152837B64D /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E7BA55A92FB471FBB8146 /* AdManager.swift */; };
@@ -33,10 +35,11 @@
 		A8016A59D14073F427D4F0A3 /* DailyPuzzleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AA9506E7D2C8677D27027 /* DailyPuzzleService.swift */; };
 		ABB44DD793415AAA0EF794B7 /* DifficultyLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BECA3F9388B0F91CD6063 /* DifficultyLevel.swift */; };
 		AFB73DD3E67D0B9B25DBFA84 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344AE480174BED22980C88EE /* StoreKitManager.swift */; };
-		B73313F1450D4C8F86A7E7A6 /* PuzzleLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9B217B85CA44929F04E42A /* PuzzleLockService.swift */; };
+		B72F62179456CF57E4FF86DC /* TimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6B8957A51BB0F92906A3E /* TimeService.swift */; };
 		B7CFAE526E1ED8C6B804A743 /* NonogramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7406D25A43DE0183CE9350 /* NonogramViewModel.swift */; };
 		C73527186039311067A52747 /* Nonogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD26CA8FC88C9A36972A9B /* Nonogram.swift */; };
 		D02992C93508574BCD4ABC46 /* DailyNonogramApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0076EA9D3CE3B0C6F4CD8FE5 /* DailyNonogramApp.swift */; };
+		DF3E0997994778B3942AED3C /* PuzzleLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B24D071F365F8DA6BA38E28 /* PuzzleLockService.swift */; };
 		E855D0E16EDB29EF3B10D833 /* PremiumTeaserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */; };
 		E9A86458A2706BB6354E6853 /* PremiumPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3534056C3831B2DB8FAF7828 /* PremiumPaywallView.swift */; };
 		F5F78C17595CFA859084C6CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD678FAAA87585D6FC92FC41 /* SettingsView.swift */; };
@@ -45,17 +48,19 @@
 /* Begin PBXFileReference section */
 		0076EA9D3CE3B0C6F4CD8FE5 /* DailyNonogramApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNonogramApp.swift; sourceTree = "<group>"; };
 		03B5FE7A79FD1BBCD1BDB8C4 /* WeekProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekProgressView.swift; sourceTree = "<group>"; };
+		0CB930642D7B07566EB82CBE /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
 		20A891DCA6E668581CE3C05D /* SampleNonogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleNonogram.swift; sourceTree = "<group>"; };
+		2B24D071F365F8DA6BA38E28 /* PuzzleLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleLockService.swift; sourceTree = "<group>"; };
 		344AE480174BED22980C88EE /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		3534056C3831B2DB8FAF7828 /* PremiumPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumPaywallView.swift; sourceTree = "<group>"; };
 		378E9D6D32E1FB9C631E41A5 /* Puzzles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Puzzles; path = DailyNonogram/Resources/Puzzles; sourceTree = SOURCE_ROOT; };
 		39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTeaserService.swift; sourceTree = "<group>"; };
 		43B6D66973569B7EFF90C1C2 /* ArchivePuzzleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePuzzleSheet.swift; sourceTree = "<group>"; };
 		441BECA3F9388B0F91CD6063 /* DifficultyLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevel.swift; sourceTree = "<group>"; };
+		47E6B8957A51BB0F92906A3E /* TimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeService.swift; sourceTree = "<group>"; };
 		4A83E456CDBB8C4EFA54E82A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4FFD26CA8FC88C9A36972A9B /* Nonogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonogram.swift; sourceTree = "<group>"; };
 		545BF5A3C3563AC6BAA2D1A9 /* PuzzleLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleLibrary.swift; sourceTree = "<group>"; };
-		5B9B217B85CA44929F04E42A /* PuzzleLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleLockService.swift; sourceTree = "<group>"; };
 		711715741E47E26C4A8A67B0 /* BonusPuzzleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusPuzzleSheet.swift; sourceTree = "<group>"; };
 		7B37F78BE24814A515D18980 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		920C4400CBEECBA6F443C2F9 /* PremiumTeaserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTeaserView.swift; sourceTree = "<group>"; };
@@ -67,7 +72,7 @@
 		B301E4FA53788FF012DEA80C /* CluesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CluesView.swift; sourceTree = "<group>"; };
 		BB7406D25A43DE0183CE9350 /* NonogramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonogramViewModel.swift; sourceTree = "<group>"; };
 		BE6E91DC2F0C457E06BBA4DF /* CompletionOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionOverlayView.swift; sourceTree = "<group>"; };
-		C793274A66DB3D4CE0FC4B38 /* Daily Nonogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Nonogram.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C793274A66DB3D4CE0FC4B38 /* DailyNonogram.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DailyNonogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBF9FDF36B5C95B5E28231FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4FF677544C464B41061B1C8 /* StreakService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakService.swift; sourceTree = "<group>"; };
 		D51F2BC79F415C64A294158F /* CellState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
@@ -75,6 +80,7 @@
 		D9DA8289EE7971E7633D4D15 /* FreeNonoPuzzleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeNonoPuzzleLoader.swift; sourceTree = "<group>"; };
 		DC05920377EBA37BBF4404D4 /* NonogramBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonogramBoardView.swift; sourceTree = "<group>"; };
 		DDD1ACB73559FBBBE7B1EEE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F9524B7009D2D3DE27CE2A77 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		FC0A51968B391AFA9660FE9F /* DifficultySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultySelectionView.swift; sourceTree = "<group>"; };
 		FD678FAAA87585D6FC92FC41 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +112,7 @@
 				3534056C3831B2DB8FAF7828 /* PremiumPaywallView.swift */,
 				920C4400CBEECBA6F443C2F9 /* PremiumTeaserView.swift */,
 				FD678FAAA87585D6FC92FC41 /* SettingsView.swift */,
+				0CB930642D7B07566EB82CBE /* ShareCardView.swift */,
 				7B37F78BE24814A515D18980 /* ToolbarView.swift */,
 				03B5FE7A79FD1BBCD1BDB8C4 /* WeekProgressView.swift */,
 			);
@@ -131,7 +138,7 @@
 		8BD4191F305BD0B2EB16E3AE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C793274A66DB3D4CE0FC4B38 /* Daily Nonogram.app */,
+				C793274A66DB3D4CE0FC4B38 /* DailyNonogram.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,10 +177,12 @@
 				D85E7BA55A92FB471FBB8146 /* AdManager.swift */,
 				AA8AA9506E7D2C8677D27027 /* DailyPuzzleService.swift */,
 				D9DA8289EE7971E7633D4D15 /* FreeNonoPuzzleLoader.swift */,
+				F9524B7009D2D3DE27CE2A77 /* NotificationManager.swift */,
 				39228F75D27EB7CF51DD251B /* PremiumTeaserService.swift */,
-				5B9B217B85CA44929F04E42A /* PuzzleLockService.swift */,
+				2B24D071F365F8DA6BA38E28 /* PuzzleLockService.swift */,
 				344AE480174BED22980C88EE /* StoreKitManager.swift */,
 				D4FF677544C464B41061B1C8 /* StreakService.swift */,
+				47E6B8957A51BB0F92906A3E /* TimeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -223,7 +232,7 @@
 				9974737F4A9D8525F078B9E5 /* GoogleMobileAds */,
 			);
 			productName = DailyNonogram;
-			productReference = C793274A66DB3D4CE0FC4B38 /* Daily Nonogram.app */;
+			productReference = C793274A66DB3D4CE0FC4B38 /* DailyNonogram.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -234,6 +243,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = A867428F355C25DE2AD96130 /* Build configuration list for PBXProject "DailyNonogram" */;
 			developmentRegion = en;
@@ -293,15 +304,18 @@
 				058FA31CD6F99464BD4784F0 /* NonogramBoardView.swift in Sources */,
 				2EFD5468E6EFB550A377D71D /* NonogramGridView.swift in Sources */,
 				B7CFAE526E1ED8C6B804A743 /* NonogramViewModel.swift in Sources */,
+				416AAC283423CC70155D77BD /* NotificationManager.swift in Sources */,
 				E9A86458A2706BB6354E6853 /* PremiumPaywallView.swift in Sources */,
 				E855D0E16EDB29EF3B10D833 /* PremiumTeaserService.swift in Sources */,
 				7721DDAA8CD2DD68E2CB3BDF /* PremiumTeaserView.swift in Sources */,
-				B73313F1450D4C8F86A7E7A6 /* PuzzleLockService.swift in Sources */,
 				706E9F189225A0C6CAE0E0FE /* PuzzleLibrary.swift in Sources */,
+				DF3E0997994778B3942AED3C /* PuzzleLockService.swift in Sources */,
 				707D5AD5BB7C0AEB823330ED /* SampleNonogram.swift in Sources */,
 				F5F78C17595CFA859084C6CD /* SettingsView.swift in Sources */,
+				02F084C381332DB06D3FCDD3 /* ShareCardView.swift in Sources */,
 				AFB73DD3E67D0B9B25DBFA84 /* StoreKitManager.swift in Sources */,
 				936234CBB032844977C7CADF /* StreakService.swift in Sources */,
+				B72F62179456CF57E4FF86DC /* TimeService.swift in Sources */,
 				3179DE2DC261FD0B4731DF2B /* ToolbarView.swift in Sources */,
 				4F71C0794E0FCF3E1616F1DE /* WeekProgressView.swift in Sources */,
 			);
@@ -326,7 +340,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adept.dailynonogram;
+				PRODUCT_BUNDLE_IDENTIFIER = com.philip.DailyNonogram;
 				PRODUCT_NAME = "Daily Nonogram";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;
@@ -470,7 +484,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adept.dailynonogram;
+				PRODUCT_BUNDLE_IDENTIFIER = com.philip.DailyNonogram;
 				PRODUCT_NAME = "Daily Nonogram";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;

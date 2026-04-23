@@ -43,6 +43,8 @@ App Store Connect → App → In-App Purchases → „+" → jeweils anlegen:
 - Preis: z.B. 0,99 €/Monat
 - Lokalisierung DE: „Premium – Monatlich" / EN: „Premium – Monthly"
 - Subscription Group: „Premium" (neu anlegen, falls erste)
+- Werbefrei, Mehr Rätsel, Streak-Freeze
+- Ad-free, more puzzles, streak-freeze
 
 ### Jährliches Abo
 - Typ: **Auto-Renewable Subscription**
@@ -220,9 +222,9 @@ In App Store Connect:
 
 ## 7. Checkliste vor dem ersten Upload
 
-- [ ] Bundle ID stimmt mit App Store Connect überein
-- [ ] Version 1.0, Build 1 gesetzt
-- [ ] In-App Purchase Capability in Xcode aktiv
+- [x] Bundle ID stimmt mit App Store Connect überein
+- [x] Version 1.0, Build 1 gesetzt
+- [x] In-App Purchase Capability in Xcode aktiv
 - [ ] Alle 3 IAP-Produkte in App Store Connect angelegt und im Status „Ready to Submit"
 - [ ] Datenschutz-URL erreichbar (GitHub Pages live)
 - [ ] Support-URL erreichbar

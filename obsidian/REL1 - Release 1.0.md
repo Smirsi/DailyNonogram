@@ -8,8 +8,8 @@ Bereite alles für einen Release der Version 1.0 vor. Vor dem Release soll das g
 - [x] Apple Developer Account aktiv (99 $/Jahr unter developer.apple.com)
 - [x] App in App Store Connect anlegen: App Name, Bundle ID `com.philip.DailyNonogram` (oder deine gewünschte ID), Kategorie: Games → Puzzle
 - [x] Bundle ID im Xcode-Projekt anpassen falls nötig (Signing & Capabilities)
-- [ ] **Datenschutz-URL** erstellen (z.B. einfache HTML-Seite auf GitHub Pages)
-- [ ] **Support-URL** erstellen (z.B. E-Mail-Link oder Webseite)
+- [x] **Datenschutz-URL** erstellen (z.B. einfache HTML-Seite auf GitHub Pages)
+- [x] **Support-URL** erstellen (z.B. E-Mail-Link oder Webseite)
 
 ## App-Store-Assets
 - [x] **App-Icon**: bereits gesetzt (DES4.1 erledigt) – alle Größen prüfen (1024×1024 für Store)
@@ -47,3 +47,4 @@ Datum: 2026-04-18
 `MARKETING_VERSION` im Xcode-Projekt auf `0.1` gesetzt (war 1.0). `CURRENT_PROJECT_VERSION` bleibt 1 (Build-Nummer). Deployment Target iOS 17.0 bereits korrekt. Schritt-für-Schritt TestFlight/App-Store Anleitung und Asset-Checkliste oben ergänzt.
 
 [[REL1.1 - Vorbereitungen]]
+[[REL1.2 - Testflight]]

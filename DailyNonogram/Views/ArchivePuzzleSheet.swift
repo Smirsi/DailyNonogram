@@ -66,8 +66,11 @@ private struct ArchiveBoardView: View {
 
     @AppStorage("showCluesBothSides") private var showCluesBothSides = false
     private let cellSize: CGFloat = 36
+    private let minScale: CGFloat = 0.3
+    private let maxScale: CGFloat = 3.0
     @State private var scale: CGFloat = 1.0
     @State private var liveScale: CGFloat = 1.0
+    @State private var isPinching = false
 
     private var effectiveCellSize: CGFloat { cellSize * liveScale }
     private var rowClueWidth: CGFloat {
@@ -105,7 +108,8 @@ private struct ArchiveBoardView: View {
                                      cellSize: effectiveCellSize,
                                      checkedClues: vm.checkedRowClues)
                             .frame(width: rowClueWidth)
-                        NonogramGridView(vm: vm, cellSize: cellSize, scale: $scale, liveScale: $liveScale)
+                        NonogramGridView(vm: vm, cellSize: cellSize, scale: $scale,
+                                         liveScale: $liveScale, isPinching: $isPinching)
                         if showCluesBothSides {
                             RowCluesView(clues: vm.nonogram.rowClues,
                                          cellSize: effectiveCellSize,
@@ -117,6 +121,18 @@ private struct ArchiveBoardView: View {
                 }
                 .padding(16)
             }
+            .simultaneousGesture(
+                MagnificationGesture()
+                    .onChanged { value in
+                        isPinching = true
+                        liveScale = min(maxScale, max(minScale, scale * value))
+                    }
+                    .onEnded { value in
+                        scale = min(maxScale, max(minScale, scale * value))
+                        liveScale = scale
+                        isPinching = false
+                    }
+            )
             ToolbarView(currentTool: $vm.currentTool)
                 .padding(.top, 16)
                 .padding(.bottom, 8)

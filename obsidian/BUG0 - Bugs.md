@@ -4,3 +4,8 @@
 [[BUG3 - Flammensymbol nach Rätsellösen fehlt]]
 [[BUG4 - Prüfe das korrekte Abstreichen der Zahlen am Rand]]
 [[BUG5 - Hint nicht klickbar]]
+[[BUG6 - Abstreichen der Zahlen nicht korrekt]]
+[[BUG7 - Darstellung zu Beginn und Zoomen]]
+[[BUG8 - Skalierung der Zahlen am Rand]]
+[[BUG9 - Fehler aufdecken]]
+[[BU10 - Einstellungen von Beginn]]

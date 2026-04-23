@@ -60,6 +60,12 @@ enum DS {
         .system(size: 11, weight: .medium, design: .monospaced)
     }
 
+    /// Clue font that scales proportionally with cell size (base cellSize = 36 → 11pt).
+    static func clueFontScaled(cellSize: CGFloat) -> Font {
+        let size = max(7, min(22, cellSize * 0.305))
+        return .system(size: size, weight: .medium, design: .monospaced)
+    }
+
     static func toolLabelFont() -> Font {
         .system(size: 11, weight: .medium)
     }
