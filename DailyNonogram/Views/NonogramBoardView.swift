@@ -165,6 +165,7 @@ struct NonogramBoardView: View {
         .onAppear {
             streak = StreakService.currentStreak()
             checkFreezeOpportunity()
+            vm.resetHints(isPremium: store.isPremium)
         }
         .onChange(of: vm.showCompletion) { _, isShowing in
             guard isShowing else { return }
@@ -236,15 +237,21 @@ struct NonogramBoardView: View {
 
             Spacer()
 
-            // Hint (all users, requires rewarded ad; Debug: always active)
+            // Hint (all users; uses hint allowance, refill via ad when empty)
             if !vm.hintsBlocked {
+                let hasHints = vm.hintsRemaining > 0
                 #if DEBUG
                 let hintEnabled = true
                 #else
-                let hintEnabled = ads.hintRewardedReady
+                let hintEnabled = hasHints || ads.hintRewardedReady
                 #endif
-                actionButton(icon: "lightbulb", label: "Hint", enabled: hintEnabled) {
-                    showHintAd()
+                let hintLabel = "Hint (\(vm.hintsRemaining))"
+                actionButton(icon: "lightbulb", label: hintLabel, enabled: hintEnabled) {
+                    if hasHints {
+                        showHintAd()
+                    } else {
+                        showHintRefillAd()
+                    }
                 }
             }
 
@@ -288,6 +295,20 @@ struct NonogramBoardView: View {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootVC = windowScene.windows.first?.rootViewController else { return }
         ads.showHintAdIfReady(from: rootVC) { vm.applyHint() }
+        #endif
+    }
+
+    private func showHintRefillAd() {
+        #if DEBUG
+        vm.refillHints(isPremium: store.isPremium)
+        vm.applyHint()
+        #else
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootVC = windowScene.windows.first?.rootViewController else { return }
+        ads.showHintAdIfReady(from: rootVC) {
+            vm.refillHints(isPremium: store.isPremium)
+            vm.applyHint()
+        }
         #endif
     }
 

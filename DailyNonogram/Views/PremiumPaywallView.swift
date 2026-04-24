@@ -73,6 +73,7 @@ struct PremiumPaywallView: View {
         VStack(alignment: .leading, spacing: 14) {
             featureRow(icon: "xmark.circle.fill", text: "Keine Werbung", active: true)
             featureRow(icon: "calendar", text: "Alle Rätsel der letzten 7 Tage", active: true)
+            featureRow(icon: "lightbulb.fill", text: "5 Gratis Hints pro Rätsel", active: true)
             featureRow(icon: "wand.and.stars", text: "Auto-Lösen", active: true)
             featureRow(icon: "paintpalette.fill", text: "Bald: Farbige Nonogramme", active: false)
         }

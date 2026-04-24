@@ -8,4 +8,5 @@
 [[BUG7 - Darstellung zu Beginn und Zoomen]]
 [[BUG8 - Skalierung der Zahlen am Rand]]
 [[BUG9 - Fehler aufdecken]]
-[[BU10 - Einstellungen von Beginn]]
+[[BUG10 - Einstellungen von Beginn]]
+[[BUG11 - Unendlich Hints]]

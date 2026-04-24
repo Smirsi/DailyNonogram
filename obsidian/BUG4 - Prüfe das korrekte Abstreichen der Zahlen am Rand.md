@@ -18,3 +18,5 @@ Alle Testfälle geprüft:
 - [2,2] + seq=[2] → [true,false] ✓ (vorher: [true,true] – BUG)
 - [3,1,3] + seq=[3,1] → [true,true,false] ✓
 - [2,2] + seq=[4] → [false,false] ✓
+
+#notapproved [[BUG6.1 - Zu frühes Abstreichen]]

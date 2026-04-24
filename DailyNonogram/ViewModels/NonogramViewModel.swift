@@ -29,6 +29,8 @@ class NonogramViewModel: ObservableObject {
 
     /// True when auto-solve was used — disables hints for this puzzle.
     @Published private(set) var hintsBlocked = false
+    /// Remaining hints for this puzzle (2 for free, 5 for premium).
+    @Published private(set) var hintsRemaining: Int = 2
     /// Whether there are moves to undo.
     @Published private(set) var canUndo = false
     /// Whether there are moves to redo.
@@ -132,9 +134,20 @@ class NonogramViewModel: ObservableObject {
 
     // MARK: - Hint
 
+    /// Sets hint allowance for this puzzle. Call on puzzle load.
+    func resetHints(isPremium: Bool) {
+        hintsRemaining = isPremium ? 5 : 2
+    }
+
+    /// Refills hints (called after rewarded ad watched when hintsRemaining == 0).
+    func refillHints(isPremium: Bool) {
+        hintsRemaining = isPremium ? 5 : 2
+    }
+
     /// Reveals one random correct-but-unfilled cell. Call only after rewarded ad confirmed.
     func applyHint() {
-        guard !hintsBlocked else { return }
+        guard !hintsBlocked, hintsRemaining > 0 else { return }
+        hintsRemaining -= 1
         let candidates = (0..<nonogram.rows).flatMap { row in
             (0..<nonogram.cols).compactMap { col -> GridCoord? in
                 guard nonogram.solution[row][col] else { return nil }
@@ -257,32 +270,12 @@ class NonogramViewModel: ObservableObject {
 
     private func matchClues(_ clues: [Int], to sequences: [Int]) -> [Bool] {
         if clues == [0] { return [sequences.isEmpty] }
-        guard sequences != clues else {
-            return Array(repeating: true, count: clues.count)
+        // Only confirm when sequence count matches clue count: ensures all blocks
+        // are present before assigning, preventing premature crossing.
+        guard sequences.count == clues.count else {
+            return Array(repeating: false, count: clues.count)
         }
-        var result = Array(repeating: false, count: clues.count)
-        // Left pass: only mark clue ci when there are enough remaining sequences
-        // to cover the remaining clues — prevents premature marks mid-fill.
-        var si = 0
-        for (ci, clue) in clues.enumerated() {
-            guard si < sequences.count, sequences[si] == clue else { break }
-            let remainingSeqs = sequences.count - (si + 1)
-            let remainingClues = clues.count - (ci + 1)
-            guard remainingSeqs >= remainingClues else { break }
-            result[ci] = true
-            si += 1
-        }
-        // Right pass: match remaining unmatched clues from the right.
-        // Guard siR >= si so both passes never consume the same sequence element.
-        var siR = sequences.count - 1
-        for ci in stride(from: clues.count - 1, through: 0, by: -1) {
-            if result[ci] { break }
-            guard siR >= si else { break }
-            if sequences[siR] == clues[ci] {
-                result[ci] = true; siR -= 1
-            } else { break }
-        }
-        return result
+        return zip(clues, sequences).map { $0 == $1 }
     }
 
     // MARK: - Private Helpers

@@ -19,6 +19,8 @@ struct RowCluesView: View {
                             && checkedClues[row][i]
                         Text("\(clues[row][i])")
                             .font(DS.clueFontScaled(cellSize: cellSize))
+                            .minimumScaleFactor(0.1)
+                            .lineLimit(1)
                             .foregroundStyle(isChecked ? DS.textTertiary : DS.textPrimary)
                             .strikethrough(isChecked, color: DS.textTertiary)
                     }
@@ -49,6 +51,8 @@ struct ColCluesView: View {
                             && checkedClues[col][i]
                         Text("\(clues[col][i])")
                             .font(DS.clueFontScaled(cellSize: cellSize))
+                            .minimumScaleFactor(0.1)
+                            .lineLimit(1)
                             .foregroundStyle(isChecked ? DS.textTertiary : DS.textPrimary)
                             .strikethrough(isChecked, color: DS.textTertiary)
                     }

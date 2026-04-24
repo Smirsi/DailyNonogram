@@ -9,3 +9,5 @@ Commit: siehe nächster Commit
 
 - `DS.clueFontScaled(cellSize:)` hinzugefügt: skaliert die Schriftgröße proportional zur Zellgröße (Basis 36pt → 11pt, Bereich 7–22pt).
 - `CluesView.swift` (Row + Col): verwendet nun `clueFontScaled` statt der fixen 11pt-Schrift – Zahlen bleiben proportional zu den Zellen bei jedem Zoom-Level.
+
+#notapproved [[BUG8.1 - Skalierung ganz rausgezoomed]]

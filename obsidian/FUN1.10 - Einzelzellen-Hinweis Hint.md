@@ -24,3 +24,5 @@ Ein Hint-Button enthüllt eine zufällig gewählte noch-nicht-korrekt-gefüllte 
 Datum: 2026-04-19
 
 Neuer `CellState.hinted = 4` (grün dargestellt, zählt für `isComplete` als gefüllt). `NonogramViewModel.applyHint()` wählt zufällig eine korrekte leere Zelle und setzt sie auf `.hinted`. Neuer Rewarded-Ad-Slot `rewardedHintUnitID` in `AdManager`. Button "Hint" (Glühbirnen-Icon) für alle User sichtbar, aber nur aktiv wenn Ad geladen. Nach Auto-Lösen wird `hintsBlocked = true` gesetzt.
+
+#approved 

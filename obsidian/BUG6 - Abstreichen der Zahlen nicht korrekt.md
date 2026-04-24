@@ -8,3 +8,4 @@ Datum: 2026-04-23
 Commit: siehe nächster Commit
 
 `matchClues` in `NonogramViewModel.swift` überarbeitet: Der linke Pass prüft nun vor jedem Match, ob genug verbleibende Sequences für die noch ausstehenden Clues vorhanden sind (`remainingSeqs >= remainingClues`). Damit wird z.B. bei Clues=[1,3] und nur 1 gefüllter Zelle die "1" nicht mehr voreilig abgehakt.
+#notapproved [[BUG6.1 - Zu frühes Abstreichen]]
