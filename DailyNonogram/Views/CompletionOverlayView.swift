@@ -6,8 +6,6 @@ struct CompletionOverlayView: View {
     let onDismiss: () -> Void
 
     @State private var appeared = false
-    @State private var shareImage: UIImage? = nil
-    @State private var showShareSheet = false
 
     var body: some View {
         ZStack {
@@ -56,8 +54,9 @@ struct CompletionOverlayView: View {
                 // Share + CTA
                 HStack(spacing: 12) {
                     Button {
-                        shareImage = renderShareCardImage(nonogram: nonogram, streak: streak)
-                        showShareSheet = shareImage != nil
+                        if let img = renderShareCardImage(nonogram: nonogram, streak: streak) {
+                            showShare(image: img)
+                        }
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                             .font(.system(size: 16, weight: .medium))
@@ -77,11 +76,6 @@ struct CompletionOverlayView: View {
                     }
                     .buttonStyle(.plain)
                 }
-                .sheet(isPresented: $showShareSheet) {
-                    if let img = shareImage {
-                        ShareSheet(items: [img])
-                    }
-                }
             }
             .padding(.horizontal, 32)
             .padding(.vertical, 36)
@@ -96,6 +90,19 @@ struct CompletionOverlayView: View {
                 }
             }
         }
+    }
+
+    private func showShare(image: UIImage) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootVC = windowScene.windows.first?.rootViewController else { return }
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        // iPad: popover needs an anchor, otherwise blank sheet
+        if let popover = vc.popoverPresentationController {
+            popover.sourceView = rootVC.view
+            popover.sourceRect = CGRect(x: rootVC.view.bounds.midX, y: rootVC.view.bounds.midY, width: 0, height: 0)
+            popover.permittedArrowDirections = []
+        }
+        rootVC.present(vc, animated: true)
     }
 
     private func formattedDate() -> String {
@@ -141,14 +148,3 @@ private struct SolvedPixelArtView: View {
     }
 }
 
-// MARK: - UIActivityViewController wrapper
-
-private struct ShareSheet: UIViewControllerRepresentable {
-    let items: [Any]
-
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        UIActivityViewController(activityItems: items, applicationActivities: nil)
-    }
-
-    func updateUIViewController(_ vc: UIActivityViewController, context: Context) {}
-}
