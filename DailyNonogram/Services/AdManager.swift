@@ -86,7 +86,10 @@ final class AdManager: NSObject, ObservableObject {
     }
 
     func showRewardedIfReady(from rootVC: UIViewController, onReward: @escaping () -> Void) {
-        guard let ad = rewarded, rewardedReady else { return }
+        guard let ad = rewarded, rewardedReady else {
+            onReward()  // fallback: no ad available, proceed anyway
+            return
+        }
         rewardedReady = false
         ad.present(fromRootViewController: rootVC) { [weak self] in
             onReward()

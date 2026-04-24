@@ -248,7 +248,7 @@ struct NonogramBoardView: View {
                 let hintLabel = "Hint (\(vm.hintsRemaining))"
                 actionButton(icon: "lightbulb", label: hintLabel, enabled: hintEnabled) {
                     if hasHints {
-                        showHintAd()
+                        vm.applyHint()  // free from allowance, no ad required
                     } else {
                         showHintRefillAd()
                     }
