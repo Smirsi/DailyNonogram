@@ -15,6 +15,13 @@
       }
     },
     {
+      "query": "tag:#open",
+      "color": {
+        "a": 1,
+        "rgb": 15140872
+      }
+    },
+    {
       "query": "tag:#approved",
       "color": {
         "a": 1,
@@ -33,13 +40,6 @@
       "color": {
         "a": 1,
         "rgb": 15854314
-      }
-    },
-    {
-      "query": "tag:#open",
-      "color": {
-        "a": 1,
-        "rgb": 15140872
       }
     },
     {
@@ -67,6 +67,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.9846573987124321,
+  "scale": 0.774636256821406,
   "close": true
 }

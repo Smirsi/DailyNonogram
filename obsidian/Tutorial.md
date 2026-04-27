@@ -21,3 +21,4 @@ Commit: siehe unten
 - Erscheint beim ersten App-Start via `@AppStorage("hasSeenTutorial")`
 - In `SettingsView.swift` Button „Tutorial erneut ansehen" hinzugefügt (sendet Notification → öffnet Tutorial)
 - Alle Tutorial-Texte vollständig in Localizable.strings (DE + EN) hinterlegt
+#approved 

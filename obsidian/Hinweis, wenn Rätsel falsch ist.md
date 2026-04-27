@@ -4,11 +4,12 @@
 [[Release 1.0]]
 # Aufgabe
 Wenn das komplette Rätsel ausgefüllt ist, aber nicht korrekt ist, soll ein Hinweis kommen, dass etwas falsch ist.
+
 # Implementierung
 
 Datum: 2026-04-27
 Commit: siehe unten
 
-In `NonogramViewModel.swift` wurde `@Published var isWronglyComplete: Bool = false` hinzugefügt. In `saveAndCheckCompletion()` wird es auf `true` gesetzt, wenn die Anzahl gefüllter Zellen exakt der Lösungsanzahl entspricht (aber `isComplete` false ist). 
+(Runde 1) `@Published var isWronglyComplete` + Banner-Overlay in `NonogramBoardView.swift` implementiert.
 
-In `NonogramBoardView.swift` wurde ein Banner-Overlay am unteren Rand eingeblendet (orange Warnsymbol + Text „Noch nicht korrekt – überprüfe deine Antworten."). Das Banner kann weggeklickt werden und erscheint erneut sobald neue Änderungen gemacht werden.
+(Runde 2 – Fix) In `saveAndCheckCompletion()` wurde die Bedingung korrigiert: Banner erscheint jetzt wenn keine einzige `.empty`-Zelle mehr im Grid vorhanden ist (`!hasEmpty`) UND `isComplete == false`. Vorher wurde nur gezählt ob `filledCount == solutionCount`, was bei komplett ausgemalten Rätseln (inkl. nicht-Lösungs-Zellen) fehlschlug.

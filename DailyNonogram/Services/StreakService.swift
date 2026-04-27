@@ -4,13 +4,19 @@ struct StreakService {
 
     // MARK: - Keys
 
-    private static let frozenDatesKey = "streak_frozenDates"
-    private static let solveSpentKey  = "streak_solveSpentFreezes"
+    private static let frozenDatesKey        = "streak_frozenDates"
+    private static let solveSpentKey         = "streak_solveSpentFreezes"
+    private static let purchasedTokensKey    = "streak_purchasedFreezeTokens"
+    private static let starterFreezeKey      = "hasReceivedStarterFreeze"
+
+    // MARK: - Limits
+
+    static let freeFreezeLimit     = 2
+    static let premiumFreezeLimit  = 10
 
     // MARK: - Public API
 
     /// Consecutive days with at least 1 solved puzzle (frozen days included).
-    /// Starts from today if solved, from yesterday otherwise.
     static func currentStreak() -> Int {
         let cal = Calendar.current
         let today = DailyPuzzleService.today()
@@ -33,25 +39,46 @@ struct StreakService {
         return count
     }
 
-    /// Freeze tokens available to the user.
-    /// Free: 1 per 7 consecutive solved days, max 5. Premium: 2 per 7 days, max 10.
+    /// Total freeze tokens available (earned + purchased, respecting the dynamic limit).
     static func availableFreezes(isPremium: Bool) -> Int {
-        let maxFreezes = isPremium ? 10 : 5
+        let baseLimit = isPremium ? premiumFreezeLimit : freeFreezeLimit
+        let purchased = purchasedFreezeTokens()
+        let effectiveLimit = baseLimit + purchased
         let used = loadFrozenDates().count + UserDefaults.standard.integer(forKey: solveSpentKey)
-        return max(0, min(earnedFreezes(isPremium: isPremium) - used, maxFreezes - used))
+        let earned = earnedFreezes(isPremium: isPremium)
+        return max(0, min(earned, effectiveLimit) - used + purchased)
     }
 
-    /// Spends one freeze token for the auto-solve feature. Returns false if none available.
+    /// Spends one freeze token for auto-solve. Prefers purchased tokens. Returns false if none available.
     @discardableResult
     static func spendFreezeForSolve(isPremium: Bool) -> Bool {
         guard availableFreezes(isPremium: isPremium) > 0 else { return false }
-        let current = UserDefaults.standard.integer(forKey: solveSpentKey)
-        UserDefaults.standard.set(current + 1, forKey: solveSpentKey)
+        let purchased = purchasedFreezeTokens()
+        if purchased > 0 {
+            UserDefaults.standard.set(purchased - 1, forKey: purchasedTokensKey)
+        } else {
+            let current = UserDefaults.standard.integer(forKey: solveSpentKey)
+            UserDefaults.standard.set(current + 1, forKey: solveSpentKey)
+        }
         return true
     }
 
-    /// Returns true when yesterday was missed, the day before was active,
-    /// and the user has a freeze available — i.e. a freeze can rescue the streak.
+    /// Adds purchased freeze tokens (e.g. from IAP or welcome bonus).
+    static func addPurchasedFreezeTokens(_ count: Int) {
+        let current = purchasedFreezeTokens()
+        UserDefaults.standard.set(current + count, forKey: purchasedTokensKey)
+    }
+
+    /// Grants starter freeze on first launch. Returns true if granted (first time only).
+    @discardableResult
+    static func grantStarterFreezeIfNeeded() -> Bool {
+        guard !UserDefaults.standard.bool(forKey: starterFreezeKey) else { return false }
+        UserDefaults.standard.set(true, forKey: starterFreezeKey)
+        addPurchasedFreezeTokens(1)
+        return true
+    }
+
+    /// Returns true when yesterday was missed and a freeze can rescue the streak.
     static func canApplyFreezeForYesterday(isPremium: Bool) -> Bool {
         guard availableFreezes(isPremium: isPremium) > 0 else { return false }
         let cal = Calendar.current
@@ -67,7 +94,7 @@ struct StreakService {
         return yesterdayMissed && dayBeforeActive
     }
 
-    /// Applies a freeze token to the given date.
+    /// Applies a freeze token to the given date. Prefers purchased tokens.
     @discardableResult
     static func applyFreeze(for date: Date, isPremium: Bool) -> Bool {
         guard availableFreezes(isPremium: isPremium) > 0 else { return false }
@@ -76,13 +103,19 @@ struct StreakService {
         guard !frozen.contains(dateStr) else { return false }
         frozen.append(dateStr)
         saveFrozenDates(frozen)
+        let purchased = purchasedFreezeTokens()
+        if purchased > 0 {
+            UserDefaults.standard.set(purchased - 1, forKey: purchasedTokensKey)
+        }
         return true
+    }
+
+    static func purchasedFreezeTokens() -> Int {
+        UserDefaults.standard.integer(forKey: purchasedTokensKey)
     }
 
     // MARK: - Private
 
-    /// Solved-only days within the current continuous run (frozen days excluded).
-    /// Multiplied by 1 for free users, 2 for premium.
     private static func earnedFreezes(isPremium: Bool) -> Int {
         let cal = Calendar.current
         let today = DailyPuzzleService.today()

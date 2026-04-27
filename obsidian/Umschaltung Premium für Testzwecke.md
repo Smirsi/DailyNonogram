@@ -10,3 +10,4 @@ Datum: 2026-04-27
 Commit: siehe unten
 
 In `SettingsView.swift` wurde ein `#if DEBUG`-Block hinzugefügt mit einem Toggle „Premium aktivieren (Test)". Dieser Toggle setzt direkt `UserDefaults["isPremiumCached"]` und aktualisiert `store.isPremium` via `StoreKitManager.setDebugPremium()`. Im Release-Build nicht sichtbar.
+#approved 

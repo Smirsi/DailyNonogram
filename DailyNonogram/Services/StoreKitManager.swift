@@ -11,11 +11,13 @@ final class StoreKitManager: ObservableObject {
 
     // MARK: - Product IDs (replace with real IDs from App Store Connect)
 
-    static let monthlyID  = "com.adept.dailynonogram.premium.monthly"
-    static let yearlyID   = "com.adept.dailynonogram.premium.yearly"
-    static let lifetimeID = "com.adept.dailynonogram.premium.lifetime"
+    static let monthlyID   = "com.adept.dailynonogram.premium.monthly"
+    static let yearlyID    = "com.adept.dailynonogram.premium.yearly"
+    static let lifetimeID  = "com.adept.dailynonogram.premium.lifetime"
+    static let freezeTokenID = "com.adept.dailynonogram.purchase.freezetoken"
 
-    static let allProductIDs: Set<String> = [monthlyID, yearlyID, lifetimeID]
+    static let premiumIDs: Set<String> = [monthlyID, yearlyID, lifetimeID]
+    static let allProductIDs: Set<String> = premiumIDs.union([freezeTokenID])
 
     // MARK: - Published State
 
@@ -23,6 +25,8 @@ final class StoreKitManager: ObservableObject {
     @Published var isPremium: Bool = false
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
+    @Published var freezeTokenProduct: Product? = nil
+    @Published var lastPurchasedFreezeTokens: Bool = false
 
     // MARK: - Private
 
@@ -47,8 +51,10 @@ final class StoreKitManager: ObservableObject {
         isLoading = true
         defer { isLoading = false }
         do {
-            products = try await Product.products(for: Self.allProductIDs)
+            let loaded = try await Product.products(for: Self.allProductIDs)
                 .sorted { $0.price < $1.price }
+            products = loaded.filter { Self.premiumIDs.contains($0.id) }
+            freezeTokenProduct = loaded.first { $0.id == Self.freezeTokenID }
         } catch {
             errorMessage = String(format: String(localized: "Produkte konnten nicht geladen werden: %@"), error.localizedDescription)
         }
@@ -65,6 +71,17 @@ final class StoreKitManager: ObservableObject {
             case .success(let verification):
                 let transaction = try checkVerified(verification)
                 await transaction.finish()
+                if transaction.productID == Self.freezeTokenID {
+                    StreakService.addPurchasedFreezeTokens(3)
+                    lastPurchasedFreezeTokens = true
+                } else {
+                    let wasPremiumBefore = isPremium
+                    await updatePremiumStatus()
+                    if !wasPremiumBefore && isPremium {
+                        StreakService.addPurchasedFreezeTokens(1)
+                    }
+                    return
+                }
                 await updatePremiumStatus()
             case .userCancelled:
                 break
@@ -95,7 +112,7 @@ final class StoreKitManager: ObservableObject {
         var hasPremium = false
         for await result in Transaction.currentEntitlements {
             if let transaction = try? checkVerified(result),
-               Self.allProductIDs.contains(transaction.productID) {
+               Self.premiumIDs.contains(transaction.productID) {
                 hasPremium = true
                 break
             }

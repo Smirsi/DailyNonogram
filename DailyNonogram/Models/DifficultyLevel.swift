@@ -10,12 +10,12 @@ enum DifficultyLevel: String, Codable, CaseIterable, Sendable {
 
     var displayName: String {
         switch self {
-        case .easy:        return String(localized: "Einfach")
+        case .easy:        return String(localized: "Klein")
         case .medium:      return String(localized: "Mittel")
-        case .hard:        return String(localized: "Schwer")
-        case .colorEasy:   return String(localized: "Farbe — Einfach")
+        case .hard:        return String(localized: "Groß")
+        case .colorEasy:   return String(localized: "Farbe — Klein")
         case .colorMedium: return String(localized: "Farbe — Mittel")
-        case .colorHard:   return String(localized: "Farbe — Schwer")
+        case .colorHard:   return String(localized: "Farbe — Groß")
         }
     }
 

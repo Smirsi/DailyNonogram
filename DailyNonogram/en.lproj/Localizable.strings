@@ -9,6 +9,10 @@
 "Tägliche Erinnerung (8:00 Uhr)" = "Daily Reminder (8:00 AM)";
 "Streak" = "Streak";
 "Du erhältst nach je 7 gespielten Tagen in Folge einen Freeze-Token. Ein Freeze schützt deinen Streak für einen verpassten Tag." = "You earn a Freeze Token after every 7 consecutive days played. A Freeze protects your streak for one missed day.";
+"Freeze erhalten! Du hast jetzt %lld Freeze verfügbar." = "Freeze received! You now have %lld freeze(s) available.";
+"Freeze eingelöst am %@" = "Freeze used on %@";
+"3 Freeze kaufen" = "Buy 3 Freezes";
+"3 Freeze kaufen – %@" = "Buy 3 Freezes – %@";
 "Premium" = "Premium";
 "Premium freischalten" = "Unlock Premium";
 "Premium aktiv" = "Premium Active";
@@ -23,6 +27,8 @@
 "Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen." = "The puzzle will be fully solved. You will lose 1 Streak Freeze and cannot use hints afterwards.";
 "Undo" = "Undo";
 "Redo" = "Redo";
+"Leeren" = "Clear";
+"Rätsel wirklich leeren?" = "Really clear the puzzle?";
 "Fehler" = "Errors";
 "Lösen" = "Solve";
 "Noch nicht korrekt – überprüfe deine Antworten." = "Not correct yet – check your answers.";
@@ -81,12 +87,12 @@
 "Freezes verfügbar" = "Freezes available";
 
 /* Difficulty levels */
-"Einfach" = "Easy";
+"Klein" = "Small";
 "Mittel" = "Medium";
-"Schwer" = "Hard";
-"Farbe — Einfach" = "Color — Easy";
+"Groß" = "Large";
+"Farbe — Klein" = "Color — Small";
 "Farbe — Mittel" = "Color — Medium";
-"Farbe — Schwer" = "Color — Hard";
+"Farbe — Groß" = "Color — Large";
 "Klein · bis 10×10 Felder" = "Small · up to 10×10 cells";
 "Mittel · bis 15×15 Felder" = "Medium · up to 15×15 cells";
 "Groß · bis 25×25 Felder" = "Large · up to 25×25 cells";

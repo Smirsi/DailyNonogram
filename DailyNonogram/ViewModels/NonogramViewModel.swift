@@ -42,6 +42,9 @@ class NonogramViewModel: ObservableObject {
 
     private var undoStack: [[CellChange]] = []
     private var redoStack: [[CellChange]] = []
+    private var undoKey: String { "undoStack_\(nonogram.difficulty.rawValue)" }
+    private var redoKey: String { "redoStack_\(nonogram.difficulty.rawValue)" }
+    private static let maxUndoSteps = 20
     private var gridSnapshotBeforeDrag: [[CellState]]? = nil
     private var dragTargetState: CellState = .filled
     private var visitedInDrag: Set<GridCoord> = []
@@ -60,6 +63,9 @@ class NonogramViewModel: ObservableObject {
         if savedGrid != nil {
             updateAutoFeatures()
         }
+        undoStack = Self.loadStack(key: "undoStack_\(nonogram.difficulty.rawValue)")
+        redoStack = Self.loadStack(key: "redoStack_\(nonogram.difficulty.rawValue)")
+        updateUndoRedoState()
     }
 
     // MARK: - Completion Check
@@ -119,6 +125,8 @@ class NonogramViewModel: ObservableObject {
         guard let changes = undoStack.popLast() else { return }
         for c in changes { grid[c.row][c.col] = c.from }
         redoStack.append(changes)
+        Self.saveStack(undoStack, key: undoKey)
+        Self.saveStack(redoStack, key: redoKey)
         updateUndoRedoState()
         if autoCheckmark { updateCheckedClues() } else { resetCheckedClues() }
         DailyPuzzleService.saveProgress(grid, difficulty: nonogram.difficulty)
@@ -128,9 +136,30 @@ class NonogramViewModel: ObservableObject {
         guard let changes = redoStack.popLast() else { return }
         for c in changes { grid[c.row][c.col] = c.to }
         undoStack.append(changes)
+        Self.saveStack(undoStack, key: undoKey)
+        Self.saveStack(redoStack, key: redoKey)
         updateUndoRedoState()
         if autoCheckmark { updateCheckedClues() } else { resetCheckedClues() }
         DailyPuzzleService.saveProgress(grid, difficulty: nonogram.difficulty)
+    }
+
+    // MARK: - Clear Grid
+
+    func clearGrid() {
+        let snapshot = grid
+        for row in 0..<nonogram.rows {
+            for col in 0..<nonogram.cols {
+                grid[row][col] = .empty
+            }
+        }
+        undoStack.removeAll()
+        redoStack.removeAll()
+        Self.saveStack(undoStack, key: undoKey)
+        Self.saveStack(redoStack, key: redoKey)
+        updateUndoRedoState()
+        resetCheckedClues()
+        isWronglyComplete = false
+        saveAndCheckCompletion()
     }
 
     // MARK: - Hint
@@ -179,6 +208,7 @@ class NonogramViewModel: ObservableObject {
         guard !toReveal.isEmpty else { return }
         let snapshot = grid
         for coord in toReveal { grid[coord.row][coord.col] = .error }
+        updateCheckedClues()
         recordUndo(from: snapshot)
         DailyPuzzleService.saveProgress(grid, difficulty: nonogram.difficulty)
     }
@@ -213,18 +243,28 @@ class NonogramViewModel: ObservableObject {
         checkedColClues = nonogram.colClues.map { Array(repeating: false, count: $0.count) }
     }
 
-    /// Improved autoX: uses block-sequence comparison instead of sum-only comparison.
+    /// Improved autoX: fills empty cells when a line is complete, removes autoCrossed when no longer complete.
     private func applyAutoX() {
         for row in 0..<nonogram.rows {
-            guard rowLineIsComplete(row) else { continue }
-            for col in 0..<nonogram.cols where grid[row][col] == .empty {
-                grid[row][col] = .autoCrossed
+            if rowLineIsComplete(row) {
+                for col in 0..<nonogram.cols where grid[row][col] == .empty {
+                    grid[row][col] = .autoCrossed
+                }
+            } else {
+                for col in 0..<nonogram.cols where grid[row][col] == .autoCrossed {
+                    grid[row][col] = .empty
+                }
             }
         }
         for col in 0..<nonogram.cols {
-            guard colLineIsComplete(col) else { continue }
-            for row in 0..<nonogram.rows where grid[row][col] == .empty {
-                grid[row][col] = .autoCrossed
+            if colLineIsComplete(col) {
+                for row in 0..<nonogram.rows where grid[row][col] == .empty {
+                    grid[row][col] = .autoCrossed
+                }
+            } else {
+                for row in 0..<nonogram.rows where grid[row][col] == .autoCrossed {
+                    grid[row][col] = .empty
+                }
             }
         }
     }
@@ -292,14 +332,15 @@ class NonogramViewModel: ObservableObject {
 
         var result = Array(repeating: false, count: clues.count)
 
-        // From left: mark consecutive clues whose sealed blocks match
+        // From left: mark consecutive clues whose sealed-on-both-sides blocks match
         var leftClueIdx = 0
         var leftBlockIdx = 0
         while leftBlockIdx < blocks.count && leftClueIdx < clues.count {
             let block = blocks[leftBlockIdx]
             let afterEnd = block.start + block.length
+            let sealedLeft = block.start == 0 || !cells[block.start - 1]
             let sealedRight = afterEnd >= cells.count || !cells[afterEnd]
-            if block.length == clues[leftClueIdx] && sealedRight {
+            if block.length == clues[leftClueIdx] && sealedLeft && sealedRight {
                 result[leftClueIdx] = true
                 leftClueIdx += 1
                 leftBlockIdx += 1
@@ -308,13 +349,15 @@ class NonogramViewModel: ObservableObject {
             }
         }
 
-        // From right: mark consecutive clues whose sealed blocks match (no overlap with left)
+        // From right: mark consecutive clues whose sealed-on-both-sides blocks match (no overlap with left)
         var rightClueIdx = clues.count - 1
         var rightBlockIdx = blocks.count - 1
         while rightBlockIdx >= leftBlockIdx && rightClueIdx >= leftClueIdx {
             let block = blocks[rightBlockIdx]
+            let afterEnd = block.start + block.length
             let sealedLeft = block.start == 0 || !cells[block.start - 1]
-            if block.length == clues[rightClueIdx] && sealedLeft {
+            let sealedRight = afterEnd >= cells.count || !cells[afterEnd]
+            if block.length == clues[rightClueIdx] && sealedLeft && sealedRight {
                 result[rightClueIdx] = true
                 rightClueIdx -= 1
                 rightBlockIdx -= 1
@@ -364,16 +407,13 @@ class NonogramViewModel: ObservableObject {
             DailyPuzzleService.markSolved(difficulty: nonogram.difficulty)
             showCompletion = true
         } else {
-            var solutionCount = 0
-            var filledCount = 0
-            for row in 0..<nonogram.rows {
+            var hasEmpty = false
+            outer: for row in 0..<nonogram.rows {
                 for col in 0..<nonogram.cols {
-                    if nonogram.solution[row][col] { solutionCount += 1 }
-                    let s = grid[row][col]
-                    if s == .filled || s == .hinted { filledCount += 1 }
+                    if grid[row][col] == .empty { hasEmpty = true; break outer }
                 }
             }
-            isWronglyComplete = (solutionCount > 0 && filledCount == solutionCount)
+            isWronglyComplete = !hasEmpty
         }
     }
 
@@ -388,12 +428,36 @@ class NonogramViewModel: ObservableObject {
         }
         guard !changes.isEmpty else { return }
         undoStack.append(changes)
+        if undoStack.count > Self.maxUndoSteps { undoStack.removeFirst() }
         redoStack.removeAll()
+        Self.saveStack(undoStack, key: undoKey)
+        Self.saveStack(redoStack, key: redoKey)
         updateUndoRedoState()
     }
 
     private func updateUndoRedoState() {
         canUndo = !undoStack.isEmpty
         canRedo = !redoStack.isEmpty
+    }
+
+    // MARK: - Undo/Redo Persistence
+
+    private static func saveStack(_ stack: [[CellChange]], key: String) {
+        let raw = stack.map { changes in
+            changes.map { [$0.row, $0.col, $0.from.rawValue, $0.to.rawValue] }
+        }
+        UserDefaults.standard.set(raw, forKey: key)
+    }
+
+    private static func loadStack(key: String) -> [[CellChange]] {
+        guard let raw = UserDefaults.standard.array(forKey: key) as? [[[Int]]] else { return [] }
+        return raw.map { changes in
+            changes.compactMap { arr -> CellChange? in
+                guard arr.count == 4,
+                      let from = CellState(rawValue: arr[2]),
+                      let to = CellState(rawValue: arr[3]) else { return nil }
+                return CellChange(row: arr[0], col: arr[1], from: from, to: to)
+            }
+        }.filter { !$0.isEmpty }
     }
 }

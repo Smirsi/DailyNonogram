@@ -19,3 +19,4 @@ Neuer Service `NotificationManager.swift`:
 - `cancelNotifications()` löscht ausstehende Reminder
 - `DailyNonogramApp.init()` ruft den Manager beim App-Start auf
 - `SettingsView`: Sektion "Benachrichtigungen" mit Toggle "Tägliche Erinnerung (8:00 Uhr)"
+- #approved 

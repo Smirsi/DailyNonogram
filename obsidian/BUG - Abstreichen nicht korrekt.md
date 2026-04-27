@@ -17,8 +17,6 @@ Antwort: Auto-Strikethrough falsch – die automatische Durchstreichung der Zahl
 Datum: 2026-04-27
 Commit: siehe unten
 
-Die `matchClues`-Funktion in `NonogramViewModel.swift` wurde komplett überarbeitet. Die neue Implementierung (`matchClues(_ clues: [Int], toCells cells: [Bool])`) unterstützt partielles Abstreichen:
-- **Von links**: Korrekt platzierte und abgeschlossene Blöcke (sealedRight) werden sofort abgehakt
-- **Von rechts**: Korrekt platzierte und abgeschlossene Blöcke (sealedLeft) werden sofort abgehakt
-- **Kein Overlap**: Beide Richtungen teilen sich keine Blöcke
-- **Full Match**: Bei vollständiger Übereinstimmung werden alle Zahlen abgehakt
+(Runde 2 – Fix) `matchClues` in `NonogramViewModel.swift` korrigiert: Beide Richtungen (links→rechts und rechts→links) prüfen jetzt `sealedLeft AND sealedRight`. Ein Block wird nur abgehakt wenn er definitiv nicht mehr wachsen kann (beidseitig versiegelt). Vorher wurde nur eine Seite geprüft, was zu verfrühtem Abstreichen führte (z.B. einzelne Zelle die zur "5" gehört wurde als "1" gestrichen).
+
+Zusätzlich: `applyErrors()` ruft jetzt `updateCheckedClues()` auf, damit nach dem Ad-Fix die Zahlen korrekt zurückgesetzt werden.

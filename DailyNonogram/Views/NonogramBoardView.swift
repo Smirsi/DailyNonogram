@@ -12,7 +12,12 @@ struct NonogramBoardView: View {
     @State private var archiveSelection: ArchiveDateSelection? = nil
     @State private var streak: Int = 0
     @State private var showSolveConfirm = false
+    @State private var showClearConfirm = false
     @State private var wronglyCompleteDismissed = false
+    @State private var showFreezeEarnedAlert = false
+    @State private var freezeEarnedMessage = ""
+    @State private var showFreezeSpentAlert = false
+    @State private var freezeSpentDate = ""
 
     @EnvironmentObject private var store: StoreKitManager
     @EnvironmentObject private var ads: AdManager
@@ -165,6 +170,7 @@ struct NonogramBoardView: View {
         .background(DS.background.ignoresSafeArea())
         .onAppear {
             streak = StreakService.currentStreak()
+            checkStarterFreeze()
             checkFreezeOpportunity()
             vm.resetHints(isPremium: store.isPremium)
         }
@@ -218,6 +224,19 @@ struct NonogramBoardView: View {
         } message: {
             Text("Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen.")
         }
+        .confirmationDialog("Rätsel wirklich leeren?", isPresented: $showClearConfirm, titleVisibility: .visible) {
+            Button("Leeren", role: .destructive) { vm.clearGrid() }
+            Button("Abbrechen", role: .cancel) {}
+        }
+        .alert(freezeEarnedMessage, isPresented: $showFreezeEarnedAlert) {
+            Button("OK", role: .cancel) {}
+        }
+        .alert(
+            String(format: String(localized: "Freeze eingelöst am %@"), freezeSpentDate),
+            isPresented: $showFreezeSpentAlert
+        ) {
+            Button("OK", role: .cancel) {}
+        }
         .overlay(alignment: .bottom) {
             if vm.isWronglyComplete && !wronglyCompleteDismissed {
                 HStack(spacing: 8) {
@@ -261,6 +280,11 @@ struct NonogramBoardView: View {
             // Redo
             actionButton(icon: "arrow.uturn.forward", label: "Redo", enabled: vm.canRedo) {
                 withAnimation(.easeOut(duration: 0.15)) { vm.redo() }
+            }
+
+            // Clear
+            actionButton(icon: "trash", label: "Leeren", enabled: true) {
+                showClearConfirm = true
             }
 
             Spacer()
@@ -393,6 +417,13 @@ struct NonogramBoardView: View {
         return f.string(from: DailyPuzzleService.today())
     }
 
+    private func checkStarterFreeze() {
+        guard StreakService.grantStarterFreezeIfNeeded() else { return }
+        let total = StreakService.availableFreezes(isPremium: store.isPremium)
+        freezeEarnedMessage = String(format: String(localized: "Freeze erhalten! Du hast jetzt %lld Freeze verfügbar."), Int64(total))
+        showFreezeEarnedAlert = true
+    }
+
     private func checkFreezeOpportunity() {
         guard StreakService.canApplyFreezeForYesterday(isPremium: store.isPremium) else { return }
         let key = "freezeAutoApplied_\(DailyPuzzleService.dateString(for: DailyPuzzleService.today()))"
@@ -400,7 +431,14 @@ struct NonogramBoardView: View {
         UserDefaults.standard.set(true, forKey: key)
         let cal = Calendar.current
         let yesterday = cal.date(byAdding: .day, value: -1, to: DailyPuzzleService.today())!
-        StreakService.applyFreeze(for: yesterday, isPremium: store.isPremium)
+        if StreakService.applyFreeze(for: yesterday, isPremium: store.isPremium) {
+            let f = DateFormatter()
+            f.locale = Locale.current
+            f.dateStyle = .medium
+            f.timeStyle = .none
+            freezeSpentDate = f.string(from: yesterday)
+            showFreezeSpentAlert = true
+        }
         streak = StreakService.currentStreak()
     }
 }

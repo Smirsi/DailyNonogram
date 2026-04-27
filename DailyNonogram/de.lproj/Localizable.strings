@@ -9,6 +9,10 @@
 "Tägliche Erinnerung (8:00 Uhr)" = "Tägliche Erinnerung (8:00 Uhr)";
 "Streak" = "Streak";
 "Du erhältst nach je 7 gespielten Tagen in Folge einen Freeze-Token. Ein Freeze schützt deinen Streak für einen verpassten Tag." = "Du erhältst nach je 7 gespielten Tagen in Folge einen Freeze-Token. Ein Freeze schützt deinen Streak für einen verpassten Tag.";
+"Freeze erhalten! Du hast jetzt %lld Freeze verfügbar." = "Freeze erhalten! Du hast jetzt %lld Freeze verfügbar.";
+"Freeze eingelöst am %@" = "Freeze eingelöst am %@";
+"3 Freeze kaufen" = "3 Freeze kaufen";
+"3 Freeze kaufen – %@" = "3 Freeze kaufen – %@";
 "Premium" = "Premium";
 "Premium freischalten" = "Premium freischalten";
 "Premium aktiv" = "Premium aktiv";
@@ -21,12 +25,14 @@
 "Lösen (kostet 1 Freeze)" = "Lösen (kostet 1 Freeze)";
 "Abbrechen" = "Abbrechen";
 "Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen." = "Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen.";
-"Undo" = "Undo";
-"Redo" = "Redo";
+"Undo" = "Rückgängig";
+"Redo" = "Wiederholen";
+"Leeren" = "Leeren";
+"Rätsel wirklich leeren?" = "Rätsel wirklich leeren?";
 "Fehler" = "Fehler";
 "Lösen" = "Lösen";
 "Noch nicht korrekt – überprüfe deine Antworten." = "Noch nicht korrekt – überprüfe deine Antworten.";
-"Hint (%lld)" = "Hint (%lld)";
+"Hint (%lld)" = "Tipp (%lld)";
 
 /* Premium / Paywall */
 "Daily Nonogram Premium" = "Daily Nonogram Premium";
@@ -81,12 +87,12 @@
 "Freezes verfügbar" = "Freezes verfügbar";
 
 /* Difficulty levels */
-"Einfach" = "Einfach";
+"Klein" = "Klein";
 "Mittel" = "Mittel";
-"Schwer" = "Schwer";
-"Farbe — Einfach" = "Farbe — Einfach";
+"Groß" = "Groß";
+"Farbe — Klein" = "Farbe — Klein";
 "Farbe — Mittel" = "Farbe — Mittel";
-"Farbe — Schwer" = "Farbe — Schwer";
+"Farbe — Groß" = "Farbe — Groß";
 "Klein · bis 10×10 Felder" = "Klein · bis 10×10 Felder";
 "Mittel · bis 15×15 Felder" = "Mittel · bis 15×15 Felder";
 "Groß · bis 25×25 Felder" = "Groß · bis 25×25 Felder";

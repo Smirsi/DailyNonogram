@@ -14,12 +14,4 @@ Antwort: Ja, vollständig lokalisieren.
 Datum: 2026-04-27
 Commit: siehe unten
 
-Vollständige Lokalisierung implementiert:
-- `de.lproj/Localizable.strings` und `en.lproj/Localizable.strings` erstellt mit allen UI-Texten
-- Beide Dateien ins Xcode-Projekt (project.pbxproj) eingebunden via PBXVariantGroup
-- `DateFormatter.locale` in allen Views auf `Locale.current` geändert (war hardcoded „de_DE")
-- `DifficultyLevel.displayName/description` nutzen nun `String(localized:)`
-- `actionButton(label:)` in NonogramBoardView auf `LocalizedStringKey` umgestellt
-- `ToolbarView` ToolItem labels auf `LocalizedStringKey` umgestellt
-- `PremiumPaywallView` computed String properties auf `String(localized:)` umgestellt
-- `StoreKitManager` Fehlermeldungen auf `String(format: String(localized:), ...)` umgestellt
+Vollständige Lokalisierung implementiert (Runde 1 – alle UI-Texte). In Runde 2 (2026-04-27) nachgebessert: `Undo` → `Rückgängig`, `Redo` → `Wiederholen`, `Hint (%lld)` → `Tipp (%lld)` in `de.lproj/Localizable.strings`.

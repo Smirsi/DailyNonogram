@@ -66,7 +66,25 @@ struct NonogramGridView: View {
                 boldPath.move(to: CGPoint(x: 0, y: y))
                 boldPath.addLine(to: CGPoint(x: totalWidth, y: y))
             }
-            ctx.stroke(boldPath, with: .color(DS.boldLine), lineWidth: 1.0)
+            ctx.stroke(boldPath, with: .color(DS.boldLine), lineWidth: 1.5)
+
+            // Position numbers every 5 cells (top row and left column)
+            let labelSize = max(6, effectiveCellSize * 0.35)
+            let font = Font.system(size: labelSize, weight: .medium)
+            for col in stride(from: 5, to: cols, by: 5) {
+                let isFilled = vm.grid[0][col] == .filled || vm.grid[0][col] == .hinted
+                let labelColor = isFilled ? Color.white.opacity(0.45) : Color.gray.opacity(0.5)
+                let x = CGFloat(col) * effectiveCellSize + 2
+                let y = CGFloat(0) * effectiveCellSize + 2
+                ctx.draw(Text("\(col)").font(font).foregroundStyle(labelColor), at: CGPoint(x: x, y: y), anchor: .topLeading)
+            }
+            for row in stride(from: 5, to: rows, by: 5) {
+                let isFilled = vm.grid[row][0] == .filled || vm.grid[row][0] == .hinted
+                let labelColor = isFilled ? Color.white.opacity(0.45) : Color.gray.opacity(0.5)
+                let x = CGFloat(0) * effectiveCellSize + 2
+                let y = CGFloat(row) * effectiveCellSize + 2
+                ctx.draw(Text("\(row)").font(font).foregroundStyle(labelColor), at: CGPoint(x: x, y: y), anchor: .topLeading)
+            }
 
             // X marks for .crossed, .autoCrossed, .error cells
             for row in 0..<rows {
@@ -112,6 +130,14 @@ struct NonogramGridView: View {
                 .onEnded { _ in
                     guard !isPinching else { return }
                     vm.endDrag()
+                }
+        )
+        // Detect pinch on same view to set flag immediately (prevents race with outer MagnificationGesture)
+        .simultaneousGesture(
+            MagnificationGesture(minimumScaleDelta: 0)
+                .onChanged { _ in isPinching = true }
+                .onEnded { _ in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { isPinching = false }
                 }
         )
         // Double tap resets zoom

@@ -15,3 +15,4 @@ Neuer Service `TimeService.swift`:
 - `currentTime` und `today` nutzen den Offset → Datum-Manipulation durch Handyuhr-Änderung wird kompensiert
 - Offline-Fallback: zuletzt gecachter Offset wird verwendet
 - `DailyPuzzleService.today()` ruft jetzt `TimeService.shared.today` statt `Date()` auf
+#approved 

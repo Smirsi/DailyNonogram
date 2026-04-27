@@ -83,6 +83,17 @@ struct SettingsView: View {
                         }
                         .foregroundStyle(DS.accent)
                     }
+                    if let freezeProduct = store.freezeTokenProduct {
+                        Button {
+                            Task { await store.purchase(freezeProduct) }
+                        } label: {
+                            Label(
+                                String(format: String(localized: "3 Freeze kaufen – %@"), freezeProduct.displayPrice),
+                                systemImage: "snowflake"
+                            )
+                        }
+                        .foregroundStyle(DS.accent)
+                    }
                 }
             }
             .navigationTitle("Einstellungen")
