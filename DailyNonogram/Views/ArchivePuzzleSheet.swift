@@ -51,7 +51,7 @@ struct ArchivePuzzleSheet: View {
 
     private func formattedDate() -> String {
         let f = DateFormatter()
-        f.locale = Locale(identifier: "de_DE")
+        f.locale = Locale.current
         f.dateFormat = "EEEE, d. MMMM"
         return f.string(from: date)
     }

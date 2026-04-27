@@ -1,0 +1,114 @@
+/* Settings */
+"Einstellungen" = "Einstellungen";
+"Anzeige" = "Anzeige";
+"Hinweise auf beiden Seiten" = "Hinweise auf beiden Seiten";
+"Automatisierung" = "Automatisierung";
+"Automatisches X" = "Automatisches X";
+"Automatisches Abhaken" = "Automatisches Abhaken";
+"Benachrichtigungen" = "Benachrichtigungen";
+"Tägliche Erinnerung (8:00 Uhr)" = "Tägliche Erinnerung (8:00 Uhr)";
+"Streak" = "Streak";
+"Du erhältst nach je 7 gespielten Tagen in Folge einen Freeze-Token. Ein Freeze schützt deinen Streak für einen verpassten Tag." = "Du erhältst nach je 7 gespielten Tagen in Folge einen Freeze-Token. Ein Freeze schützt deinen Streak für einen verpassten Tag.";
+"Premium" = "Premium";
+"Premium freischalten" = "Premium freischalten";
+"Premium aktiv" = "Premium aktiv";
+"Fertig" = "Fertig";
+"Debug" = "Debug";
+"Premium aktivieren (Test)" = "Premium aktivieren (Test)";
+
+/* Game board */
+"Puzzle lösen?" = "Puzzle lösen?";
+"Lösen (kostet 1 Freeze)" = "Lösen (kostet 1 Freeze)";
+"Abbrechen" = "Abbrechen";
+"Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen." = "Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen.";
+"Undo" = "Undo";
+"Redo" = "Redo";
+"Fehler" = "Fehler";
+"Lösen" = "Lösen";
+"Noch nicht korrekt – überprüfe deine Antworten." = "Noch nicht korrekt – überprüfe deine Antworten.";
+"Hint (%lld)" = "Hint (%lld)";
+
+/* Premium / Paywall */
+"Daily Nonogram Premium" = "Daily Nonogram Premium";
+"Mehr Rätsel, keine Werbung" = "Mehr Rätsel, keine Werbung";
+"Keine Werbung" = "Keine Werbung";
+"Alle Rätsel der letzten 7 Tage" = "Alle Rätsel der letzten 7 Tage";
+"5 Gratis Hints pro Rätsel" = "5 Gratis Hints pro Rätsel";
+"Auto-Lösen" = "Auto-Lösen";
+"Bald: Farbige Nonogramme" = "Bald: Farbige Nonogramme";
+"Preise nicht verfügbar" = "Preise nicht verfügbar";
+"⭐ Beliebteste Wahl" = "⭐ Beliebteste Wahl";
+"Jährlich" = "Jährlich";
+"Monatlich" = "Monatlich";
+"Einmalig" = "Einmalig";
+"pro Jahr – spare bis zu 37 %" = "pro Jahr – spare bis zu 37 %";
+"pro Monat" = "pro Monat";
+"einmalige Zahlung, für immer" = "einmalige Zahlung, für immer";
+"Käufe wiederherstellen" = "Käufe wiederherstellen";
+"Jetzt kaufen" = "Jetzt kaufen";
+"Jetzt kaufen – %@" = "Jetzt kaufen – %@";
+"Mehr aus deinen Rätseln rausholen!" = "Mehr aus deinen Rätseln rausholen!";
+"Premium werden" = "Premium werden";
+"Vielleicht später" = "Vielleicht später";
+
+/* Completion */
+"Gelöst!" = "Gelöst!";
+"Tag in Folge" = "Tag in Folge";
+"Tage in Folge" = "Tage in Folge";
+"Weiter" = "Weiter";
+"Schließen" = "Schließen";
+
+/* Bonus puzzle */
+"Bonus-Rätsel" = "Bonus-Rätsel";
+"Bonus gelöst!" = "Bonus gelöst!";
+"Gut gemacht!" = "Gut gemacht!";
+"Kurze Werbung anschauen und ein Extra-Rätsel spielen" = "Kurze Werbung anschauen und ein Extra-Rätsel spielen";
+"Spielen" = "Spielen";
+
+/* Toolbar */
+"Stift" = "Stift";
+"Radierer" = "Radierer";
+"Markierung" = "Markierung";
+
+/* Difficulty / Home */
+"Daily Nonogram" = "Daily Nonogram";
+"Noch kein Streak" = "Noch kein Streak";
+"Weiteres Rätsel spielen?" = "Weiteres Rätsel spielen?";
+"Werbung ansehen" = "Werbung ansehen";
+"Schau eine kurze Werbung an, um dieses Rätsel spielen zu können." = "Schau eine kurze Werbung an, um dieses Rätsel spielen zu können.";
+"Tag" = "Tag";
+"Tage" = "Tage";
+"Freezes verfügbar" = "Freezes verfügbar";
+
+/* Difficulty levels */
+"Einfach" = "Einfach";
+"Mittel" = "Mittel";
+"Schwer" = "Schwer";
+"Farbe — Einfach" = "Farbe — Einfach";
+"Farbe — Mittel" = "Farbe — Mittel";
+"Farbe — Schwer" = "Farbe — Schwer";
+"Klein · bis 10×10 Felder" = "Klein · bis 10×10 Felder";
+"Mittel · bis 15×15 Felder" = "Mittel · bis 15×15 Felder";
+"Groß · bis 25×25 Felder" = "Groß · bis 25×25 Felder";
+"Farbe · 5×5–8×8 · 2–3 Farben" = "Farbe · 5×5–8×8 · 2–3 Farben";
+"Farbe · 8×8–12×12 · 2–4 Farben" = "Farbe · 8×8–12×12 · 2–4 Farben";
+"Farbe · 12×12–20×20 · 3–5 Farben" = "Farbe · 12×12–20×20 · 3–5 Farben";
+
+/* Tutorial */
+"Tutorial erneut ansehen" = "Tutorial erneut ansehen";
+"Willkommen!" = "Willkommen!";
+"Felder füllen" = "Felder füllen";
+"Radierer & Markierung" = "Radierer & Markierung";
+"Hinweise & Hilfe" = "Hinweise & Hilfe";
+"Tägliches Rätsel" = "Tägliches Rätsel";
+"Ein Nonogramm ist ein Bilderrätsel. Die Zahlen am Rand geben an, wie viele Felder hintereinander gefüllt sein müssen." = "Ein Nonogramm ist ein Bilderrätsel. Die Zahlen am Rand geben an, wie viele Felder hintereinander gefüllt sein müssen.";
+"Tippe auf eine Zelle oder wische über mehrere Zellen, um sie zu füllen. Tippe erneut, um sie zu leeren." = "Tippe auf eine Zelle oder wische über mehrere Zellen, um sie zu füllen. Tippe erneut, um sie zu leeren.";
+"Nutze den Radierer, um Felder zu leeren. Mit der Markierung setzt du ein X in Felder, die leer bleiben müssen." = "Nutze den Radierer, um Felder zu leeren. Mit der Markierung setzt du ein X in Felder, die leer bleiben müssen.";
+"Wenn du nicht weiterkommst, gibt dir ein Hint einen Tipp. Du hast pro Rätsel eine begrenzte Anzahl." = "Wenn du nicht weiterkommst, gibt dir ein Hint einen Tipp. Du hast pro Rätsel eine begrenzte Anzahl.";
+"Jeden Tag gibt es ein neues Nonogramm. Löse es täglich und halte deinen Streak am Laufen!" = "Jeden Tag gibt es ein neues Nonogramm. Löse es täglich und halte deinen Streak am Laufen!";
+"Los geht's" = "Los geht's";
+
+/* Errors */
+"Produkte konnten nicht geladen werden: %@" = "Produkte konnten nicht geladen werden: %@";
+"Kauf fehlgeschlagen: %@" = "Kauf fehlgeschlagen: %@";
+"Wiederherstellen fehlgeschlagen: %@" = "Wiederherstellen fehlgeschlagen: %@";

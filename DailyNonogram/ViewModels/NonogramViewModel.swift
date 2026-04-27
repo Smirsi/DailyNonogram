@@ -24,6 +24,7 @@ class NonogramViewModel: ObservableObject {
     @Published var grid: [[CellState]]
     @Published var currentTool: Tool = .pen
     @Published var showCompletion: Bool = false
+    @Published var isWronglyComplete: Bool = false
     @Published var checkedRowClues: [[Bool]] = []
     @Published var checkedColClues: [[Bool]] = []
 
@@ -247,13 +248,11 @@ class NonogramViewModel: ObservableObject {
     private func updateCheckedClues() {
         checkedRowClues = (0..<nonogram.rows).map { row in
             let cells = grid[row].map { $0 == .filled || $0 == .hinted }
-            let sequence = filledSequences(in: cells)
-            return matchClues(nonogram.rowClues[row], to: sequence)
+            return matchClues(nonogram.rowClues[row], toCells: cells)
         }
         checkedColClues = (0..<nonogram.cols).map { col in
             let cells = (0..<nonogram.rows).map { grid[$0][col] == .filled || grid[$0][col] == .hinted }
-            let sequence = filledSequences(in: cells)
-            return matchClues(nonogram.colClues[col], to: sequence)
+            return matchClues(nonogram.colClues[col], toCells: cells)
         }
     }
 
@@ -268,14 +267,63 @@ class NonogramViewModel: ObservableObject {
         return result
     }
 
-    private func matchClues(_ clues: [Int], to sequences: [Int]) -> [Bool] {
-        if clues == [0] { return [sequences.isEmpty] }
-        // Only confirm when sequence count matches clue count: ensures all blocks
-        // are present before assigning, preventing premature crossing.
-        guard sequences.count == clues.count else {
-            return Array(repeating: false, count: clues.count)
+    // Matches clues against the current cell state, supporting partial
+    // strikethrough from both ends for confirmed (sealed) blocks.
+    private func matchClues(_ clues: [Int], toCells cells: [Bool]) -> [Bool] {
+        guard clues != [0] else { return [cells.allSatisfy { !$0 }] }
+
+        // Extract blocks with start positions
+        var blocks: [(start: Int, length: Int)] = []
+        var i = 0
+        while i < cells.count {
+            if cells[i] {
+                let start = i
+                while i < cells.count && cells[i] { i += 1 }
+                blocks.append((start: start, length: i - start))
+            } else {
+                i += 1
+            }
         }
-        return zip(clues, sequences).map { $0 == $1 }
+
+        // Full exact match
+        if blocks.map(\.length) == clues {
+            return Array(repeating: true, count: clues.count)
+        }
+
+        var result = Array(repeating: false, count: clues.count)
+
+        // From left: mark consecutive clues whose sealed blocks match
+        var leftClueIdx = 0
+        var leftBlockIdx = 0
+        while leftBlockIdx < blocks.count && leftClueIdx < clues.count {
+            let block = blocks[leftBlockIdx]
+            let afterEnd = block.start + block.length
+            let sealedRight = afterEnd >= cells.count || !cells[afterEnd]
+            if block.length == clues[leftClueIdx] && sealedRight {
+                result[leftClueIdx] = true
+                leftClueIdx += 1
+                leftBlockIdx += 1
+            } else {
+                break
+            }
+        }
+
+        // From right: mark consecutive clues whose sealed blocks match (no overlap with left)
+        var rightClueIdx = clues.count - 1
+        var rightBlockIdx = blocks.count - 1
+        while rightBlockIdx >= leftBlockIdx && rightClueIdx >= leftClueIdx {
+            let block = blocks[rightBlockIdx]
+            let sealedLeft = block.start == 0 || !cells[block.start - 1]
+            if block.length == clues[rightClueIdx] && sealedLeft {
+                result[rightClueIdx] = true
+                rightClueIdx -= 1
+                rightBlockIdx -= 1
+            } else {
+                break
+            }
+        }
+
+        return result
     }
 
     // MARK: - Private Helpers
@@ -312,8 +360,20 @@ class NonogramViewModel: ObservableObject {
     private func saveAndCheckCompletion() {
         DailyPuzzleService.saveProgress(grid, difficulty: nonogram.difficulty)
         if isComplete {
+            isWronglyComplete = false
             DailyPuzzleService.markSolved(difficulty: nonogram.difficulty)
             showCompletion = true
+        } else {
+            var solutionCount = 0
+            var filledCount = 0
+            for row in 0..<nonogram.rows {
+                for col in 0..<nonogram.cols {
+                    if nonogram.solution[row][col] { solutionCount += 1 }
+                    let s = grid[row][col]
+                    if s == .filled || s == .hinted { filledCount += 1 }
+                }
+            }
+            isWronglyComplete = (solutionCount > 0 && filledCount == solutionCount)
         }
     }
 

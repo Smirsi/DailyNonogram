@@ -12,6 +12,7 @@ struct NonogramBoardView: View {
     @State private var archiveSelection: ArchiveDateSelection? = nil
     @State private var streak: Int = 0
     @State private var showSolveConfirm = false
+    @State private var wronglyCompleteDismissed = false
 
     @EnvironmentObject private var store: StoreKitManager
     @EnvironmentObject private var ads: AdManager
@@ -217,8 +218,35 @@ struct NonogramBoardView: View {
         } message: {
             Text("Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen.")
         }
+        .overlay(alignment: .bottom) {
+            if vm.isWronglyComplete && !wronglyCompleteDismissed {
+                HStack(spacing: 8) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.orange)
+                    Text("Noch nicht korrekt – überprüfe deine Antworten.")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(DS.textPrimary)
+                    Spacer()
+                    Button {
+                        withAnimation { wronglyCompleteDismissed = true }
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(DS.textTertiary)
+                    }
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .background(DS.surface.shadow(radius: 4, y: -2))
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .onChange(of: vm.isWronglyComplete) { _, newValue in
+            if newValue { wronglyCompleteDismissed = false }
+        }
         .animation(.easeOut(duration: 0.3), value: pendingCompletion)
         .animation(.easeOut(duration: 0.3), value: showPremiumTeaser)
+        .animation(.easeOut(duration: 0.3), value: vm.isWronglyComplete)
     }
 
     // MARK: - Action Buttons
@@ -245,8 +273,7 @@ struct NonogramBoardView: View {
                 #else
                 let hintEnabled = hasHints || ads.hintRewardedReady
                 #endif
-                let hintLabel = "Hint (\(vm.hintsRemaining))"
-                actionButton(icon: "lightbulb", label: hintLabel, enabled: hintEnabled) {
+                actionButton(icon: "lightbulb", label: "Hint (\(vm.hintsRemaining))", enabled: hintEnabled) {
                     if hasHints {
                         vm.applyHint()  // free from allowance, no ad required
                     } else {
@@ -271,7 +298,7 @@ struct NonogramBoardView: View {
     }
 
     @ViewBuilder
-    private func actionButton(icon: String, label: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+    private func actionButton(icon: String, label: LocalizedStringKey, enabled: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(spacing: 3) {
                 Image(systemName: icon)
@@ -360,7 +387,7 @@ struct NonogramBoardView: View {
 
     private func formattedDate() -> String {
         let f = DateFormatter()
-        f.locale = Locale(identifier: "de_DE")
+        f.locale = Locale.current
         f.dateStyle = .long
         f.timeStyle = .none
         return f.string(from: DailyPuzzleService.today())

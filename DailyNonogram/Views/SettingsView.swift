@@ -44,6 +44,27 @@ struct SettingsView: View {
                     }
                 }
 
+                Section {
+                    Button {
+                        dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            NotificationCenter.default.post(name: .showTutorial, object: nil)
+                        }
+                    } label: {
+                        Label("Tutorial erneut ansehen", systemImage: "questionmark.circle")
+                            .foregroundStyle(DS.accent)
+                    }
+                }
+
+                #if DEBUG
+                Section("Debug") {
+                    Toggle("Premium aktivieren (Test)", isOn: Binding(
+                        get: { store.isPremium },
+                        set: { store.setDebugPremium($0) }
+                    ))
+                }
+                #endif
+
                 Section("Premium") {
                     if store.isPremium {
                         Label("Premium aktiv", systemImage: "crown.fill")

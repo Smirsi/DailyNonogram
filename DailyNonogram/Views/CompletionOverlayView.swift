@@ -107,7 +107,7 @@ struct CompletionOverlayView: View {
 
     private func formattedDate() -> String {
         let f = DateFormatter()
-        f.locale = Locale(identifier: "de_DE")
+        f.locale = Locale.current
         f.dateStyle = .long
         f.timeStyle = .none
         return f.string(from: DailyPuzzleService.today())

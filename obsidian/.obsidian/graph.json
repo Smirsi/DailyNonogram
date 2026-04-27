@@ -8,6 +8,13 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
+      "query": "tag:#structure",
+      "color": {
+        "a": 1,
+        "rgb": 328966
+      }
+    },
+    {
       "query": "tag:#approved",
       "color": {
         "a": 1,
@@ -48,17 +55,10 @@
         "a": 1,
         "rgb": 613576
       }
-    },
-    {
-      "query": "tag:#structure",
-      "color": {
-        "a": 1,
-        "rgb": 328966
-      }
     }
   ],
-  "collapse-display": true,
-  "showArrow": true,
+  "collapse-display": false,
+  "showArrow": false,
   "textFadeMultiplier": -1.1,
   "nodeSizeMultiplier": 0.897526041666667,
   "lineSizeMultiplier": 1.49939236111111,
@@ -67,6 +67,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.6649305313457818,
+  "scale": 0.9846573987124321,
   "close": true
 }

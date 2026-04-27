@@ -1,0 +1,114 @@
+/* Settings */
+"Einstellungen" = "Settings";
+"Anzeige" = "Display";
+"Hinweise auf beiden Seiten" = "Clues on Both Sides";
+"Automatisierung" = "Automation";
+"Automatisches X" = "Auto-X";
+"Automatisches Abhaken" = "Auto-Checkmark";
+"Benachrichtigungen" = "Notifications";
+"Tägliche Erinnerung (8:00 Uhr)" = "Daily Reminder (8:00 AM)";
+"Streak" = "Streak";
+"Du erhältst nach je 7 gespielten Tagen in Folge einen Freeze-Token. Ein Freeze schützt deinen Streak für einen verpassten Tag." = "You earn a Freeze Token after every 7 consecutive days played. A Freeze protects your streak for one missed day.";
+"Premium" = "Premium";
+"Premium freischalten" = "Unlock Premium";
+"Premium aktiv" = "Premium Active";
+"Fertig" = "Done";
+"Debug" = "Debug";
+"Premium aktivieren (Test)" = "Enable Premium (Test)";
+
+/* Game board */
+"Puzzle lösen?" = "Solve Puzzle?";
+"Lösen (kostet 1 Freeze)" = "Solve (costs 1 Freeze)";
+"Abbrechen" = "Cancel";
+"Das Puzzle wird vollständig gelöst. Du verlierst 1 Streak-Freeze und kannst danach keine Hints mehr nutzen." = "The puzzle will be fully solved. You will lose 1 Streak Freeze and cannot use hints afterwards.";
+"Undo" = "Undo";
+"Redo" = "Redo";
+"Fehler" = "Errors";
+"Lösen" = "Solve";
+"Noch nicht korrekt – überprüfe deine Antworten." = "Not correct yet – check your answers.";
+"Hint (%lld)" = "Hint (%lld)";
+
+/* Premium / Paywall */
+"Daily Nonogram Premium" = "Daily Nonogram Premium";
+"Mehr Rätsel, keine Werbung" = "More puzzles, no ads";
+"Keine Werbung" = "No Ads";
+"Alle Rätsel der letzten 7 Tage" = "All puzzles from the last 7 days";
+"5 Gratis Hints pro Rätsel" = "5 Free Hints per Puzzle";
+"Auto-Lösen" = "Auto-Solve";
+"Bald: Farbige Nonogramme" = "Coming Soon: Color Nonograms";
+"Preise nicht verfügbar" = "Prices unavailable";
+"⭐ Beliebteste Wahl" = "⭐ Most Popular";
+"Jährlich" = "Yearly";
+"Monatlich" = "Monthly";
+"Einmalig" = "Lifetime";
+"pro Jahr – spare bis zu 37 %" = "per year – save up to 37%";
+"pro Monat" = "per month";
+"einmalige Zahlung, für immer" = "one-time payment, forever";
+"Käufe wiederherstellen" = "Restore Purchases";
+"Jetzt kaufen" = "Buy Now";
+"Jetzt kaufen – %@" = "Buy Now – %@";
+"Mehr aus deinen Rätseln rausholen!" = "Get more out of your puzzles!";
+"Premium werden" = "Go Premium";
+"Vielleicht später" = "Maybe Later";
+
+/* Completion */
+"Gelöst!" = "Solved!";
+"Tag in Folge" = "Day in a Row";
+"Tage in Folge" = "Days in a Row";
+"Weiter" = "Continue";
+"Schließen" = "Close";
+
+/* Bonus puzzle */
+"Bonus-Rätsel" = "Bonus Puzzle";
+"Bonus gelöst!" = "Bonus Solved!";
+"Gut gemacht!" = "Well done!";
+"Kurze Werbung anschauen und ein Extra-Rätsel spielen" = "Watch a short ad and play an extra puzzle";
+"Spielen" = "Play";
+
+/* Toolbar */
+"Stift" = "Pen";
+"Radierer" = "Eraser";
+"Markierung" = "Mark";
+
+/* Difficulty / Home */
+"Daily Nonogram" = "Daily Nonogram";
+"Noch kein Streak" = "No streak yet";
+"Weiteres Rätsel spielen?" = "Play another puzzle?";
+"Werbung ansehen" = "Watch Ad";
+"Schau eine kurze Werbung an, um dieses Rätsel spielen zu können." = "Watch a short ad to unlock this puzzle.";
+"Tag" = "Day";
+"Tage" = "Days";
+"Freezes verfügbar" = "Freezes available";
+
+/* Difficulty levels */
+"Einfach" = "Easy";
+"Mittel" = "Medium";
+"Schwer" = "Hard";
+"Farbe — Einfach" = "Color — Easy";
+"Farbe — Mittel" = "Color — Medium";
+"Farbe — Schwer" = "Color — Hard";
+"Klein · bis 10×10 Felder" = "Small · up to 10×10 cells";
+"Mittel · bis 15×15 Felder" = "Medium · up to 15×15 cells";
+"Groß · bis 25×25 Felder" = "Large · up to 25×25 cells";
+"Farbe · 5×5–8×8 · 2–3 Farben" = "Color · 5×5–8×8 · 2–3 colors";
+"Farbe · 8×8–12×12 · 2–4 Farben" = "Color · 8×8–12×12 · 2–4 colors";
+"Farbe · 12×12–20×20 · 3–5 Farben" = "Color · 12×12–20×20 · 3–5 colors";
+
+/* Tutorial */
+"Tutorial erneut ansehen" = "Watch Tutorial Again";
+"Willkommen!" = "Welcome!";
+"Felder füllen" = "Fill Cells";
+"Radierer & Markierung" = "Eraser & Mark";
+"Hinweise & Hilfe" = "Hints & Help";
+"Tägliches Rätsel" = "Daily Puzzle";
+"Ein Nonogramm ist ein Bilderrätsel. Die Zahlen am Rand geben an, wie viele Felder hintereinander gefüllt sein müssen." = "A nonogram is a picture logic puzzle. The numbers on the edge indicate how many consecutive cells must be filled.";
+"Tippe auf eine Zelle oder wische über mehrere Zellen, um sie zu füllen. Tippe erneut, um sie zu leeren." = "Tap a cell or swipe across multiple cells to fill them. Tap again to empty a cell.";
+"Nutze den Radierer, um Felder zu leeren. Mit der Markierung setzt du ein X in Felder, die leer bleiben müssen." = "Use the eraser to clear cells. Use the mark tool to place an X in cells that must remain empty.";
+"Wenn du nicht weiterkommst, gibt dir ein Hint einen Tipp. Du hast pro Rätsel eine begrenzte Anzahl." = "When you are stuck, a hint reveals one correct cell. You have a limited number of hints per puzzle.";
+"Jeden Tag gibt es ein neues Nonogramm. Löse es täglich und halte deinen Streak am Laufen!" = "A new nonogram appears every day. Solve it daily and keep your streak going!";
+"Los geht's" = "Let's go";
+
+/* Errors */
+"Produkte konnten nicht geladen werden: %@" = "Products could not be loaded: %@";
+"Kauf fehlgeschlagen: %@" = "Purchase failed: %@";
+"Wiederherstellen fehlgeschlagen: %@" = "Restore failed: %@";

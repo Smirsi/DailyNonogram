@@ -3,7 +3,7 @@ import SwiftUI
 private struct ToolItem: Identifiable {
     let tool: Tool
     let icon: String
-    let label: String
+    let label: LocalizedStringKey
     var id: String { tool.id }
 }
 

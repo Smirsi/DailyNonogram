@@ -166,18 +166,18 @@ struct PremiumPaywallView: View {
 
     private func productLabel(_ product: Product) -> String {
         switch product.id {
-        case StoreKitManager.yearlyID:   return "Jährlich"
-        case StoreKitManager.monthlyID:  return "Monatlich"
-        case StoreKitManager.lifetimeID: return "Einmalig"
+        case StoreKitManager.yearlyID:   return String(localized: "Jährlich")
+        case StoreKitManager.monthlyID:  return String(localized: "Monatlich")
+        case StoreKitManager.lifetimeID: return String(localized: "Einmalig")
         default: return product.displayName
         }
     }
 
     private func productSubtitle(_ product: Product) -> String {
         switch product.id {
-        case StoreKitManager.yearlyID:   return "pro Jahr – spare bis zu 37 %"
-        case StoreKitManager.monthlyID:  return "pro Monat"
-        case StoreKitManager.lifetimeID: return "einmalige Zahlung, für immer"
+        case StoreKitManager.yearlyID:   return String(localized: "pro Jahr – spare bis zu 37 %")
+        case StoreKitManager.monthlyID:  return String(localized: "pro Monat")
+        case StoreKitManager.lifetimeID: return String(localized: "einmalige Zahlung, für immer")
         default: return product.description
         }
     }
@@ -227,7 +227,7 @@ struct PremiumPaywallView: View {
     }
 
     private var ctaLabel: String {
-        guard let product = selectedProduct else { return "Jetzt kaufen" }
-        return "Jetzt kaufen – \(product.displayPrice)"
+        guard let product = selectedProduct else { return String(localized: "Jetzt kaufen") }
+        return String(format: String(localized: "Jetzt kaufen – %@"), product.displayPrice)
     }
 }

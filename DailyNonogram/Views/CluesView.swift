@@ -29,6 +29,7 @@ struct RowCluesView: View {
                 .frame(height: cellSize)
             }
         }
+        .padding(alignRight ? .trailing : .leading, 6)
     }
 }
 
@@ -61,5 +62,6 @@ struct ColCluesView: View {
                 .frame(width: cellSize)
             }
         }
+        .padding(alignBottom ? .bottom : .top, 6)
     }
 }

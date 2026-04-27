@@ -74,7 +74,7 @@ struct WeekProgressView: View {
         let cal = Calendar.current
         let today = DailyPuzzleService.today()
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = Locale.current
         formatter.dateFormat = "EE"
 
         return (0..<7).map { offset in

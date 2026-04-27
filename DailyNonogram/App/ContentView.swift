@@ -1,29 +1,58 @@
 import SwiftUI
 
+extension Notification.Name {
+    static let showTutorial = Notification.Name("showTutorial")
+}
+
 struct ContentView: View {
     @EnvironmentObject private var store: StoreKitManager
     @State private var selectedDifficulty: DifficultyLevel? = DailyPuzzleService.selectedDifficulty()
+    @AppStorage("hasSeenTutorial") private var hasSeenTutorial = false
+    @State private var showTutorial = false
 
     var body: some View {
-        if let difficulty = selectedDifficulty {
-            PuzzleContainerView(
-                difficulty: difficulty,
-                isPremium: store.isPremium,
-                onChangeDifficulty: {
-                    // Premium: allow returning to difficulty selection
-                    selectedDifficulty = nil
+        Group {
+            if let difficulty = selectedDifficulty {
+                PuzzleContainerView(
+                    difficulty: difficulty,
+                    isPremium: store.isPremium,
+                    onChangeDifficulty: {
+                        selectedDifficulty = nil
+                    }
+                )
+            } else {
+                DifficultySelectionView(
+                    onSelect: { diff in
+                        DailyPuzzleService.saveDifficulty(diff)
+                        selectedDifficulty = diff
+                    },
+                    isPremium: store.isPremium,
+                    solvedToday: solvedDifficultiesForToday(),
+                    dailyPuzzles: DailyPuzzleService.todaysDailyPuzzles()
+                )
+            }
+        }
+        .overlay {
+            if showTutorial {
+                TutorialView {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        showTutorial = false
+                        hasSeenTutorial = true
+                    }
                 }
-            )
-        } else {
-            DifficultySelectionView(
-                onSelect: { diff in
-                    DailyPuzzleService.saveDifficulty(diff)
-                    selectedDifficulty = diff
-                },
-                isPremium: store.isPremium,
-                solvedToday: solvedDifficultiesForToday(),
-                dailyPuzzles: DailyPuzzleService.todaysDailyPuzzles()
-            )
+                .transition(.opacity.combined(with: .scale(scale: 0.95)))
+            }
+        }
+        .animation(.easeOut(duration: 0.3), value: showTutorial)
+        .onAppear {
+            if !hasSeenTutorial {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    showTutorial = true
+                }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .showTutorial)) { _ in
+            showTutorial = true
         }
     }
 

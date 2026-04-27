@@ -50,7 +50,7 @@ final class StoreKitManager: ObservableObject {
             products = try await Product.products(for: Self.allProductIDs)
                 .sorted { $0.price < $1.price }
         } catch {
-            errorMessage = "Produkte konnten nicht geladen werden: \(error.localizedDescription)"
+            errorMessage = String(format: String(localized: "Produkte konnten nicht geladen werden: %@"), error.localizedDescription)
         }
         await updatePremiumStatus()
     }
@@ -74,7 +74,7 @@ final class StoreKitManager: ObservableObject {
                 break
             }
         } catch {
-            errorMessage = "Kauf fehlgeschlagen: \(error.localizedDescription)"
+            errorMessage = String(format: String(localized: "Kauf fehlgeschlagen: %@"), error.localizedDescription)
         }
     }
 
@@ -85,7 +85,7 @@ final class StoreKitManager: ObservableObject {
             try await AppStore.sync()
             await updatePremiumStatus()
         } catch {
-            errorMessage = "Wiederherstellen fehlgeschlagen: \(error.localizedDescription)"
+            errorMessage = String(format: String(localized: "Wiederherstellen fehlgeschlagen: %@"), error.localizedDescription)
         }
     }
 
@@ -123,6 +123,13 @@ final class StoreKitManager: ObservableObject {
             }
         }
     }
+
+    #if DEBUG
+    func setDebugPremium(_ value: Bool) {
+        isPremium = value
+        UserDefaults.standard.set(value, forKey: premiumKey)
+    }
+    #endif
 
     enum StoreError: Error {
         case failedVerification

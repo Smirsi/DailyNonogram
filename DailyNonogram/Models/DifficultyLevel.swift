@@ -10,23 +10,23 @@ enum DifficultyLevel: String, Codable, CaseIterable, Sendable {
 
     var displayName: String {
         switch self {
-        case .easy:        return "Einfach"
-        case .medium:      return "Mittel"
-        case .hard:        return "Schwer"
-        case .colorEasy:   return "Farbe — Einfach"
-        case .colorMedium: return "Farbe — Mittel"
-        case .colorHard:   return "Farbe — Schwer"
+        case .easy:        return String(localized: "Einfach")
+        case .medium:      return String(localized: "Mittel")
+        case .hard:        return String(localized: "Schwer")
+        case .colorEasy:   return String(localized: "Farbe — Einfach")
+        case .colorMedium: return String(localized: "Farbe — Mittel")
+        case .colorHard:   return String(localized: "Farbe — Schwer")
         }
     }
 
     var description: String {
         switch self {
-        case .easy:        return "Klein · bis 10×10 Felder"
-        case .medium:      return "Mittel · bis 15×15 Felder"
-        case .hard:        return "Groß · bis 25×25 Felder"
-        case .colorEasy:   return "Farbe · 5×5–8×8 · 2–3 Farben"
-        case .colorMedium: return "Farbe · 8×8–12×12 · 2–4 Farben"
-        case .colorHard:   return "Farbe · 12×12–20×20 · 3–5 Farben"
+        case .easy:        return String(localized: "Klein · bis 10×10 Felder")
+        case .medium:      return String(localized: "Mittel · bis 15×15 Felder")
+        case .hard:        return String(localized: "Groß · bis 25×25 Felder")
+        case .colorEasy:   return String(localized: "Farbe · 5×5–8×8 · 2–3 Farben")
+        case .colorMedium: return String(localized: "Farbe · 8×8–12×12 · 2–4 Farben")
+        case .colorHard:   return String(localized: "Farbe · 12×12–20×20 · 3–5 Farben")
         }
     }
 
